@@ -1,0 +1,22 @@
+services:
+  laya-api:
+    build: .
+    container_name: laya-api
+    ports:
+      - "8000:8000"
+    environment:
+      - OMP_NUM_THREADS=6
+      - HF_HUB_OFFLINE=0
+      # - HF_TOKEN=seu_token_aqui
+    volumes:
+      - laya-hf-cache:/home/laya/.cache/huggingface
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 300s
+
+volumes:
+  laya-hf-cache:

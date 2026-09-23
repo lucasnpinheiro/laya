@@ -1,0 +1,1336 @@
+{
+  "ambiguity": {
+    "pt/pt": {
+      "accuracy": 0.5,
+      "recall_on_ambiguous": 0.6,
+      "specificity_on_clear": 0.4,
+      "separation": -0.11,
+      "cases": [
+        {
+          "id": "amb-01",
+          "expected": true,
+          "probability": 0.1535,
+          "correct": false
+        },
+        {
+          "id": "amb-02",
+          "expected": true,
+          "probability": 0.7421,
+          "correct": true
+        },
+        {
+          "id": "amb-03",
+          "expected": true,
+          "probability": 0.7385,
+          "correct": true
+        },
+        {
+          "id": "amb-04",
+          "expected": true,
+          "probability": 0.6686,
+          "correct": true
+        },
+        {
+          "id": "amb-05",
+          "expected": true,
+          "probability": 0.2069,
+          "correct": false
+        },
+        {
+          "id": "clear-01",
+          "expected": false,
+          "probability": 0.9266,
+          "correct": false
+        },
+        {
+          "id": "clear-02",
+          "expected": false,
+          "probability": 0.8949,
+          "correct": false
+        },
+        {
+          "id": "clear-03",
+          "expected": false,
+          "probability": 0.9062,
+          "correct": false
+        },
+        {
+          "id": "clear-04",
+          "expected": false,
+          "probability": 0.0972,
+          "correct": true
+        },
+        {
+          "id": "clear-05",
+          "expected": false,
+          "probability": 0.2342,
+          "correct": true
+        }
+      ]
+    },
+    "pt/en": {
+      "accuracy": 0.1,
+      "recall_on_ambiguous": 0.0,
+      "specificity_on_clear": 0.2,
+      "separation": -0.421,
+      "cases": [
+        {
+          "id": "amb-01",
+          "expected": true,
+          "probability": 0.1332,
+          "correct": false
+        },
+        {
+          "id": "amb-02",
+          "expected": true,
+          "probability": 0.18,
+          "correct": false
+        },
+        {
+          "id": "amb-03",
+          "expected": true,
+          "probability": 0.1158,
+          "correct": false
+        },
+        {
+          "id": "amb-04",
+          "expected": true,
+          "probability": 0.1493,
+          "correct": false
+        },
+        {
+          "id": "amb-05",
+          "expected": true,
+          "probability": 0.1756,
+          "correct": false
+        },
+        {
+          "id": "clear-01",
+          "expected": false,
+          "probability": 0.7064,
+          "correct": false
+        },
+        {
+          "id": "clear-02",
+          "expected": false,
+          "probability": 0.6652,
+          "correct": false
+        },
+        {
+          "id": "clear-03",
+          "expected": false,
+          "probability": 0.8355,
+          "correct": false
+        },
+        {
+          "id": "clear-04",
+          "expected": false,
+          "probability": 0.519,
+          "correct": false
+        },
+        {
+          "id": "clear-05",
+          "expected": false,
+          "probability": 0.1304,
+          "correct": true
+        }
+      ]
+    },
+    "en/en": {
+      "accuracy": 0.5,
+      "recall_on_ambiguous": 0.0,
+      "specificity_on_clear": 1.0,
+      "separation": 0.06,
+      "cases": [
+        {
+          "id": "amb-01",
+          "expected": true,
+          "probability": 0.1787,
+          "correct": false
+        },
+        {
+          "id": "amb-02",
+          "expected": true,
+          "probability": 0.0853,
+          "correct": false
+        },
+        {
+          "id": "amb-03",
+          "expected": true,
+          "probability": 0.185,
+          "correct": false
+        },
+        {
+          "id": "amb-04",
+          "expected": true,
+          "probability": 0.0749,
+          "correct": false
+        },
+        {
+          "id": "amb-05",
+          "expected": true,
+          "probability": 0.1767,
+          "correct": false
+        },
+        {
+          "id": "clear-01",
+          "expected": false,
+          "probability": 0.1031,
+          "correct": true
+        },
+        {
+          "id": "clear-02",
+          "expected": false,
+          "probability": 0.0776,
+          "correct": true
+        },
+        {
+          "id": "clear-03",
+          "expected": false,
+          "probability": 0.0951,
+          "correct": true
+        },
+        {
+          "id": "clear-04",
+          "expected": false,
+          "probability": 0.0741,
+          "correct": true
+        },
+        {
+          "id": "clear-05",
+          "expected": false,
+          "probability": 0.051,
+          "correct": true
+        }
+      ]
+    }
+  },
+  "ambiguity_thresholds": {
+    "pt/pt": {
+      "0.5": {
+        "flagged_for_llm_review": 6,
+        "of_total": 10,
+        "ambiguous_caught": 3,
+        "ambiguous_total": 5,
+        "recall": 0.6
+      },
+      "0.3": {
+        "flagged_for_llm_review": 6,
+        "of_total": 10,
+        "ambiguous_caught": 3,
+        "ambiguous_total": 5,
+        "recall": 0.6
+      },
+      "0.2": {
+        "flagged_for_llm_review": 8,
+        "of_total": 10,
+        "ambiguous_caught": 4,
+        "ambiguous_total": 5,
+        "recall": 0.8
+      },
+      "0.1": {
+        "flagged_for_llm_review": 9,
+        "of_total": 10,
+        "ambiguous_caught": 5,
+        "ambiguous_total": 5,
+        "recall": 1.0
+      }
+    },
+    "pt/en": {
+      "0.5": {
+        "flagged_for_llm_review": 4,
+        "of_total": 10,
+        "ambiguous_caught": 0,
+        "ambiguous_total": 5,
+        "recall": 0.0
+      },
+      "0.3": {
+        "flagged_for_llm_review": 4,
+        "of_total": 10,
+        "ambiguous_caught": 0,
+        "ambiguous_total": 5,
+        "recall": 0.0
+      },
+      "0.2": {
+        "flagged_for_llm_review": 4,
+        "of_total": 10,
+        "ambiguous_caught": 0,
+        "ambiguous_total": 5,
+        "recall": 0.0
+      },
+      "0.1": {
+        "flagged_for_llm_review": 10,
+        "of_total": 10,
+        "ambiguous_caught": 5,
+        "ambiguous_total": 5,
+        "recall": 1.0
+      }
+    },
+    "en/en": {
+      "0.5": {
+        "flagged_for_llm_review": 0,
+        "of_total": 10,
+        "ambiguous_caught": 0,
+        "ambiguous_total": 5,
+        "recall": 0.0
+      },
+      "0.3": {
+        "flagged_for_llm_review": 0,
+        "of_total": 10,
+        "ambiguous_caught": 0,
+        "ambiguous_total": 5,
+        "recall": 0.0
+      },
+      "0.2": {
+        "flagged_for_llm_review": 0,
+        "of_total": 10,
+        "ambiguous_caught": 0,
+        "ambiguous_total": 5,
+        "recall": 0.0
+      },
+      "0.1": {
+        "flagged_for_llm_review": 4,
+        "of_total": 10,
+        "ambiguous_caught": 3,
+        "ambiguous_total": 5,
+        "recall": 0.6
+      }
+    }
+  },
+  "ambiguity_usable_filters": [
+    {
+      "mode": "pt/pt",
+      "threshold": "0.1",
+      "flagged_for_llm_review": 9,
+      "of_total": 10,
+      "ambiguous_caught": 5,
+      "ambiguous_total": 5,
+      "recall": 1.0
+    }
+  ],
+  "is_requirement": {
+    "pt/pt": {
+      "accuracy": 0.667,
+      "cases": [
+        {
+          "id": "req-yes-1",
+          "expected": true,
+          "probability": 0.1238,
+          "correct": false
+        },
+        {
+          "id": "req-yes-2",
+          "expected": true,
+          "probability": 0.2289,
+          "correct": false
+        },
+        {
+          "id": "req-yes-3",
+          "expected": true,
+          "probability": 0.7108,
+          "correct": true
+        },
+        {
+          "id": "req-no-1",
+          "expected": false,
+          "probability": 0.0894,
+          "correct": true
+        },
+        {
+          "id": "req-no-2",
+          "expected": false,
+          "probability": 0.0364,
+          "correct": true
+        },
+        {
+          "id": "req-no-3",
+          "expected": false,
+          "probability": 0.0585,
+          "correct": true
+        }
+      ]
+    },
+    "pt/en": {
+      "accuracy": 0.667,
+      "cases": [
+        {
+          "id": "req-yes-1",
+          "expected": true,
+          "probability": 0.0005,
+          "correct": false
+        },
+        {
+          "id": "req-yes-2",
+          "expected": true,
+          "probability": 0.2285,
+          "correct": false
+        },
+        {
+          "id": "req-yes-3",
+          "expected": true,
+          "probability": 0.8835,
+          "correct": true
+        },
+        {
+          "id": "req-no-1",
+          "expected": false,
+          "probability": 0.0376,
+          "correct": true
+        },
+        {
+          "id": "req-no-2",
+          "expected": false,
+          "probability": 0.0014,
+          "correct": true
+        },
+        {
+          "id": "req-no-3",
+          "expected": false,
+          "probability": 0.0164,
+          "correct": true
+        }
+      ]
+    },
+    "en/en": {
+      "accuracy": 0.833,
+      "cases": [
+        {
+          "id": "req-yes-1",
+          "expected": true,
+          "probability": 0.8288,
+          "correct": true
+        },
+        {
+          "id": "req-yes-2",
+          "expected": true,
+          "probability": 0.1852,
+          "correct": false
+        },
+        {
+          "id": "req-yes-3",
+          "expected": true,
+          "probability": 0.8693,
+          "correct": true
+        },
+        {
+          "id": "req-no-1",
+          "expected": false,
+          "probability": 0.0862,
+          "correct": true
+        },
+        {
+          "id": "req-no-2",
+          "expected": false,
+          "probability": 0.1507,
+          "correct": true
+        },
+        {
+          "id": "req-no-3",
+          "expected": false,
+          "probability": 0.0818,
+          "correct": true
+        }
+      ]
+    }
+  },
+  "panel_routing": {
+    "pt/pt": {
+      "accuracy": 0.615,
+      "mean_confidence_when_right": 0.594,
+      "mean_confidence_when_wrong": 0.25,
+      "cases": [
+        {
+          "id": "sec-01",
+          "expected": "security",
+          "got": "security",
+          "correct": true,
+          "confidence": 0.9745
+        },
+        {
+          "id": "sec-02",
+          "expected": "security",
+          "got": "security",
+          "correct": true,
+          "confidence": 0.9193
+        },
+        {
+          "id": "sec-03",
+          "expected": "security",
+          "got": "security",
+          "correct": true,
+          "confidence": 0.9109
+        },
+        {
+          "id": "db-01",
+          "expected": "database",
+          "got": "database",
+          "correct": true,
+          "confidence": 0.6021
+        },
+        {
+          "id": "db-02",
+          "expected": "database",
+          "got": "database",
+          "correct": true,
+          "confidence": 0.1117
+        },
+        {
+          "id": "perf-01",
+          "expected": "performance",
+          "got": "performance",
+          "correct": true,
+          "confidence": 0.7703
+        },
+        {
+          "id": "perf-02",
+          "expected": "performance",
+          "got": "performance",
+          "correct": true,
+          "confidence": 0.2957
+        },
+        {
+          "id": "ui-01",
+          "expected": "frontend",
+          "got": "database",
+          "correct": false,
+          "confidence": 0.801
+        },
+        {
+          "id": "ui-02",
+          "expected": "frontend",
+          "got": "performance",
+          "correct": false,
+          "confidence": 0.1371
+        },
+        {
+          "id": "erp-01",
+          "expected": "erp_domain",
+          "got": "security",
+          "correct": false,
+          "confidence": 0.0623
+        },
+        {
+          "id": "erp-02",
+          "expected": "erp_domain",
+          "got": "security",
+          "correct": false,
+          "confidence": 0.162
+        },
+        {
+          "id": "cq-01",
+          "expected": "code_quality",
+          "got": "frontend",
+          "correct": false,
+          "confidence": 0.089
+        },
+        {
+          "id": "cq-02",
+          "expected": "code_quality",
+          "got": "code_quality",
+          "correct": true,
+          "confidence": 0.1658
+        }
+      ]
+    },
+    "pt/en": {
+      "accuracy": 0.923,
+      "mean_confidence_when_right": 0.504,
+      "mean_confidence_when_wrong": 0.133,
+      "cases": [
+        {
+          "id": "sec-01",
+          "expected": "security",
+          "got": "security",
+          "correct": true,
+          "confidence": 0.9446
+        },
+        {
+          "id": "sec-02",
+          "expected": "security",
+          "got": "security",
+          "correct": true,
+          "confidence": 0.9722
+        },
+        {
+          "id": "sec-03",
+          "expected": "security",
+          "got": "security",
+          "correct": true,
+          "confidence": 0.8979
+        },
+        {
+          "id": "db-01",
+          "expected": "database",
+          "got": "database",
+          "correct": true,
+          "confidence": 0.3478
+        },
+        {
+          "id": "db-02",
+          "expected": "database",
+          "got": "database",
+          "correct": true,
+          "confidence": 0.3597
+        },
+        {
+          "id": "perf-01",
+          "expected": "performance",
+          "got": "performance",
+          "correct": true,
+          "confidence": 0.637
+        },
+        {
+          "id": "perf-02",
+          "expected": "performance",
+          "got": "performance",
+          "correct": true,
+          "confidence": 0.1725
+        },
+        {
+          "id": "ui-01",
+          "expected": "frontend",
+          "got": "frontend",
+          "correct": true,
+          "confidence": 0.6703
+        },
+        {
+          "id": "ui-02",
+          "expected": "frontend",
+          "got": "frontend",
+          "correct": true,
+          "confidence": 0.5541
+        },
+        {
+          "id": "erp-01",
+          "expected": "erp_domain",
+          "got": "code_quality",
+          "correct": false,
+          "confidence": 0.1331
+        },
+        {
+          "id": "erp-02",
+          "expected": "erp_domain",
+          "got": "erp_domain",
+          "correct": true,
+          "confidence": 0.1874
+        },
+        {
+          "id": "cq-01",
+          "expected": "code_quality",
+          "got": "code_quality",
+          "correct": true,
+          "confidence": 0.1727
+        },
+        {
+          "id": "cq-02",
+          "expected": "code_quality",
+          "got": "code_quality",
+          "correct": true,
+          "confidence": 0.1369
+        }
+      ]
+    },
+    "en/en": {
+      "accuracy": 0.846,
+      "mean_confidence_when_right": 0.658,
+      "mean_confidence_when_wrong": 0.152,
+      "cases": [
+        {
+          "id": "sec-01",
+          "expected": "security",
+          "got": "security",
+          "correct": true,
+          "confidence": 0.9981
+        },
+        {
+          "id": "sec-02",
+          "expected": "security",
+          "got": "security",
+          "correct": true,
+          "confidence": 0.9042
+        },
+        {
+          "id": "sec-03",
+          "expected": "security",
+          "got": "erp_domain",
+          "correct": false,
+          "confidence": 0.2125
+        },
+        {
+          "id": "db-01",
+          "expected": "database",
+          "got": "database",
+          "correct": true,
+          "confidence": 0.8803
+        },
+        {
+          "id": "db-02",
+          "expected": "database",
+          "got": "database",
+          "correct": true,
+          "confidence": 0.4682
+        },
+        {
+          "id": "perf-01",
+          "expected": "performance",
+          "got": "performance",
+          "correct": true,
+          "confidence": 0.749
+        },
+        {
+          "id": "perf-02",
+          "expected": "performance",
+          "got": "performance",
+          "correct": true,
+          "confidence": 0.74
+        },
+        {
+          "id": "ui-01",
+          "expected": "frontend",
+          "got": "frontend",
+          "correct": true,
+          "confidence": 0.8557
+        },
+        {
+          "id": "ui-02",
+          "expected": "frontend",
+          "got": "database",
+          "correct": false,
+          "confidence": 0.0918
+        },
+        {
+          "id": "erp-01",
+          "expected": "erp_domain",
+          "got": "erp_domain",
+          "correct": true,
+          "confidence": 0.3536
+        },
+        {
+          "id": "erp-02",
+          "expected": "erp_domain",
+          "got": "erp_domain",
+          "correct": true,
+          "confidence": 0.7393
+        },
+        {
+          "id": "cq-01",
+          "expected": "code_quality",
+          "got": "code_quality",
+          "correct": true,
+          "confidence": 0.4364
+        },
+        {
+          "id": "cq-02",
+          "expected": "code_quality",
+          "got": "code_quality",
+          "correct": true,
+          "confidence": 0.1156
+        }
+      ]
+    }
+  },
+  "panel_routing_best_mode": {
+    "mode": "pt/en",
+    "accuracy": 0.923
+  },
+  "panel_confidence_gap": {
+    "pt/pt": 0.344,
+    "pt/en": 0.371,
+    "en/en": 0.506
+  },
+  "ui_surface": {
+    "pt/pt": {
+      "accuracy": 0.615,
+      "recall_on_ui": 1.0,
+      "cases": [
+        {
+          "id": "sec-01",
+          "expected": false,
+          "probability": 0.9873,
+          "correct": false
+        },
+        {
+          "id": "sec-02",
+          "expected": true,
+          "probability": 0.9849,
+          "correct": true
+        },
+        {
+          "id": "sec-03",
+          "expected": true,
+          "probability": 1.0,
+          "correct": true
+        },
+        {
+          "id": "db-01",
+          "expected": false,
+          "probability": 0.1377,
+          "correct": true
+        },
+        {
+          "id": "db-02",
+          "expected": false,
+          "probability": 0.4405,
+          "correct": true
+        },
+        {
+          "id": "perf-01",
+          "expected": false,
+          "probability": 0.9999,
+          "correct": false
+        },
+        {
+          "id": "perf-02",
+          "expected": false,
+          "probability": 0.7038,
+          "correct": false
+        },
+        {
+          "id": "ui-01",
+          "expected": true,
+          "probability": 0.9044,
+          "correct": true
+        },
+        {
+          "id": "ui-02",
+          "expected": true,
+          "probability": 0.7684,
+          "correct": true
+        },
+        {
+          "id": "erp-01",
+          "expected": false,
+          "probability": 0.0871,
+          "correct": true
+        },
+        {
+          "id": "erp-02",
+          "expected": false,
+          "probability": 0.6371,
+          "correct": false
+        },
+        {
+          "id": "cq-01",
+          "expected": false,
+          "probability": 0.8228,
+          "correct": false
+        },
+        {
+          "id": "cq-02",
+          "expected": false,
+          "probability": 0.2194,
+          "correct": true
+        }
+      ]
+    },
+    "pt/en": {
+      "accuracy": 0.769,
+      "recall_on_ui": 0.5,
+      "cases": [
+        {
+          "id": "sec-01",
+          "expected": false,
+          "probability": 0.6317,
+          "correct": false
+        },
+        {
+          "id": "sec-02",
+          "expected": true,
+          "probability": 0.9369,
+          "correct": true
+        },
+        {
+          "id": "sec-03",
+          "expected": true,
+          "probability": 0.3845,
+          "correct": false
+        },
+        {
+          "id": "db-01",
+          "expected": false,
+          "probability": 0.0011,
+          "correct": true
+        },
+        {
+          "id": "db-02",
+          "expected": false,
+          "probability": 0.0687,
+          "correct": true
+        },
+        {
+          "id": "perf-01",
+          "expected": false,
+          "probability": 0.2404,
+          "correct": true
+        },
+        {
+          "id": "perf-02",
+          "expected": false,
+          "probability": 0.0865,
+          "correct": true
+        },
+        {
+          "id": "ui-01",
+          "expected": true,
+          "probability": 0.8756,
+          "correct": true
+        },
+        {
+          "id": "ui-02",
+          "expected": true,
+          "probability": 0.4725,
+          "correct": false
+        },
+        {
+          "id": "erp-01",
+          "expected": false,
+          "probability": 0.0745,
+          "correct": true
+        },
+        {
+          "id": "erp-02",
+          "expected": false,
+          "probability": 0.0019,
+          "correct": true
+        },
+        {
+          "id": "cq-01",
+          "expected": false,
+          "probability": 0.049,
+          "correct": true
+        },
+        {
+          "id": "cq-02",
+          "expected": false,
+          "probability": 0.099,
+          "correct": true
+        }
+      ]
+    },
+    "en/en": {
+      "accuracy": 0.846,
+      "recall_on_ui": 0.5,
+      "cases": [
+        {
+          "id": "sec-01",
+          "expected": false,
+          "probability": 0.1223,
+          "correct": true
+        },
+        {
+          "id": "sec-02",
+          "expected": true,
+          "probability": 0.105,
+          "correct": false
+        },
+        {
+          "id": "sec-03",
+          "expected": true,
+          "probability": 0.2023,
+          "correct": false
+        },
+        {
+          "id": "db-01",
+          "expected": false,
+          "probability": 0.1692,
+          "correct": true
+        },
+        {
+          "id": "db-02",
+          "expected": false,
+          "probability": 0.0662,
+          "correct": true
+        },
+        {
+          "id": "perf-01",
+          "expected": false,
+          "probability": 0.2196,
+          "correct": true
+        },
+        {
+          "id": "perf-02",
+          "expected": false,
+          "probability": 0.2164,
+          "correct": true
+        },
+        {
+          "id": "ui-01",
+          "expected": true,
+          "probability": 0.9491,
+          "correct": true
+        },
+        {
+          "id": "ui-02",
+          "expected": true,
+          "probability": 0.8912,
+          "correct": true
+        },
+        {
+          "id": "erp-01",
+          "expected": false,
+          "probability": 0.0806,
+          "correct": true
+        },
+        {
+          "id": "erp-02",
+          "expected": false,
+          "probability": 0.0494,
+          "correct": true
+        },
+        {
+          "id": "cq-01",
+          "expected": false,
+          "probability": 0.1155,
+          "correct": true
+        },
+        {
+          "id": "cq-02",
+          "expected": false,
+          "probability": 0.0557,
+          "correct": true
+        }
+      ]
+    }
+  },
+  "unresolved_severity": {
+    "pt/pt": {
+      "accuracy": 0.333,
+      "cases": [
+        {
+          "id": "unres-blocks",
+          "expected": "blocks",
+          "got": "open",
+          "correct": false,
+          "confidence": 0.0074
+        },
+        {
+          "id": "unres-golive",
+          "expected": "blocks_go_live",
+          "got": "open",
+          "correct": false,
+          "confidence": 0.0306
+        },
+        {
+          "id": "unres-open",
+          "expected": "open",
+          "got": "open",
+          "correct": true,
+          "confidence": 0.1882
+        }
+      ]
+    },
+    "pt/en": {
+      "accuracy": 0.333,
+      "cases": [
+        {
+          "id": "unres-blocks",
+          "expected": "blocks",
+          "got": "open",
+          "correct": false,
+          "confidence": 0.0461
+        },
+        {
+          "id": "unres-golive",
+          "expected": "blocks_go_live",
+          "got": "blocks",
+          "correct": false,
+          "confidence": 0.2089
+        },
+        {
+          "id": "unres-open",
+          "expected": "open",
+          "got": "open",
+          "correct": true,
+          "confidence": 0.6218
+        }
+      ]
+    },
+    "en/en": {
+      "accuracy": 0.333,
+      "cases": [
+        {
+          "id": "unres-blocks",
+          "expected": "blocks",
+          "got": "open",
+          "correct": false,
+          "confidence": 0.1379
+        },
+        {
+          "id": "unres-golive",
+          "expected": "blocks_go_live",
+          "got": "open",
+          "correct": false,
+          "confidence": 0.0447
+        },
+        {
+          "id": "unres-open",
+          "expected": "open",
+          "got": "open",
+          "correct": true,
+          "confidence": 0.3515
+        }
+      ]
+    }
+  },
+  "full_prd_screen": {
+    "requirements": 13,
+    "questions_per_requirement": 3,
+    "total_questions": 39,
+    "elapsed_seconds": 16.14,
+    "seconds_per_requirement": 1.242,
+    "flagged_ambiguous": 0,
+    "flagged_ui": 2,
+    "panels_touched": [
+      "code_quality",
+      "database",
+      "erp_domain",
+      "frontend",
+      "performance",
+      "security"
+    ],
+    "screened": [
+      {
+        "id": "sec-01",
+        "panel": "security",
+        "ambiguous": false,
+        "ui_surface": false
+      },
+      {
+        "id": "sec-02",
+        "panel": "security",
+        "ambiguous": false,
+        "ui_surface": false
+      },
+      {
+        "id": "sec-03",
+        "panel": "erp_domain",
+        "ambiguous": false,
+        "ui_surface": false
+      },
+      {
+        "id": "db-01",
+        "panel": "database",
+        "ambiguous": false,
+        "ui_surface": false
+      },
+      {
+        "id": "db-02",
+        "panel": "database",
+        "ambiguous": false,
+        "ui_surface": false
+      },
+      {
+        "id": "perf-01",
+        "panel": "performance",
+        "ambiguous": false,
+        "ui_surface": false
+      },
+      {
+        "id": "perf-02",
+        "panel": "performance",
+        "ambiguous": false,
+        "ui_surface": false
+      },
+      {
+        "id": "ui-01",
+        "panel": "frontend",
+        "ambiguous": false,
+        "ui_surface": true
+      },
+      {
+        "id": "ui-02",
+        "panel": "database",
+        "ambiguous": false,
+        "ui_surface": true
+      },
+      {
+        "id": "erp-01",
+        "panel": "erp_domain",
+        "ambiguous": false,
+        "ui_surface": false
+      },
+      {
+        "id": "erp-02",
+        "panel": "erp_domain",
+        "ambiguous": false,
+        "ui_surface": false
+      },
+      {
+        "id": "cq-01",
+        "panel": "code_quality",
+        "ambiguous": false,
+        "ui_surface": false
+      },
+      {
+        "id": "cq-02",
+        "panel": "code_quality",
+        "ambiguous": false,
+        "ui_surface": false
+      }
+    ]
+  },
+  "question_packing": {
+    "noul_ambiguous_ms": 376.9,
+    "noul_ui_ms": 321.1,
+    "choice_panel_6_options_ms": 512.8,
+    "three_separate_calls_ms": 1210.8,
+    "three_packed_in_one_call_ms": 1202.2,
+    "packing_saving": 0.007,
+    "choice_vs_noul_ratio": 1.36
+  },
+  "gated_panel_routing": {
+    "gates": {
+      "0.0": {
+        "auto_accepted": 13,
+        "escalated_to_llm": 0,
+        "precision_on_accepted": 0.923,
+        "wrong_but_accepted": [
+          "erp-01"
+        ]
+      },
+      "0.2": {
+        "auto_accepted": 8,
+        "escalated_to_llm": 5,
+        "precision_on_accepted": 1.0,
+        "wrong_but_accepted": []
+      },
+      "0.3": {
+        "auto_accepted": 8,
+        "escalated_to_llm": 5,
+        "precision_on_accepted": 1.0,
+        "wrong_but_accepted": []
+      },
+      "0.4": {
+        "auto_accepted": 6,
+        "escalated_to_llm": 7,
+        "precision_on_accepted": 1.0,
+        "wrong_but_accepted": []
+      },
+      "0.5": {
+        "auto_accepted": 6,
+        "escalated_to_llm": 7,
+        "precision_on_accepted": 1.0,
+        "wrong_but_accepted": []
+      }
+    },
+    "cases": [
+      {
+        "id": "sec-01",
+        "expected": "security",
+        "got": "security",
+        "correct": true,
+        "confidence": 0.9446
+      },
+      {
+        "id": "sec-02",
+        "expected": "security",
+        "got": "security",
+        "correct": true,
+        "confidence": 0.9722
+      },
+      {
+        "id": "sec-03",
+        "expected": "security",
+        "got": "security",
+        "correct": true,
+        "confidence": 0.8979
+      },
+      {
+        "id": "db-01",
+        "expected": "database",
+        "got": "database",
+        "correct": true,
+        "confidence": 0.3478
+      },
+      {
+        "id": "db-02",
+        "expected": "database",
+        "got": "database",
+        "correct": true,
+        "confidence": 0.3597
+      },
+      {
+        "id": "perf-01",
+        "expected": "performance",
+        "got": "performance",
+        "correct": true,
+        "confidence": 0.637
+      },
+      {
+        "id": "perf-02",
+        "expected": "performance",
+        "got": "performance",
+        "correct": true,
+        "confidence": 0.1725
+      },
+      {
+        "id": "ui-01",
+        "expected": "frontend",
+        "got": "frontend",
+        "correct": true,
+        "confidence": 0.6703
+      },
+      {
+        "id": "ui-02",
+        "expected": "frontend",
+        "got": "frontend",
+        "correct": true,
+        "confidence": 0.5541
+      },
+      {
+        "id": "erp-01",
+        "expected": "erp_domain",
+        "got": "code_quality",
+        "correct": false,
+        "confidence": 0.1331
+      },
+      {
+        "id": "erp-02",
+        "expected": "erp_domain",
+        "got": "erp_domain",
+        "correct": true,
+        "confidence": 0.1874
+      },
+      {
+        "id": "cq-01",
+        "expected": "code_quality",
+        "got": "code_quality",
+        "correct": true,
+        "confidence": 0.1727
+      },
+      {
+        "id": "cq-02",
+        "expected": "code_quality",
+        "got": "code_quality",
+        "correct": true,
+        "confidence": 0.1369
+      }
+    ]
+  },
+  "gated_panel_routing_safe_gates": {
+    "0.2": {
+      "auto_accepted": 8,
+      "escalated_to_llm": 5,
+      "precision_on_accepted": 1.0,
+      "wrong_but_accepted": []
+    },
+    "0.3": {
+      "auto_accepted": 8,
+      "escalated_to_llm": 5,
+      "precision_on_accepted": 1.0,
+      "wrong_but_accepted": []
+    },
+    "0.4": {
+      "auto_accepted": 6,
+      "escalated_to_llm": 7,
+      "precision_on_accepted": 1.0,
+      "wrong_but_accepted": []
+    },
+    "0.5": {
+      "auto_accepted": 6,
+      "escalated_to_llm": 7,
+      "precision_on_accepted": 1.0,
+      "wrong_but_accepted": []
+    }
+  }
+}

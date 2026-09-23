@@ -1,0 +1,133 @@
+{
+  "_comment": "Requisitos de PRD no dominio ERP/CakePHP, em PT-BR e EN pareados. O par permite medir quanto se ganha traduzindo antes da triagem.",
+
+  "panel_criteria_pt": {
+    "security": "autenticacao, permissao, auditoria, dados pessoais, mascaramento, vulnerabilidade",
+    "database": "tabela, coluna, indice, migracao, schema, chave primaria",
+    "performance": "tempo de resposta, carga, consulta lenta, volume de registros, cache",
+    "frontend": "tela, formulario, modal, listagem visual, layout, componente de interface",
+    "erp_domain": "regra de negocio fiscal, estoque, faturamento, comissao, pedido, nota fiscal",
+    "code_quality": "refatoracao, acoplamento, injecao de dependencia, organizacao do codigo sem mudar comportamento"
+  },
+  "panel_criteria_en": {
+    "security": "authentication, permissions, auditing, personal data, masking, vulnerabilities",
+    "database": "tables, columns, indexes, migrations, schema, primary keys",
+    "performance": "response time, load, slow queries, record volume, caching",
+    "frontend": "screens, forms, modals, visual listings, layout, interface components",
+    "erp_domain": "business rules for tax, stock, invoicing, commissions, orders, fiscal documents",
+    "code_quality": "refactoring, coupling, dependency injection, code organization without behaviour change"
+  },
+
+  "requirements": [
+    {"id": "sec-01", "panel": "security", "ambiguous": false, "testable": true, "ui_surface": false,
+     "pt": "Toda tentativa de login malsucedida deve ser registrada em log de auditoria com IP e data e hora.",
+     "en": "Every failed login attempt must be written to the audit log with the IP address and timestamp."},
+    {"id": "sec-02", "panel": "security", "ambiguous": false, "testable": true, "ui_surface": true,
+     "pt": "O sistema deve exigir segundo fator de autenticacao para usuarios com perfil administrador.",
+     "en": "The system must require a second authentication factor for users with the administrator profile."},
+    {"id": "sec-03", "panel": "security", "ambiguous": false, "testable": true, "ui_surface": true,
+     "pt": "O CPF dos clientes deve aparecer mascarado na listagem para usuarios sem permissao de visualizacao completa.",
+     "en": "Customer tax IDs must appear masked in the listing for users without full-view permission."},
+
+    {"id": "db-01", "panel": "database", "ambiguous": false, "testable": true, "ui_surface": false,
+     "pt": "A tabela de movimentacoes de estoque deve ter indice composto em produto_id e data_movimentacao.",
+     "en": "The stock movement table must have a composite index on product_id and movement_date."},
+    {"id": "db-02", "panel": "database", "ambiguous": false, "testable": true, "ui_surface": false,
+     "pt": "A migracao deve converter a coluna de codigo do produto de VARCHAR(20) para VARCHAR(40) sem perda de dados.",
+     "en": "The migration must widen the product code column from VARCHAR(20) to VARCHAR(40) without data loss."},
+
+    {"id": "perf-01", "panel": "performance", "ambiguous": false, "testable": true, "ui_surface": false,
+     "pt": "A listagem de pedidos deve responder em ate 800ms no percentil 95 com 50 mil registros.",
+     "en": "The order listing must respond within 800ms at the 95th percentile with 50 thousand records."},
+    {"id": "perf-02", "panel": "performance", "ambiguous": false, "testable": true, "ui_surface": false,
+     "pt": "O relatorio de faturamento anual nao pode executar mais de uma consulta por registro exibido.",
+     "en": "The annual invoicing report must not run more than one query per displayed record."},
+
+    {"id": "ui-01", "panel": "frontend", "ambiguous": false, "testable": true, "ui_surface": true,
+     "pt": "A tela de cadastro de produto deve exibir as variacoes em um modal reaproveitando o componente de tabela existente.",
+     "en": "The product form screen must show variants in a modal, reusing the existing table component."},
+    {"id": "ui-02", "panel": "frontend", "ambiguous": false, "testable": true, "ui_surface": true,
+     "pt": "A tela de pedidos deve manter os filtros selecionados ao voltar da tela de detalhe.",
+     "en": "The order screen must keep the selected filters when returning from the detail screen."},
+
+    {"id": "erp-01", "panel": "erp_domain", "ambiguous": false, "testable": true, "ui_surface": false,
+     "pt": "O cancelamento de um pedido ja faturado deve gerar nota fiscal de devolucao e estornar o estoque.",
+     "en": "Cancelling an already invoiced order must issue a return fiscal document and put the stock back."},
+    {"id": "erp-02", "panel": "erp_domain", "ambiguous": false, "testable": true, "ui_surface": false,
+     "pt": "A comissao do vendedor deve ser calculada sobre o valor liquido do pedido, descontando frete e impostos.",
+     "en": "Sales commission must be calculated on the net order value, after shipping and taxes are deducted."},
+
+    {"id": "cq-01", "panel": "code_quality", "ambiguous": false, "testable": true, "ui_surface": false,
+     "pt": "O servico de importacao deve ser extraido do controller para uma classe dedicada, sem alterar o comportamento.",
+     "en": "The import service must be extracted from the controller into a dedicated class, with no behaviour change."},
+    {"id": "cq-02", "panel": "code_quality", "ambiguous": false, "testable": true, "ui_surface": false,
+     "pt": "As chamadas diretas ao gerenciador de conexao espalhadas nos controllers devem ser substituidas por injecao de dependencia.",
+     "en": "Direct connection-manager calls scattered across controllers must be replaced with dependency injection."}
+  ],
+
+  "ambiguity": [
+    {"id": "amb-01", "ambiguous": true,
+     "pt": "O sistema deve ser rapido e intuitivo.",
+     "en": "The system must be fast and intuitive."},
+    {"id": "amb-02", "ambiguous": true,
+     "pt": "Melhorar a experiencia do usuario na tela de pedidos.",
+     "en": "Improve the user experience on the order screen."},
+    {"id": "amb-03", "ambiguous": true,
+     "pt": "O relatorio deve trazer os dados corretos.",
+     "en": "The report must bring the correct data."},
+    {"id": "amb-04", "ambiguous": true,
+     "pt": "Tratar adequadamente os erros de integracao.",
+     "en": "Handle integration errors appropriately."},
+    {"id": "amb-05", "ambiguous": true,
+     "pt": "O desempenho da listagem precisa melhorar significativamente.",
+     "en": "Listing performance needs to improve significantly."},
+    {"id": "clear-01", "ambiguous": false,
+     "pt": "A listagem de pedidos deve responder em ate 800ms no percentil 95 com 50 mil registros.",
+     "en": "The order listing must respond within 800ms at the 95th percentile with 50 thousand records."},
+    {"id": "clear-02", "ambiguous": false,
+     "pt": "Toda tentativa de login malsucedida deve ser registrada em log de auditoria com IP e data e hora.",
+     "en": "Every failed login attempt must be written to the audit log with the IP address and timestamp."},
+    {"id": "clear-03", "ambiguous": false,
+     "pt": "A comissao do vendedor deve ser calculada sobre o valor liquido do pedido, descontando frete e impostos.",
+     "en": "Sales commission must be calculated on the net order value, after shipping and taxes are deducted."},
+    {"id": "clear-04", "ambiguous": false,
+     "pt": "A migracao deve converter a coluna de codigo do produto de VARCHAR(20) para VARCHAR(40) sem perda de dados.",
+     "en": "The migration must widen the product code column from VARCHAR(20) to VARCHAR(40) without data loss."},
+    {"id": "clear-05", "ambiguous": false,
+     "pt": "O cancelamento de um pedido ja faturado deve gerar nota fiscal de devolucao e estornar o estoque.",
+     "en": "Cancelling an already invoiced order must issue a return fiscal document and put the stock back."}
+  ],
+
+  "is_requirement": [
+    {"id": "req-yes-1", "is_requirement": true,
+     "pt": "O sistema deve bloquear a exclusao de um produto que possua movimentacao de estoque.",
+     "en": "The system must block deletion of a product that has stock movements."},
+    {"id": "req-yes-2", "is_requirement": true,
+     "pt": "O usuario deve poder exportar a listagem de pedidos em CSV.",
+     "en": "The user must be able to export the order listing as CSV."},
+    {"id": "req-yes-3", "is_requirement": true,
+     "pt": "A nota fiscal deve ser enviada ao cliente por e-mail apos a autorizacao da SEFAZ.",
+     "en": "The fiscal document must be emailed to the customer after tax-authority approval."},
+    {"id": "req-no-1", "is_requirement": false,
+     "pt": "A empresa atende hoje cerca de 400 lojistas na regiao Sul.",
+     "en": "The company currently serves around 400 retailers in the southern region."},
+    {"id": "req-no-2", "is_requirement": false,
+     "pt": "Este documento foi revisado pela equipe comercial em marco.",
+     "en": "This document was reviewed by the sales team in March."},
+    {"id": "req-no-3", "is_requirement": false,
+     "pt": "O modulo atual foi desenvolvido em 2019 por um fornecedor externo.",
+     "en": "The current module was built in 2019 by an outside vendor."}
+  ],
+
+  "unresolved": [
+    {"id": "unres-blocks", "severity": "blocks",
+     "pt": "Nao esta definido qual campo identifica o vendedor no pedido; sem isso a comissao nao pode ser calculada.",
+     "en": "It is not defined which field identifies the salesperson on the order; commission cannot be computed without it."},
+    {"id": "unres-golive", "severity": "blocks_go_live",
+     "pt": "O certificado digital de homologacao vence antes da data de entrada em producao.",
+     "en": "The staging digital certificate expires before the production go-live date."},
+    {"id": "unres-open", "severity": "open",
+     "pt": "Ainda nao decidimos se o botao de exportar fica no topo ou no rodape da listagem.",
+     "en": "We have not decided yet whether the export button sits at the top or the bottom of the listing."}
+  ]
+}

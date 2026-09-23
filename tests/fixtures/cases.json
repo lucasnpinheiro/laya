@@ -1,0 +1,77 @@
+{
+  "department_criteria": {
+    "billing": "invoices, payments, refunds, charges, subscriptions",
+    "technical": "bugs, outages, errors, crashes, broken features",
+    "sales": "pricing questions, quotes, new contracts, upgrades",
+    "other": "everything else"
+  },
+  "triage": [
+    {"id": "en-billing-1", "lang": "en", "department": "billing",
+     "text": "We were billed twice for March on invoice #4411. Please refund the duplicate charge."},
+    {"id": "en-billing-2", "lang": "en", "department": "billing",
+     "text": "My credit card was charged $240 but the invoice says $120. Can you correct this?"},
+    {"id": "en-billing-3", "lang": "en", "department": "billing",
+     "text": "Please cancel my subscription and issue a prorated refund for the unused months."},
+    {"id": "en-tech-1", "lang": "en", "department": "technical",
+     "text": "The checkout page returns HTTP 500 for every order since this morning's deploy."},
+    {"id": "en-tech-2", "lang": "en", "department": "technical",
+     "text": "The mobile app crashes on launch after the latest update. Logs show a null pointer."},
+    {"id": "en-tech-3", "lang": "en", "department": "technical",
+     "text": "CSV export has been stuck at 0% for two hours and no file is ever produced."},
+    {"id": "en-sales-1", "lang": "en", "department": "sales",
+     "text": "We are a 300-seat company evaluating your enterprise tier. Can you send pricing and a quote?"},
+    {"id": "en-sales-2", "lang": "en", "department": "sales",
+     "text": "What does it cost to upgrade from the Pro plan to Business for 50 users?"},
+    {"id": "en-sales-3", "lang": "en", "department": "sales",
+     "text": "We would like to negotiate an annual contract with volume discounts before renewal."},
+    {"id": "pt-billing-1", "lang": "pt", "department": "billing",
+     "text": "Fui cobrado duas vezes na fatura de marco. Quero o reembolso da cobranca duplicada."},
+    {"id": "pt-billing-2", "lang": "pt", "department": "billing",
+     "text": "O boleto veio com valor errado, pagaram 500 reais a mais do que o contratado."},
+    {"id": "pt-tech-1", "lang": "pt", "department": "technical",
+     "text": "O site esta fora do ar desde as 9h, todas as paginas retornam erro 500."},
+    {"id": "pt-tech-2", "lang": "pt", "department": "technical",
+     "text": "O aplicativo fecha sozinho toda vez que tento abrir o relatorio de vendas."},
+    {"id": "pt-sales-1", "lang": "pt", "department": "sales",
+     "text": "Gostaria de um orcamento para o plano empresarial com 200 usuarios."},
+    {"id": "pt-sales-2", "lang": "pt", "department": "sales",
+     "text": "Quanto custa fazer upgrade do plano basico para o profissional?"}
+  ],
+  "refund_noul": [
+    {"id": "refund-yes-1", "expected": true,
+     "text": "Please refund the duplicate charge to my card immediately."},
+    {"id": "refund-yes-2", "expected": true,
+     "text": "I want my money back for the months I never used."},
+    {"id": "refund-yes-3", "expected": true,
+     "text": "Estorne o valor cobrado a mais na minha fatura, por favor."},
+    {"id": "refund-no-1", "expected": false,
+     "text": "Could you explain how the billing cycle works? I just want to understand the dates."},
+    {"id": "refund-no-2", "expected": false,
+     "text": "The login page is broken on Safari. Nothing to do with payments."},
+    {"id": "refund-no-3", "expected": false,
+     "text": "Please send me a quote for the enterprise plan."}
+  ],
+  "churn_noul": [
+    {"id": "churn-yes-1", "expected": true,
+     "text": "If this is not fixed today we will cancel our plan and move to a competitor."},
+    {"id": "churn-yes-2", "expected": true,
+     "text": "This is the third outage this month. We are seriously considering leaving."},
+    {"id": "churn-no-1", "expected": false,
+     "text": "Great product overall, just a small question about the export format."},
+    {"id": "churn-no-2", "expected": false,
+     "text": "Thanks for the quick fix yesterday, everything works again."}
+  ],
+  "urgency_score": [
+    {"id": "urg-high", "min_expected": 1.2,
+     "text": "Production is completely down, no customer can place an order. We are losing revenue every minute."},
+    {"id": "urg-low", "max_expected": 1.0,
+     "text": "Whenever you get a chance, could you add my colleague to the account? No rush at all."}
+  ],
+  "routing": [
+    {"id": "route-en", "text": "Please refund the duplicate charge on my invoice.", "expected_model": "english"},
+    {"id": "route-hi", "text": "मुझसे दो बार शुल्क लिया गया, कृपया पैसे वापस करें।", "expected_model": "multilingual"},
+    {"id": "route-ja", "text": "請求書が二重に請求されています。返金してください。", "expected_model": "multilingual"},
+    {"id": "route-ar", "text": "لقد تم خصم المبلغ مرتين، يرجى إعادة المبلغ.", "expected_model": "multilingual"},
+    {"id": "route-ru", "text": "С меня дважды списали деньги, верните средства.", "expected_model": "multilingual"}
+  ]
+}
