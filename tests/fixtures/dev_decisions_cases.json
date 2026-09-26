@@ -1,0 +1,140 @@
+{
+  "_about": "Decisoes tipadas do dia a dia de desenvolvimento, pareadas PT/EN. Cada pergunta tem os criterios em ingles (modo mais preciso medido em SPEC-RESEARCH.md) e casos rotulados a mao. Consumido por tests/test_dev_decisions.py.",
+  "questions": {
+    "commit_type": {
+      "type": "choice",
+      "instructions": "What kind of change is described?",
+      "criteria": {
+        "feat": "adds a new capability or behaviour visible to users",
+        "fix": "corrects a bug or wrong behaviour",
+        "refactor": "restructures code without changing behaviour",
+        "docs": "changes only documentation, readme or comments",
+        "test": "adds or changes only automated tests",
+        "chore": "build, dependencies, configuration or tooling"
+      },
+      "cases": [
+        {"label": "feat", "pt": "Adiciona exportacao do relatorio de vendas em CSV na tela de pedidos.", "en": "Add CSV export of the sales report to the orders screen."},
+        {"label": "fix", "pt": "Corrige calculo do ICMS que arredondava para baixo em pedidos com desconto.", "en": "Fix ICMS calculation that rounded down on orders with a discount."},
+        {"label": "refactor", "pt": "Extrai a logica de frete do controller para um service, sem alterar o comportamento.", "en": "Extract shipping logic from the controller into a service, with no behaviour change."},
+        {"label": "docs", "pt": "Atualiza o README com o passo a passo de instalacao local.", "en": "Update the README with the local setup walkthrough."},
+        {"label": "test", "pt": "Cria testes unitarios para o calculo de comissao dos vendedores.", "en": "Add unit tests for the sales commission calculation."},
+        {"label": "chore", "pt": "Atualiza cakephp/cakephp de 4.4 para 4.5 no composer.", "en": "Bump cakephp/cakephp from 4.4 to 4.5 in composer."},
+        {"label": "fix", "pt": "Tela de clientes quebrava com erro 500 quando o CPF vinha vazio.", "en": "Customers screen crashed with a 500 error when the CPF was empty."},
+        {"label": "feat", "pt": "Permite ao usuario agendar o envio automatico da nota fiscal por e-mail.", "en": "Let users schedule automatic e-mailing of the invoice."}
+      ]
+    },
+    "issue_kind": {
+      "type": "choice",
+      "instructions": "What kind of issue is this?",
+      "criteria": {
+        "bug": "something that used to work or should work is broken",
+        "feature": "a request for new behaviour that does not exist yet",
+        "question": "the reporter is asking how something works, nothing is broken",
+        "tech_debt": "internal cleanup, upgrade or refactoring with no user-visible change"
+      },
+      "cases": [
+        {"label": "bug", "pt": "Desde ontem o botao salvar do cadastro de produtos nao faz nada.", "en": "Since yesterday the save button on the product form does nothing."},
+        {"label": "feature", "pt": "Seria otimo poder filtrar os pedidos por transportadora.", "en": "It would be great to filter orders by carrier."},
+        {"label": "question", "pt": "Como faco para cadastrar um segundo endereco de entrega para o cliente?", "en": "How do I register a second delivery address for a customer?"},
+        {"label": "tech_debt", "pt": "Precisamos migrar os jobs de cron para filas, o codigo atual esta duplicado.", "en": "We need to move the cron jobs to queues; the current code is duplicated."},
+        {"label": "bug", "pt": "O total do pedido aparece diferente na tela e no PDF.", "en": "The order total shows differently on screen and in the PDF."},
+        {"label": "feature", "pt": "Queremos um painel com o faturamento diario por vendedor.", "en": "We want a dashboard with daily revenue per salesperson."},
+        {"label": "question", "pt": "Qual a diferenca entre pedido faturado e pedido expedido no sistema?", "en": "What is the difference between an invoiced order and a shipped order in the system?"},
+        {"label": "tech_debt", "pt": "Remover as classes antigas de integracao que ninguem mais usa.", "en": "Remove the old integration classes nobody uses anymore."}
+      ]
+    },
+    "test_failure_cause": {
+      "type": "choice",
+      "instructions": "What most likely caused this test failure?",
+      "criteria": {
+        "product_bug": "the code under test returns a wrong value or wrong behaviour",
+        "flaky": "timing, race condition or random order; passes on retry",
+        "environment": "missing service, database, network, credentials or configuration",
+        "outdated_test": "the behaviour changed on purpose and the test expectation is old"
+      },
+      "cases": [
+        {"label": "product_bug", "pt": "Esperado 150.00, recebido 135.00 em testCalculaTotalComDesconto; o desconto esta sendo aplicado duas vezes.", "en": "Expected 150.00, got 135.00 in testTotalWithDiscount; the discount is applied twice."},
+        {"label": "flaky", "pt": "O teste passa localmente e falha as vezes no CI por timeout esperando o elemento aparecer; rodando de novo passou.", "en": "Test passes locally and sometimes fails in CI with a timeout waiting for the element; rerunning passed."},
+        {"label": "environment", "pt": "SQLSTATE[HY000] [2002] Connection refused ao conectar no banco de testes.", "en": "SQLSTATE[HY000] [2002] Connection refused when connecting to the test database."},
+        {"label": "outdated_test", "pt": "O teste espera a mensagem 'Pedido salvo', mas o texto foi trocado de proposito para 'Pedido registrado' na ultima sprint.", "en": "The test expects the message 'Order saved', but the text was deliberately changed to 'Order recorded' last sprint."},
+        {"label": "environment", "pt": "Falha ao chamar a API externa: variavel TRAY_CONSUMER_KEY nao definida no ambiente de CI.", "en": "Failed calling the external API: TRAY_CONSUMER_KEY is not set in the CI environment."},
+        {"label": "product_bug", "pt": "Estoque ficou negativo apos cancelar o pedido; o teste esperava que voltasse para 10.", "en": "Stock went negative after cancelling the order; the test expected it back at 10."},
+        {"label": "flaky", "pt": "Dois testes gravam no mesmo arquivo temporario e falham dependendo da ordem de execucao.", "en": "Two tests write the same temp file and fail depending on execution order."},
+        {"label": "outdated_test", "pt": "Campo 'telefone' virou opcional pela nova regra, mas o teste ainda exige erro de validacao quando vazio.", "en": "The 'phone' field became optional under the new rule, but the test still requires a validation error when empty."}
+      ]
+    },
+    "log_severity": {
+      "type": "choice",
+      "instructions": "How severe is this log entry for the on-call engineer?",
+      "criteria": {
+        "info": "normal operation, nothing to do",
+        "warning": "degraded or unusual but the system still works",
+        "error": "one operation failed, users may be affected",
+        "critical": "outage, data loss or security breach; act now"
+      },
+      "cases": [
+        {"label": "info", "pt": "Job de sincronizacao de estoque concluido: 120 produtos atualizados em 3.2s.", "en": "Stock sync job finished: 120 products updated in 3.2s."},
+        {"label": "warning", "pt": "Cota da API em 85%; reduzindo frequencia de sincronizacao.", "en": "API quota at 85%; lowering sync frequency."},
+        {"label": "error", "pt": "Falha ao emitir NF-e do pedido 4521: rejeicao 539 duplicidade.", "en": "Failed to issue NF-e for order 4521: rejection 539 duplicate."},
+        {"label": "critical", "pt": "Banco de producao sem espaco em disco; todas as gravacoes estao falhando.", "en": "Production database out of disk space; all writes are failing."},
+        {"label": "info", "pt": "Usuario admin fez login com sucesso.", "en": "User admin logged in successfully."},
+        {"label": "warning", "pt": "Consulta lenta: 4.8s em SELECT de pedidos sem indice.", "en": "Slow query: 4.8s on orders SELECT without an index."},
+        {"label": "error", "pt": "Excecao nao tratada em PedidosController::edit, usuario recebeu erro 500.", "en": "Unhandled exception in OrdersController::edit, user got a 500 error."},
+        {"label": "critical", "pt": "Detectado acesso a tabela de clientes com token vazado; dados pessoais exportados.", "en": "Access to the customers table with a leaked token detected; personal data exported."}
+      ]
+    },
+    "review_verdict": {
+      "type": "choice",
+      "instructions": "What verdict does this code review comment give?",
+      "criteria": {
+        "approve": "the reviewer is satisfied and the change can merge",
+        "request_changes": "the reviewer blocks the merge until something is fixed",
+        "comment": "a suggestion or question that does not block the merge"
+      },
+      "cases": [
+        {"label": "approve", "pt": "Tudo certo, testes passando. Pode mergear.", "en": "All good, tests passing. Ship it."},
+        {"label": "request_changes", "pt": "Essa query concatena o input do usuario direto no SQL, precisa corrigir antes de subir.", "en": "This query concatenates user input straight into SQL; must be fixed before merging."},
+        {"label": "comment", "pt": "Nit: talvez um nome mais descritivo para essa variavel, mas fica a seu criterio.", "en": "Nit: maybe a more descriptive name for this variable, up to you."},
+        {"label": "approve", "pt": "Revisado, logica correta e bem coberta. Aprovado.", "en": "Reviewed, logic is correct and well covered. Approved."},
+        {"label": "request_changes", "pt": "Faltou o teste do caso de cancelamento e a migracao quebra o banco atual. Bloqueando.", "en": "The cancellation test is missing and the schema change breaks the current database. Blocking."},
+        {"label": "comment", "pt": "Por curiosidade, por que usar array aqui em vez de collection?", "en": "Out of curiosity, why an array here instead of a collection?"}
+      ]
+    },
+    "breaking_change": {
+      "type": "noul",
+      "instructions": "Does this change break existing callers, clients or stored data?",
+      "cases": [
+        {"label": true, "pt": "Renomeia o endpoint /api/pedidos para /api/v2/orders e remove o antigo.", "en": "Rename the /api/pedidos endpoint to /api/v2/orders and remove the old one."},
+        {"label": true, "pt": "Remove a coluna cliente_email da tabela pedidos.", "en": "Drop the cliente_email column from the orders table."},
+        {"label": true, "pt": "O campo 'valor' da resposta JSON passa de string para objeto com moeda.", "en": "The 'valor' field in the JSON response changes from a string to an object with currency."},
+        {"label": false, "pt": "Adiciona um campo opcional 'observacao' na resposta do pedido.", "en": "Add an optional 'observacao' field to the order response."},
+        {"label": false, "pt": "Melhora o texto da mensagem de erro de login.", "en": "Improve the wording of the login error message."},
+        {"label": false, "pt": "Cria um indice novo em pedidos(created) para acelerar o relatorio.", "en": "Create a new index on orders(created) to speed up the report."}
+      ]
+    },
+    "touches_schema": {
+      "type": "noul",
+      "instructions": "Does this change require altering database tables, columns or indexes?",
+      "cases": [
+        {"label": true, "pt": "Guardar a data de expedicao de cada pedido para o relatorio logistico.", "en": "Store the shipping date of each order for the logistics report."},
+        {"label": true, "pt": "Criar cadastro de transportadoras vinculado aos pedidos.", "en": "Create a carriers register linked to orders."},
+        {"label": true, "pt": "Adicionar indice unico em clientes(cpf) para impedir duplicidade.", "en": "Add a unique index on customers(cpf) to prevent duplicates."},
+        {"label": false, "pt": "Trocar a cor do botao de salvar para verde.", "en": "Change the save button colour to green."},
+        {"label": false, "pt": "Reordenar as colunas exibidas na listagem de produtos.", "en": "Reorder the columns shown in the product listing."},
+        {"label": false, "pt": "Corrigir o texto do e-mail de boas-vindas.", "en": "Fix the wording of the welcome e-mail."}
+      ]
+    },
+    "security_sensitive": {
+      "type": "noul",
+      "instructions": "Does this change touch authentication, permissions, secrets or personal data?",
+      "cases": [
+        {"label": true, "pt": "Permitir login com token de API alem de usuario e senha.", "en": "Allow login with an API token in addition to username and password."},
+        {"label": true, "pt": "Exportar lista de clientes com CPF e telefone em planilha.", "en": "Export the customer list with CPF and phone to a spreadsheet."},
+        {"label": true, "pt": "Vendedor passa a poder editar pedidos de outros vendedores.", "en": "Salespeople can now edit other salespeople's orders."},
+        {"label": false, "pt": "Paginar a listagem de produtos em 50 itens.", "en": "Paginate the product listing at 50 items."},
+        {"label": false, "pt": "Ajustar o espacamento do rodape do PDF do pedido.", "en": "Adjust the footer spacing of the order PDF."},
+        {"label": false, "pt": "Ordenar categorias por nome na arvore do catalogo.", "en": "Sort categories by name in the catalogue tree."}
+      ]
+    }
+  }
+}

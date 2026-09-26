@@ -1,0 +1,561 @@
+{
+  "_about": "Casos reais do historico do Claude Code (~/.claude/history.jsonl), parafraseados e anonimizados. Rotulos feitos por LLM; revisar.",
+  "_source_count": 6658,
+  "_notes": "Todos os segredos, logins e hosts sao ficticios (joao, Xyz!123fake, sk-fake-000, erp.example.com). Casos sinteticos (sem exemplo real proximo): contains_credentials 'Authorization: Bearer' e 'tela de troca de senha'; destructive_intent 'git filter-repo + push --force' e o dump 'por cima' do banco de teste (parafraseado de um pedido de dump para o banco de teste). A classe question e rara no historico (~30 prompts com '?' ou 'como/qual'). Alguns casos se repetem entre perguntas de proposito.",
+  "questions": {
+    "request_kind": {
+      "type": "choice",
+      "instructions": "What is the developer asking the coding agent to do?",
+      "criteria": {
+        "fix_bug": "correct an error, crash, wrong value or broken behaviour",
+        "new_feature": "build or change a screen, report, field, endpoint or behaviour",
+        "plan_spec": "write, update or revalidate a specification, plan or PRD before coding",
+        "run_tests": "execute tests, validate in the browser or check that something works",
+        "docs_tooling": "update documentation, skills, agent config, install or configure tools",
+        "question": "ask for an explanation or opinion, no change requested"
+      },
+      "cases": [
+        {
+          "pt": "O campo #pedido-compra-search tem valor informado, 1170, mas quando salva não está sendo enviado e gera erro. Corrigir para enviar o valor informado.",
+          "en": "The #pedido-compra-search field has a value (1170) but it is not sent on save, which causes an error. Fix it so the entered value is sent.",
+          "label": "fix_bug"
+        },
+        {
+          "pt": "Quando le o XML, usar UTF-8 para não quebrar caracteres. No XML vem <xProd>ALÇA ACETINADA</xProd> e no banco salva ALÃA ACETINADA",
+          "en": "When reading the XML, use UTF-8 so characters don't break. The XML has <xProd>ALÇA ACETINADA</xProd> but the database stores ALÃA ACETINADA.",
+          "label": "fix_bug"
+        },
+        {
+          "pt": "Erro ao processar a impressão: Unknown finder method \"customCache\" on App\\Model\\Table\\PessoasTable. Corrigir",
+          "en": "Error while printing: Unknown finder method \"customCache\" on App\\Model\\Table\\PessoasTable. Fix it.",
+          "label": "fix_bug"
+        },
+        {
+          "pt": "Quando imprimir o DRE quebrou o layout, corrigir https://erp.example.com/admin/relatorios/dre?imprimir=1",
+          "en": "Printing the DRE report breaks the layout, fix it https://erp.example.com/admin/relatorios/dre?imprimir=1",
+          "label": "fix_bug"
+        },
+        {
+          "pt": "Caixas, na tela edit, trazer todos os tipos de pagamentos que tiveram vendas e seus totais, incluir campo separado para troco, todos os campos disabled exceto Saldo Fechamento",
+          "en": "Cash registers edit screen: show every payment type that had sales with its totals, add a separate change field, all fields disabled except Closing Balance.",
+          "label": "new_feature"
+        },
+        {
+          "pt": "CADASTRO - PESSOAS - ABA CONTAS A RECEBER - INSERIR COLUNA DATA PAGAMENTO",
+          "en": "REGISTRY - PEOPLE - RECEIVABLES TAB - ADD A PAYMENT DATE COLUMN",
+          "label": "new_feature"
+        },
+        {
+          "pt": "criar novo relatorio de contas, com os filtros empresa_id, sub_conta_id, data_vencimento (data_inicio, data_fim), consultando clientes_contas_pagamentos e clientes_contas_recebimentos",
+          "en": "Create a new accounts report with filters empresa_id, sub_conta_id, due date (start, end), querying clientes_contas_pagamentos and clientes_contas_recebimentos.",
+          "label": "new_feature"
+        },
+        {
+          "pt": "Criar um novo metodo imprimirReciboA4 no OrdensServicosController, seguir este modelo do PDF em anexo",
+          "en": "Create a new imprimirReciboA4 method in OrdensServicosController, following the attached PDF template.",
+          "label": "new_feature"
+        },
+        {
+          "pt": "Atualizar a spec com estes ajustes, colocar um botão em cada aba direcionando para as rotas dos ultimos conhecimentos e contas a pagar, filtrando pela transportadora ou fornecedor",
+          "en": "Update the spec with these adjustments: a button on each tab linking to the latest freight bills and payables, filtered by carrier or supplier.",
+          "label": "plan_spec"
+        },
+        {
+          "pt": "usando o mcp sentry, listar todos os erros e lentidão, e criar spec para atuar na causa raiz",
+          "en": "Using the Sentry MCP, list all errors and slowness, and create a spec to address the root cause.",
+          "label": "plan_spec",
+          "why": "mentions error monitoring, but the deliverable is a spec"
+        },
+        {
+          "pt": "Atualizar a spec: todos os calculos somente para pedidos com pago == 1 e status != 9",
+          "en": "Update the spec: all calculations only for orders with pago == 1 and status != 9.",
+          "label": "plan_spec"
+        },
+        {
+          "pt": "Criar spec para correção pontual no projeto baseado no levantamento do servidor de produção",
+          "en": "Create a spec for a targeted fix in the project based on the production server survey.",
+          "label": "plan_spec"
+        },
+        {
+          "pt": "Fazer teste via navegador, salvar as evidencias",
+          "en": "Run a test in the browser and save the evidence.",
+          "label": "run_tests"
+        },
+        {
+          "pt": "Faz uma bateria de teste de unidade, integração, e2e e mcp playwright, para validar se o sistema não teve quebra acidental apos as specs",
+          "en": "Run a round of unit, integration, e2e and Playwright MCP tests to check nothing broke by accident after the specs.",
+          "label": "run_tests"
+        },
+        {
+          "pt": "Fazer teste do inicio ao fim de criação de ordem de produção, com 3 produtos do tipo P e 1 produto do tipo S",
+          "en": "Run an end-to-end test of creating a production order with 3 products of type P and 1 of type S.",
+          "label": "run_tests"
+        },
+        {
+          "pt": "Fazer varios teste via navegador https://erp.example.com/admin Já logado. Multiplos testes até ter 100% de confirmação das correções",
+          "en": "Run several browser tests at https://erp.example.com/admin (already logged in), repeating until the fixes are 100% confirmed.",
+          "label": "run_tests"
+        },
+        {
+          "pt": "atualizar o AGENTS.md",
+          "en": "Update AGENTS.md.",
+          "label": "docs_tooling"
+        },
+        {
+          "pt": "Instalar e configurar o MCP do sentry",
+          "en": "Install and configure the Sentry MCP.",
+          "label": "docs_tooling"
+        },
+        {
+          "pt": "Atualizar a skill domain-expert-erp com os dados a seguir, e na skill tlc-spec-driven fazer a referencia de utilizar o domain-expert-erp",
+          "en": "Update the domain-expert-erp skill with the following data, and make tlc-spec-driven reference domain-expert-erp.",
+          "label": "docs_tooling"
+        },
+        {
+          "pt": "Ajustar o .githooks/pre-commit para rodar o phpstan com level 7",
+          "en": "Adjust .githooks/pre-commit to run PHPStan at level 7.",
+          "label": "docs_tooling"
+        },
+        {
+          "pt": "Quando o pedido vem pela tela add.php, quando adiciona o desconto, os valores são calculados corretamente?",
+          "en": "When the order comes from the add.php screen and a discount is added, are the values calculated correctly?",
+          "label": "question"
+        },
+        {
+          "pt": "Qual o motivo do bloqueio?",
+          "en": "What is the reason for the block?",
+          "label": "question",
+          "why": "also a follow-up; still no change requested"
+        },
+        {
+          "pt": "Como ter certeza que o historico do git e github não tem as credenciais vazadas",
+          "en": "How can I be sure the git and GitHub history has no leaked credentials?",
+          "label": "question"
+        },
+        {
+          "pt": "Rodei ./bin/cake atualizar_margem_liquida --produto=4229 e retornou margem líquida -87.365,32%. Está correto este calculo? Como uma margem fica tão negativa?",
+          "en": "I ran ./bin/cake atualizar_margem_liquida --produto=4229 and got a net margin of -87,365.32%. Is this calculation right? How can a margin be that negative?",
+          "label": "question",
+          "why": "could be read as fix_bug; phrased as a question"
+        }
+      ]
+    },
+    "work_area": {
+      "type": "choice",
+      "instructions": "Which area of the system does this request mainly touch?",
+      "criteria": {
+        "database": "SQL, tables, columns, queries, indexes, migrations or data fixes",
+        "screen_ui": "templates, layout, buttons, forms, charts, CSS or JavaScript in the page",
+        "fiscal_finance": "invoices, NF-e, taxes, payments, billing, cash or financial reports",
+        "stock_orders": "products, stock, orders, production or logistics",
+        "agent_tooling": "Claude skills, AGENTS.md, hooks, MCP, docker or developer tools",
+        "integration": "external APIs, e-commerce stores, e-mail sending, webhooks or error monitoring"
+      },
+      "cases": [
+        {
+          "pt": "Criar script sql para a criação dos index",
+          "en": "Create an SQL script to create the indexes.",
+          "label": "database"
+        },
+        {
+          "pt": "Identificar no estrutura.sql as tabelas que tem index iguais para o mesmo campo e remover a duplicidade",
+          "en": "Find tables in estrutura.sql that have identical indexes on the same column and remove the duplicates.",
+          "label": "database"
+        },
+        {
+          "pt": "Error Code: 1064 near 'IF NOT EXISTS `empresa_id` INT NULL AFTER' ao rodar o ALTER TABLE, corrigir o script sql",
+          "en": "Error Code 1064 near 'IF NOT EXISTS `empresa_id` INT NULL AFTER' when running ALTER TABLE; fix the SQL script.",
+          "label": "database"
+        },
+        {
+          "pt": "Sim, regra: nunca criar view tables SQL, sempre criar as querys no model",
+          "en": "Yes, rule: never create SQL views, always build the queries in the model.",
+          "label": "database"
+        },
+        {
+          "pt": "Converter o confirm de \"Confirma marcar esta ação como concluída?\" para o padrão $.confirm",
+          "en": "Convert the \"Confirm marking this action as done?\" confirm to the $.confirm pattern.",
+          "label": "screen_ui"
+        },
+        {
+          "pt": "Melhorar a visibilidade da tela, os dados estão muito compactados, dividir em duas linhas",
+          "en": "Improve the screen's readability; the data is too compact, split it into two lines.",
+          "label": "screen_ui"
+        },
+        {
+          "pt": "No modal de conferencia do recebimento mudar a ordem dos cards e melhorar a visualização",
+          "en": "In the receiving check modal, change the order of the cards and improve the display.",
+          "label": "screen_ui"
+        },
+        {
+          "pt": "melhorar a identificação de cada um dos botões e cores",
+          "en": "Make each button and its colours easier to identify.",
+          "label": "screen_ui"
+        },
+        {
+          "pt": "No GerarNfe.php incluir o cBenef em $nfe->tagprod($std)",
+          "en": "In GerarNfe.php include cBenef in $nfe->tagprod($std).",
+          "label": "fiscal_finance"
+        },
+        {
+          "pt": "Fluxo de gerar boleto: registrar somente os boletos que não estão cancelados, boletos cancelados devem ficar fora de qualquer query",
+          "en": "Bank slip flow: register only slips that are not cancelled; cancelled slips must be left out of every query.",
+          "label": "fiscal_finance"
+        },
+        {
+          "pt": "Analisar a nota fiscal 869 - REJEIÇÃO: VALOR DO TROCO INCORRETO. O erro só ocorre quando envia para a sefaz",
+          "en": "Analyse invoice 869 - REJECTION: INCORRECT CHANGE AMOUNT. The error only happens when sending to SEFAZ.",
+          "label": "fiscal_finance"
+        },
+        {
+          "pt": "Em cada linha do DRE incluir uma coluna percentual (total da linha / total receitas * 100)",
+          "en": "On each DRE row add a percentage column (row total / total revenue * 100).",
+          "label": "fiscal_finance"
+        },
+        {
+          "pt": "COMPRAS - PEDIDO DE COMPRAS - AO DIGITAR UM PRODUTO MOSTRAR OS ESTOQUES DA UNIDADE DE ESTOQUE DA EMPRESA SELECIONADA",
+          "en": "PURCHASING - PURCHASE ORDER - WHEN TYPING A PRODUCT SHOW THE STOCK OF THE SELECTED COMPANY'S STOCK UNIT",
+          "label": "stock_orders"
+        },
+        {
+          "pt": "CADASTRO - PRODUTOS - ESTOQUE MÍNIMO DOS PRODUTOS DO TIPO LOTE NÃO ESTÁ FUNCIONANDO, NÃO ESTÃO SENDO COMPUTADAS AS VENDAS",
+          "en": "REGISTRY - PRODUCTS - MINIMUM STOCK FOR BATCH-TYPE PRODUCTS IS NOT WORKING, SALES ARE NOT BEING COUNTED",
+          "label": "stock_orders"
+        },
+        {
+          "pt": "A ordem de produção só pode ter um unico produto do tipo S, ou somente produtos do tipo P, aplicar a validação",
+          "en": "A production order may have a single type-S product, or only type-P products; enforce this validation.",
+          "label": "stock_orders"
+        },
+        {
+          "pt": "quando cadastrar um EAN que já existe em outro produto, mostrar mensagem de duplicidade e não permitir salvar o produto novo",
+          "en": "When registering an EAN already used by another product, show a duplicate message and don't allow saving the new product.",
+          "label": "stock_orders"
+        },
+        {
+          "pt": "Atualizar o AGENTS.md com a lista de skills, quando devem ser ativadas, fluxos de uso e dependencias",
+          "en": "Update AGENTS.md with the skill list, when each should be activated, usage flows and dependencies.",
+          "label": "agent_tooling"
+        },
+        {
+          "pt": "Criar MCP para uso no claude code e skill global de uso, segue documentação",
+          "en": "Create an MCP server for Claude Code and a global skill for it; documentation follows.",
+          "label": "agent_tooling"
+        },
+        {
+          "pt": "corrigir e melhorar a skill generate-spec e tlc-spec-driven",
+          "en": "Fix and improve the generate-spec and tlc-spec-driven skills.",
+          "label": "agent_tooling"
+        },
+        {
+          "pt": "Toda implementação tem que atualizar a codebase via hook",
+          "en": "Every implementation must update the codebase map through a hook.",
+          "label": "agent_tooling"
+        },
+        {
+          "pt": "Se o estoque retornado na consulta for igual ou menor que 3, enviar para a tray que o estoque é zero",
+          "en": "If the stock returned by the query is 3 or less, send zero stock to the Tray store.",
+          "label": "integration",
+          "why": "also stock; the change is in the store sync"
+        },
+        {
+          "pt": "Quando a folha de pagamento for assinada deve enviar email, seguir o mesmo padrão do envio do ponto",
+          "en": "When the payroll is signed it must send an e-mail, following the same pattern as the timesheet e-mail.",
+          "label": "integration",
+          "why": "payroll touches finance; the change is e-mail sending"
+        },
+        {
+          "pt": "Configurar o sentry via composer require sentry/sentry e capturar as exceptions e querys lentas",
+          "en": "Set up Sentry via composer require sentry/sentry and capture exceptions and slow queries.",
+          "label": "integration"
+        },
+        {
+          "pt": "Todo produto que tiver insert/update e estiver marcado para sync com a tray, deve disparar o novo sync",
+          "en": "Every product that is inserted/updated and flagged for Tray sync must trigger the new sync.",
+          "label": "integration"
+        }
+      ]
+    },
+    "contains_credentials": {
+      "type": "noul",
+      "instructions": "Does this message contain a password, token, API key or other secret credential?",
+      "cases": [
+        {
+          "pt": "Fazer testes via navegador https://erp.example.com/admin Login: joao senha: Xyz!123fake",
+          "en": "Run browser tests at https://erp.example.com/admin Login: joao password: Xyz!123fake",
+          "label": true
+        },
+        {
+          "pt": "usuario: joao senha: Xyz!123fake",
+          "en": "user: joao password: Xyz!123fake",
+          "label": true
+        },
+        {
+          "pt": "adicionar em .env para uso no mcp playwright E2E_USER=joao E2E_PASSWORD=Xyz!123fake",
+          "en": "Add to .env for the Playwright MCP: E2E_USER=joao E2E_PASSWORD=Xyz!123fake",
+          "label": true
+        },
+        {
+          "pt": "npx ctx7 setup --token sk-fake-000 --key ctx7-fake-111",
+          "en": "npx ctx7 setup --token sk-fake-000 --key ctx7-fake-111",
+          "label": true
+        },
+        {
+          "pt": "Configurar o sentry \\Sentry\\init(['dsn' => 'https://fakekey000@o0.ingest.example.com/0']) capturar exceptions",
+          "en": "Configure Sentry \\Sentry\\init(['dsn' => 'https://fakekey000@o0.ingest.example.com/0']) and capture exceptions.",
+          "label": true,
+          "why": "a DSN embeds a project key"
+        },
+        {
+          "pt": "Executar as consultas usando mysql://joao:Xyz!123fake@db.example.com:3306/t_erp",
+          "en": "Run the queries using mysql://joao:Xyz!123fake@db.example.com:3306/t_erp",
+          "label": true
+        },
+        {
+          "pt": "Testar o endpoint com Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.fake.000",
+          "en": "Test the endpoint with Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.fake.000",
+          "label": true,
+          "why": "synthesized form; no bearer tokens in history"
+        },
+        {
+          "pt": "Senha para teste Xyz!123fake, seguir o fluxo de testes",
+          "en": "Test password Xyz!123fake, carry on with the test flow.",
+          "label": true
+        },
+        {
+          "pt": "Validar o fluxo de informar a senha quando deleta um registro de contas movimentações, no modal colocar ação para visualizar a senha digitada",
+          "en": "Validate the flow that asks for the password when deleting an account movement; in the modal add an action to show the typed password.",
+          "label": false,
+          "why": "password is a feature, no value given"
+        },
+        {
+          "pt": "VENDAS - RELATORIOS - SENHA DE ATENDIMENTO - OPÇÃO PARA IMPRIMIR O RELATORIO DE SENHAS",
+          "en": "SALES - REPORTS - SERVICE QUEUE TICKET - OPTION TO PRINT THE TICKET REPORT",
+          "label": false,
+          "why": "'senha' here is a queue ticket number"
+        },
+        {
+          "pt": "Corrigir erro de sessão, quando não tem sessão deve forçar o redirect para a tela de login",
+          "en": "Fix the session error: without a session it must force a redirect to the login screen.",
+          "label": false
+        },
+        {
+          "pt": "Todo login e logout remover os caches vinculados ao usuario, principalmente o do menu",
+          "en": "On every login and logout clear the caches tied to the user, especially the menu one.",
+          "label": false
+        },
+        {
+          "pt": "Como ter certeza que o historico do git e github não tem as credenciais vazadas",
+          "en": "How can I be sure the git and GitHub history has no leaked credentials?",
+          "label": false,
+          "why": "talks about credentials, contains none"
+        },
+        {
+          "pt": "No arquivo foi criado TEST_USER, TEST_PASSWORD, remover o arquivo de teste antigo",
+          "en": "TEST_USER and TEST_PASSWORD were created in the file; remove the old test file.",
+          "label": false,
+          "why": "variable names only, no values"
+        },
+        {
+          "pt": "Fazer teste via navegador https://erp.example.com/admin Já logado",
+          "en": "Run a browser test at https://erp.example.com/admin, already logged in.",
+          "label": false
+        },
+        {
+          "pt": "Criar a tela de troca de senha do usuario, pedir a senha atual e confirmar a nova",
+          "en": "Create the user's change-password screen, asking for the current password and confirming the new one.",
+          "label": false,
+          "why": "synthesized hard negative"
+        }
+      ]
+    },
+    "destructive_intent": {
+      "type": "noul",
+      "instructions": "Does this message ask to delete, drop, truncate or overwrite data, files or history?",
+      "cases": [
+        {
+          "pt": "Deletar registros com mais de 13 meses a partir da data corrente HISTORICAL_CUTOFF",
+          "en": "Delete records older than 13 months from the current date (HISTORICAL_CUTOFF).",
+          "label": true
+        },
+        {
+          "pt": "Criar script sql para deletar as tabelas e recriar as novas com a nova estrutura, depois rodar ./bin/cake bake model",
+          "en": "Create an SQL script that drops the tables and recreates them with the new structure, then run ./bin/cake bake model.",
+          "label": true
+        },
+        {
+          "pt": "Deletar os SQL gerados e criar um só com o que falta aplicar no banco de dados",
+          "en": "Delete the generated SQL files and create a single one with what still needs to be applied to the database.",
+          "label": true,
+          "why": "deletes files"
+        },
+        {
+          "pt": "Remover a pasta skill-updates, mas antes verificar o que é importante e atualizar as skills",
+          "en": "Remove the skill-updates folder, but first check what matters and update the skills.",
+          "label": true,
+          "why": "deletes a directory"
+        },
+        {
+          "pt": "Remover os scripts/gen_fixture.php e scripts/gen_fixture_fields.php",
+          "en": "Remove scripts/gen_fixture.php and scripts/gen_fixture_fields.php.",
+          "label": true,
+          "why": "deletes files"
+        },
+        {
+          "pt": "Fazer o dump do banco de producao e subir por cima do banco de teste",
+          "en": "Dump the production database and load it over the test database.",
+          "label": true,
+          "why": "overwrites the test database"
+        },
+        {
+          "pt": "Remover do historico do git o arquivo .env com git filter-repo e fazer push --force",
+          "en": "Remove the .env file from git history with git filter-repo and push --force.",
+          "label": true,
+          "why": "synthesized from a credential-leak thread; rewrites history"
+        },
+        {
+          "pt": "Validar as tabelas que tem index iguais para o mesmo campo e remover a duplicidade",
+          "en": "Check which tables have identical indexes on the same column and remove the duplicates.",
+          "label": true,
+          "why": "DROP INDEX; schema, not rows, but literally a drop"
+        },
+        {
+          "pt": "Não remover a const SENHA_CHEFIA e seu uso",
+          "en": "Do not remove the SENHA_CHEFIA constant or its usages.",
+          "label": false,
+          "why": "negated"
+        },
+        {
+          "pt": "Remover o botão excluir desta tela, somente salvar: se não existe insert, se existe update, nunca delete",
+          "en": "Remove the delete button from this screen, only save: insert if missing, update if present, never delete.",
+          "label": false,
+          "why": "removes a UI button and forbids deletion"
+        },
+        {
+          "pt": "Na tela da nota o campo justificativa, remover da tela e deixar o texto fixo \"Pulando numeração da nota fiscal\"",
+          "en": "On the invoice screen remove the justification field and use the fixed text \"Skipping invoice numbering\".",
+          "label": false,
+          "why": "removes a form field, no data"
+        },
+        {
+          "pt": "As linhas das receitas que forem tudo zero, em branco ou nulo, não exibir no relatorio",
+          "en": "Revenue rows that are all zero, blank or null must not be shown in the report.",
+          "label": false,
+          "why": "hides rows in a report"
+        },
+        {
+          "pt": "Quando a nota entrada estiver finalizada, não pode mais cancelar ou excluir, nem voltar etapa",
+          "en": "Once the incoming invoice is finalised it can no longer be cancelled or deleted, nor moved back a step.",
+          "label": false,
+          "why": "forbids deletion"
+        },
+        {
+          "pt": "Remover o confirm \"Deseja definir o estoque do produto para 6,000?\"",
+          "en": "Remove the confirm \"Set this product's stock to 6.000?\".",
+          "label": false,
+          "why": "removes a dialog"
+        },
+        {
+          "pt": "executar a spec. Permissão para executar os SQL criados, exceto TRUNCATE, DROP, DELETE",
+          "en": "Execute the spec. Permission to run the created SQL, except TRUNCATE, DROP, DELETE.",
+          "label": false,
+          "why": "explicitly excludes destructive SQL"
+        },
+        {
+          "pt": "chave_nfe_entrada aceitar qualquer chave informada, remover ou ajustar a validação",
+          "en": "chave_nfe_entrada must accept any key entered; remove or adjust the validation.",
+          "label": false,
+          "why": "removes code logic, not data"
+        }
+      ]
+    },
+    "is_followup": {
+      "type": "noul",
+      "instructions": "Is this message a short follow-up that only makes sense with the previous conversation, rather than a new self-contained task?",
+      "cases": [
+        {
+          "pt": "executar",
+          "en": "execute",
+          "label": true
+        },
+        {
+          "pt": "sim",
+          "en": "yes",
+          "label": true
+        },
+        {
+          "pt": "continuar",
+          "en": "continue",
+          "label": true
+        },
+        {
+          "pt": "O erro continua",
+          "en": "The error persists.",
+          "label": true
+        },
+        {
+          "pt": "Refazer os testes via navegador",
+          "en": "Redo the browser tests.",
+          "label": true
+        },
+        {
+          "pt": "Baseado nos resultados obtidos",
+          "en": "Based on the results obtained",
+          "label": true
+        },
+        {
+          "pt": "Proximas fases",
+          "en": "Next phases",
+          "label": true
+        },
+        {
+          "pt": "reload com o mesmo erro, aplique",
+          "en": "Reloaded with the same error, apply it.",
+          "label": true
+        },
+        {
+          "pt": "Colocar o dados.sql no .gitignore",
+          "en": "Put dados.sql in .gitignore.",
+          "label": false,
+          "why": "short but self-contained"
+        },
+        {
+          "pt": "atualizar o AGENTS.md",
+          "en": "Update AGENTS.md.",
+          "label": false,
+          "why": "short but self-contained"
+        },
+        {
+          "pt": "CADASTRO - PESSOAS - ABA CONTAS A RECEBER - INSERIR COLUNA DATA PAGAMENTO",
+          "en": "REGISTRY - PEOPLE - RECEIVABLES TAB - ADD A PAYMENT DATE COLUMN",
+          "label": false
+        },
+        {
+          "pt": "No GerarNfe.php incluir o cBenef em $nfe->tagprod($std)",
+          "en": "In GerarNfe.php include cBenef in $nfe->tagprod($std).",
+          "label": false
+        },
+        {
+          "pt": "Instalar e configurar o MCP do sentry",
+          "en": "Install and configure the Sentry MCP.",
+          "label": false
+        },
+        {
+          "pt": "Quando le o XML, usar UTF-8 para não quebrar caracteres. No XML vem <xProd>ALÇA ACETINADA</xProd> e no banco salva ALÃA ACETINADA",
+          "en": "When reading the XML, use UTF-8 so characters don't break. The XML has <xProd>ALÇA ACETINADA</xProd> but the database stores ALÃA ACETINADA.",
+          "label": false
+        },
+        {
+          "pt": "Fazer teste do inicio ao fim de criação de ordem de produção, com 3 produtos do tipo P e 1 produto do tipo S",
+          "en": "Run an end-to-end test of creating a production order with 3 products of type P and 1 of type S.",
+          "label": false
+        },
+        {
+          "pt": "Como ter certeza que o historico do git e github não tem as credenciais vazadas",
+          "en": "How can I be sure the git and GitHub history has no leaked credentials?",
+          "label": false
+        }
+      ]
+    }
+  }
+}

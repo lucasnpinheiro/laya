@@ -1076,8 +1076,8 @@
     "requirements": 13,
     "questions_per_requirement": 3,
     "total_questions": 39,
-    "elapsed_seconds": 16.14,
-    "seconds_per_requirement": 1.242,
+    "elapsed_seconds": 15.72,
+    "seconds_per_requirement": 1.209,
     "flagged_ambiguous": 0,
     "flagged_ui": 2,
     "panels_touched": [
@@ -1170,13 +1170,13 @@
     ]
   },
   "question_packing": {
-    "noul_ambiguous_ms": 376.9,
-    "noul_ui_ms": 321.1,
-    "choice_panel_6_options_ms": 512.8,
-    "three_separate_calls_ms": 1210.8,
-    "three_packed_in_one_call_ms": 1202.2,
-    "packing_saving": 0.007,
-    "choice_vs_noul_ratio": 1.36
+    "noul_ambiguous_ms": 312.2,
+    "noul_ui_ms": 264.5,
+    "choice_panel_6_options_ms": 391.0,
+    "three_separate_calls_ms": 967.8,
+    "three_packed_in_one_call_ms": 1046.9,
+    "packing_saving": -0.082,
+    "choice_vs_noul_ratio": 1.25
   },
   "gated_panel_routing": {
     "gates": {

@@ -3,8 +3,8 @@
     "n": 15,
     "accuracy": 0.867,
     "by_language": {
-      "pt": 0.667,
-      "en": 1.0
+      "en": 1.0,
+      "pt": 0.667
     },
     "cases": [
       {
@@ -308,10 +308,10 @@
     "vague_label": "other"
   },
   "latency_ms": {
-    "single_question_p50": 195.2,
-    "single_question_min": 172.8,
-    "single_question_max": 228.6,
-    "ten_questions_batched": 1256.7,
-    "ten_questions_per_question": 125.7
+    "single_question_p50": 223.6,
+    "single_question_min": 192.1,
+    "single_question_max": 341.8,
+    "ten_questions_batched": 1314.4,
+    "ten_questions_per_question": 131.4
   }
 }

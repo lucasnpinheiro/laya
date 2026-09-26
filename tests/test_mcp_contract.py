@@ -13,11 +13,12 @@ EXPECTED_TOOLS = {
     "laya_health",
     "laya_start",
     "laya_checkpoints",
+    "laya_question_bank",
 }
 
 
 def test_server_exposes_the_documented_tools(laya):
-    """All five documented tools show up in client discovery."""
+    """All six documented tools show up in client discovery."""
     names = {tool.name for tool in laya.list_tools()}
     assert EXPECTED_TOOLS <= names, f"missing tools: {EXPECTED_TOOLS - names}"
 
@@ -231,3 +232,25 @@ def test_start_is_idempotent_when_already_running(laya):
     assert result["ready"] is True
     assert result["already_running"] is True
     assert result["elapsed_seconds"] < 30
+
+
+def test_question_bank_lists_and_serves_measured_questions(laya):
+    """The bank tool lists every bank and hands back approved questions ready for predict."""
+    listing = laya.call("laya_question_bank")
+    names = {b["name"] for b in listing["banks"]}
+    assert {"dev_decisions", "spec_research"} <= names
+
+    bank = laya.call("laya_question_bank", name="dev_decisions")
+    for key, entry in bank["approved"].items():
+        assert entry["_mode"] in ("pt", "en"), key
+        assert "_confidence_gate" in entry or "_noul_cut" in entry, key
+        assert key in entry["question"], key
+
+    commit = bank["approved"]["commit_type"]["question"]
+    result = laya.call("laya_predict", state="Fix rounding bug in the ICMS total.", questions=commit)
+    assert result["answers"]["commit_type"]["choice"] == "fix"
+
+
+def test_question_bank_rejects_unknown_name(laya):
+    message = laya.call_expecting_error("laya_question_bank", name="nope")
+    assert "Unknown question bank" in message and "dev_decisions" in message

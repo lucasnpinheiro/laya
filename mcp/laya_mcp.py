@@ -22,11 +22,13 @@ Environment:
     LAYA_COMPOSE_DIR   directory holding docker-compose.yml (default: this file's parent repo)
     LAYA_COMPOSE_SERVICE  service to start (default: laya-api)
     LAYA_START_TIMEOUT seconds to wait for the model to load after boot (default: 900)
+    LAYA_QUESTION_BANKS directory of measured question banks (default: <repo>/question_banks)
 """
 
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 import shutil
 import time
@@ -45,6 +47,10 @@ AUTO_START = os.environ.get("LAYA_AUTO_START", "1").lower() not in ("0", "false"
 COMPOSE_DIR = Path(os.environ.get("LAYA_COMPOSE_DIR") or Path(__file__).resolve().parent.parent)
 COMPOSE_SERVICE = os.environ.get("LAYA_COMPOSE_SERVICE", "laya-api")
 START_TIMEOUT = float(os.environ.get("LAYA_START_TIMEOUT", "900"))
+
+QUESTION_BANKS = Path(
+    os.environ.get("LAYA_QUESTION_BANKS") or Path(__file__).resolve().parent.parent / "question_banks"
+)
 
 CHECKPOINTS = ("english", "multilingual", "typed-decisions")
 
@@ -181,6 +187,14 @@ mcp = MCPServer(
         "Question types: 'choice' (pick one option), 'score' (ordinal level), 'noul' "
         "(probability of yes). Keep choice questions under ~20 options; above that, split "
         "into a coarse-to-fine hierarchy.\n\n"
+        "Software development decisions: before inventing a question, call "
+        "laya_question_bank — it holds questions already measured on this install, with "
+        "the text language, confidence gate and cut that made them safe. Measured as "
+        "reliable: Conventional Commit type, issue kind (bug/feature/question/tech_debt), "
+        "code-review verdict, and as review flags only, security-sensitive and "
+        "breaking-change. Measured as unreliable — leave to reasoning: test-failure cause, "
+        "log severity, whether a change touches the schema, requirement ambiguity. Below a "
+        "question's gate, escalate the item instead of trusting the label.\n\n"
         "The backing container is started automatically on the first call. A cold start "
         "downloads the weights and can take minutes; every call after that is milliseconds."
     ),
@@ -427,6 +441,43 @@ def laya_checkpoints() -> List[Dict[str, Any]]:
             "warning": "Fine-tuned on those four workflows; no advantage outside them.",
         },
     ]
+
+
+@mcp.tool()
+def laya_question_bank(name: Optional[str] = None) -> Dict[str, Any]:
+    """Measured, ready-to-use question sets for recurring decisions, with their verdicts.
+
+    Call without `name` to list the banks and which questions each approves or rejects.
+    Call with a bank name (e.g. "dev_decisions", "spec_research") to get the full bank:
+    every approved entry carries the `question` block to paste into laya_predict, the
+    `_mode` (language to send the text in: "pt" as-is, "en" translate first), and either a
+    `_confidence_gate` (choice: accept at or above it) or a `_noul_cut` (flag at or above
+    it). Rejected entries say why — do not ask Laya those; reason about them instead.
+
+    Prefer a banked question over writing a new one: the bank's wording, criteria and
+    thresholds are the ones that were measured.
+    """
+    if not QUESTION_BANKS.is_dir():
+        raise ToolError(f"No question bank directory at {QUESTION_BANKS} (set LAYA_QUESTION_BANKS).")
+
+    banks = {p.stem: p for p in sorted(QUESTION_BANKS.glob("*.json"))}
+
+    if name is None:
+        listing = []
+        for stem, path in banks.items():
+            data = json.loads(path.read_text())
+            listing.append({
+                "name": stem,
+                "about": data.get("_about", ""),
+                "measured_on": data.get("_measured_on"),
+                "approved": {k: v.get("_verdict", "") for k, v in data.get("approved", {}).items()},
+                "rejected": sorted(data.get("rejected", {})),
+            })
+        return {"directory": str(QUESTION_BANKS), "banks": listing}
+
+    if name not in banks:
+        raise ToolError(f"Unknown question bank {name!r}. Available: {', '.join(banks) or 'none'}.")
+    return json.loads(banks[name].read_text())
 
 
 if __name__ == "__main__":

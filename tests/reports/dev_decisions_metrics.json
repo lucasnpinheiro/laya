@@ -1,0 +1,1035 @@
+{
+  "commit_type": {
+    "pt": {
+      "accuracy": 0.75,
+      "n": 8,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.3255,
+          "label": "feat",
+          "got": "docs"
+        },
+        {
+          "ok": false,
+          "value": 0.3285,
+          "label": "refactor",
+          "got": "feat"
+        }
+      ],
+      "rows": [
+        {
+          "ok": false,
+          "value": 0.3255,
+          "label": "feat",
+          "got": "docs"
+        },
+        {
+          "ok": true,
+          "value": 0.9787,
+          "label": "fix",
+          "got": "fix"
+        },
+        {
+          "ok": false,
+          "value": 0.3285,
+          "label": "refactor",
+          "got": "feat"
+        },
+        {
+          "ok": true,
+          "value": 0.8153,
+          "label": "docs",
+          "got": "docs"
+        },
+        {
+          "ok": true,
+          "value": 0.9733,
+          "label": "test",
+          "got": "test"
+        },
+        {
+          "ok": true,
+          "value": 0.3256,
+          "label": "chore",
+          "got": "chore"
+        },
+        {
+          "ok": true,
+          "value": 0.6343,
+          "label": "fix",
+          "got": "fix"
+        },
+        {
+          "ok": true,
+          "value": 0.1133,
+          "label": "feat",
+          "got": "feat"
+        }
+      ],
+      "conf_when_right": 0.64,
+      "conf_when_wrong": 0.327
+    },
+    "en": {
+      "accuracy": 1.0,
+      "n": 8,
+      "misses": [],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.2963,
+          "label": "feat",
+          "got": "feat"
+        },
+        {
+          "ok": true,
+          "value": 0.962,
+          "label": "fix",
+          "got": "fix"
+        },
+        {
+          "ok": true,
+          "value": 0.742,
+          "label": "refactor",
+          "got": "refactor"
+        },
+        {
+          "ok": true,
+          "value": 0.7781,
+          "label": "docs",
+          "got": "docs"
+        },
+        {
+          "ok": true,
+          "value": 0.9413,
+          "label": "test",
+          "got": "test"
+        },
+        {
+          "ok": true,
+          "value": 0.0931,
+          "label": "chore",
+          "got": "chore"
+        },
+        {
+          "ok": true,
+          "value": 0.4303,
+          "label": "fix",
+          "got": "fix"
+        },
+        {
+          "ok": true,
+          "value": 0.3794,
+          "label": "feat",
+          "got": "feat"
+        }
+      ],
+      "conf_when_right": 0.578,
+      "conf_when_wrong": null
+    }
+  },
+  "issue_kind": {
+    "pt": {
+      "accuracy": 0.375,
+      "n": 8,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.1179,
+          "label": "bug",
+          "got": "tech_debt"
+        },
+        {
+          "ok": false,
+          "value": 0.0473,
+          "label": "feature",
+          "got": "tech_debt"
+        },
+        {
+          "ok": false,
+          "value": 0.5291,
+          "label": "question",
+          "got": "feature"
+        },
+        {
+          "ok": false,
+          "value": 0.0453,
+          "label": "bug",
+          "got": "tech_debt"
+        },
+        {
+          "ok": false,
+          "value": 0.4079,
+          "label": "feature",
+          "got": "bug"
+        }
+      ],
+      "rows": [
+        {
+          "ok": false,
+          "value": 0.1179,
+          "label": "bug",
+          "got": "tech_debt"
+        },
+        {
+          "ok": false,
+          "value": 0.0473,
+          "label": "feature",
+          "got": "tech_debt"
+        },
+        {
+          "ok": false,
+          "value": 0.5291,
+          "label": "question",
+          "got": "feature"
+        },
+        {
+          "ok": true,
+          "value": 0.1401,
+          "label": "tech_debt",
+          "got": "tech_debt"
+        },
+        {
+          "ok": false,
+          "value": 0.0453,
+          "label": "bug",
+          "got": "tech_debt"
+        },
+        {
+          "ok": false,
+          "value": 0.4079,
+          "label": "feature",
+          "got": "bug"
+        },
+        {
+          "ok": true,
+          "value": 0.0386,
+          "label": "question",
+          "got": "question"
+        },
+        {
+          "ok": true,
+          "value": 0.549,
+          "label": "tech_debt",
+          "got": "tech_debt"
+        }
+      ],
+      "conf_when_right": 0.243,
+      "conf_when_wrong": 0.23
+    },
+    "en": {
+      "accuracy": 1.0,
+      "n": 8,
+      "misses": [],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.3788,
+          "label": "bug",
+          "got": "bug"
+        },
+        {
+          "ok": true,
+          "value": 0.2501,
+          "label": "feature",
+          "got": "feature"
+        },
+        {
+          "ok": true,
+          "value": 0.1224,
+          "label": "question",
+          "got": "question"
+        },
+        {
+          "ok": true,
+          "value": 0.3152,
+          "label": "tech_debt",
+          "got": "tech_debt"
+        },
+        {
+          "ok": true,
+          "value": 0.4217,
+          "label": "bug",
+          "got": "bug"
+        },
+        {
+          "ok": true,
+          "value": 0.4208,
+          "label": "feature",
+          "got": "feature"
+        },
+        {
+          "ok": true,
+          "value": 0.4917,
+          "label": "question",
+          "got": "question"
+        },
+        {
+          "ok": true,
+          "value": 0.396,
+          "label": "tech_debt",
+          "got": "tech_debt"
+        }
+      ],
+      "conf_when_right": 0.35,
+      "conf_when_wrong": null
+    }
+  },
+  "test_failure_cause": {
+    "pt": {
+      "accuracy": 0.25,
+      "n": 8,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.0875,
+          "label": "flaky",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.075,
+          "label": "environment",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.4128,
+          "label": "outdated_test",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.1197,
+          "label": "environment",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.2212,
+          "label": "product_bug",
+          "got": "flaky"
+        },
+        {
+          "ok": false,
+          "value": 0.3694,
+          "label": "outdated_test",
+          "got": "product_bug"
+        }
+      ],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.887,
+          "label": "product_bug",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.0875,
+          "label": "flaky",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.075,
+          "label": "environment",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.4128,
+          "label": "outdated_test",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.1197,
+          "label": "environment",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.2212,
+          "label": "product_bug",
+          "got": "flaky"
+        },
+        {
+          "ok": true,
+          "value": 0.1489,
+          "label": "flaky",
+          "got": "flaky"
+        },
+        {
+          "ok": false,
+          "value": 0.3694,
+          "label": "outdated_test",
+          "got": "product_bug"
+        }
+      ],
+      "conf_when_right": 0.518,
+      "conf_when_wrong": 0.214
+    },
+    "en": {
+      "accuracy": 0.625,
+      "n": 8,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.1639,
+          "label": "flaky",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.0661,
+          "label": "environment",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.059,
+          "label": "environment",
+          "got": "product_bug"
+        }
+      ],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.2606,
+          "label": "product_bug",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.1639,
+          "label": "flaky",
+          "got": "product_bug"
+        },
+        {
+          "ok": false,
+          "value": 0.0661,
+          "label": "environment",
+          "got": "product_bug"
+        },
+        {
+          "ok": true,
+          "value": 0.2442,
+          "label": "outdated_test",
+          "got": "outdated_test"
+        },
+        {
+          "ok": false,
+          "value": 0.059,
+          "label": "environment",
+          "got": "product_bug"
+        },
+        {
+          "ok": true,
+          "value": 0.246,
+          "label": "product_bug",
+          "got": "product_bug"
+        },
+        {
+          "ok": true,
+          "value": 0.1549,
+          "label": "flaky",
+          "got": "flaky"
+        },
+        {
+          "ok": true,
+          "value": 0.207,
+          "label": "outdated_test",
+          "got": "outdated_test"
+        }
+      ],
+      "conf_when_right": 0.223,
+      "conf_when_wrong": 0.096
+    }
+  },
+  "log_severity": {
+    "pt": {
+      "accuracy": 0.625,
+      "n": 8,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.1254,
+          "label": "info",
+          "got": "warning"
+        },
+        {
+          "ok": false,
+          "value": 0.0982,
+          "label": "info",
+          "got": "warning"
+        },
+        {
+          "ok": false,
+          "value": 0.1734,
+          "label": "critical",
+          "got": "warning"
+        }
+      ],
+      "rows": [
+        {
+          "ok": false,
+          "value": 0.1254,
+          "label": "info",
+          "got": "warning"
+        },
+        {
+          "ok": true,
+          "value": 0.0652,
+          "label": "warning",
+          "got": "warning"
+        },
+        {
+          "ok": true,
+          "value": 0.2743,
+          "label": "error",
+          "got": "error"
+        },
+        {
+          "ok": true,
+          "value": 0.1234,
+          "label": "critical",
+          "got": "critical"
+        },
+        {
+          "ok": false,
+          "value": 0.0982,
+          "label": "info",
+          "got": "warning"
+        },
+        {
+          "ok": true,
+          "value": 0.1353,
+          "label": "warning",
+          "got": "warning"
+        },
+        {
+          "ok": true,
+          "value": 0.4497,
+          "label": "error",
+          "got": "error"
+        },
+        {
+          "ok": false,
+          "value": 0.1734,
+          "label": "critical",
+          "got": "warning"
+        }
+      ],
+      "conf_when_right": 0.21,
+      "conf_when_wrong": 0.132
+    },
+    "en": {
+      "accuracy": 0.625,
+      "n": 8,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.0986,
+          "label": "info",
+          "got": "warning"
+        },
+        {
+          "ok": false,
+          "value": 0.3082,
+          "label": "critical",
+          "got": "warning"
+        },
+        {
+          "ok": false,
+          "value": 0.2209,
+          "label": "critical",
+          "got": "error"
+        }
+      ],
+      "rows": [
+        {
+          "ok": false,
+          "value": 0.0986,
+          "label": "info",
+          "got": "warning"
+        },
+        {
+          "ok": true,
+          "value": 0.3014,
+          "label": "warning",
+          "got": "warning"
+        },
+        {
+          "ok": true,
+          "value": 0.32,
+          "label": "error",
+          "got": "error"
+        },
+        {
+          "ok": false,
+          "value": 0.3082,
+          "label": "critical",
+          "got": "warning"
+        },
+        {
+          "ok": true,
+          "value": 0.1077,
+          "label": "info",
+          "got": "info"
+        },
+        {
+          "ok": true,
+          "value": 0.2863,
+          "label": "warning",
+          "got": "warning"
+        },
+        {
+          "ok": true,
+          "value": 0.4613,
+          "label": "error",
+          "got": "error"
+        },
+        {
+          "ok": false,
+          "value": 0.2209,
+          "label": "critical",
+          "got": "error"
+        }
+      ],
+      "conf_when_right": 0.295,
+      "conf_when_wrong": 0.209
+    }
+  },
+  "review_verdict": {
+    "pt": {
+      "accuracy": 0.833,
+      "n": 6,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.1785,
+          "label": "comment",
+          "got": "approve"
+        }
+      ],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.7305,
+          "label": "approve",
+          "got": "approve"
+        },
+        {
+          "ok": true,
+          "value": 0.0427,
+          "label": "request_changes",
+          "got": "request_changes"
+        },
+        {
+          "ok": false,
+          "value": 0.1785,
+          "label": "comment",
+          "got": "approve"
+        },
+        {
+          "ok": true,
+          "value": 0.8208,
+          "label": "approve",
+          "got": "approve"
+        },
+        {
+          "ok": true,
+          "value": 0.2076,
+          "label": "request_changes",
+          "got": "request_changes"
+        },
+        {
+          "ok": true,
+          "value": 0.6506,
+          "label": "comment",
+          "got": "comment"
+        }
+      ],
+      "conf_when_right": 0.49,
+      "conf_when_wrong": 0.178
+    },
+    "en": {
+      "accuracy": 1.0,
+      "n": 6,
+      "misses": [],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.8088,
+          "label": "approve",
+          "got": "approve"
+        },
+        {
+          "ok": true,
+          "value": 0.0975,
+          "label": "request_changes",
+          "got": "request_changes"
+        },
+        {
+          "ok": true,
+          "value": 0.3767,
+          "label": "comment",
+          "got": "comment"
+        },
+        {
+          "ok": true,
+          "value": 0.8801,
+          "label": "approve",
+          "got": "approve"
+        },
+        {
+          "ok": true,
+          "value": 0.6825,
+          "label": "request_changes",
+          "got": "request_changes"
+        },
+        {
+          "ok": true,
+          "value": 0.0138,
+          "label": "comment",
+          "got": "comment"
+        }
+      ],
+      "conf_when_right": 0.477,
+      "conf_when_wrong": null
+    }
+  },
+  "breaking_change": {
+    "pt": {
+      "accuracy": 0.5,
+      "n": 6,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.29,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.1068,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.0099,
+          "label": true
+        }
+      ],
+      "rows": [
+        {
+          "ok": false,
+          "value": 0.29,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.1068,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.0099,
+          "label": true
+        },
+        {
+          "ok": true,
+          "value": 0.0001,
+          "label": false
+        },
+        {
+          "ok": true,
+          "value": 0.1905,
+          "label": false
+        },
+        {
+          "ok": true,
+          "value": 0.0061,
+          "label": false
+        }
+      ],
+      "mean_p_when_yes": 0.136,
+      "mean_p_when_no": 0.066,
+      "separation": 0.07
+    },
+    "en": {
+      "accuracy": 0.5,
+      "n": 6,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.1654,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.2279,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.2608,
+          "label": true
+        }
+      ],
+      "rows": [
+        {
+          "ok": false,
+          "value": 0.1654,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.2279,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.2608,
+          "label": true
+        },
+        {
+          "ok": true,
+          "value": 0.0356,
+          "label": false
+        },
+        {
+          "ok": true,
+          "value": 0.0791,
+          "label": false
+        },
+        {
+          "ok": true,
+          "value": 0.0491,
+          "label": false
+        }
+      ],
+      "mean_p_when_yes": 0.218,
+      "mean_p_when_no": 0.055,
+      "separation": 0.163
+    }
+  },
+  "touches_schema": {
+    "pt": {
+      "accuracy": 0.333,
+      "n": 6,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.0835,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.1253,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.9971,
+          "label": false
+        },
+        {
+          "ok": false,
+          "value": 0.5751,
+          "label": false
+        }
+      ],
+      "rows": [
+        {
+          "ok": false,
+          "value": 0.0835,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.1253,
+          "label": true
+        },
+        {
+          "ok": true,
+          "value": 0.9734,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.9971,
+          "label": false
+        },
+        {
+          "ok": false,
+          "value": 0.5751,
+          "label": false
+        },
+        {
+          "ok": true,
+          "value": 0.0,
+          "label": false
+        }
+      ],
+      "mean_p_when_yes": 0.394,
+      "mean_p_when_no": 0.524,
+      "separation": -0.13
+    },
+    "en": {
+      "accuracy": 0.667,
+      "n": 6,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.1099,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.181,
+          "label": true
+        }
+      ],
+      "rows": [
+        {
+          "ok": false,
+          "value": 0.1099,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.181,
+          "label": true
+        },
+        {
+          "ok": true,
+          "value": 0.7171,
+          "label": true
+        },
+        {
+          "ok": true,
+          "value": 0.0122,
+          "label": false
+        },
+        {
+          "ok": true,
+          "value": 0.1809,
+          "label": false
+        },
+        {
+          "ok": true,
+          "value": 0.0076,
+          "label": false
+        }
+      ],
+      "mean_p_when_yes": 0.336,
+      "mean_p_when_no": 0.067,
+      "separation": 0.269
+    }
+  },
+  "security_sensitive": {
+    "pt": {
+      "accuracy": 0.667,
+      "n": 6,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.2554,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.3034,
+          "label": true
+        }
+      ],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.7588,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.2554,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.3034,
+          "label": true
+        },
+        {
+          "ok": true,
+          "value": 0.0704,
+          "label": false
+        },
+        {
+          "ok": true,
+          "value": 0.0004,
+          "label": false
+        },
+        {
+          "ok": true,
+          "value": 0.0924,
+          "label": false
+        }
+      ],
+      "mean_p_when_yes": 0.439,
+      "mean_p_when_no": 0.054,
+      "separation": 0.385
+    },
+    "en": {
+      "accuracy": 0.667,
+      "n": 6,
+      "misses": [
+        {
+          "ok": false,
+          "value": 0.1367,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.2144,
+          "label": true
+        }
+      ],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.6082,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.1367,
+          "label": true
+        },
+        {
+          "ok": false,
+          "value": 0.2144,
+          "label": true
+        },
+        {
+          "ok": true,
+          "value": 0.0157,
+          "label": false
+        },
+        {
+          "ok": true,
+          "value": 0.0922,
+          "label": false
+        },
+        {
+          "ok": true,
+          "value": 0.061,
+          "label": false
+        }
+      ],
+      "mean_p_when_yes": 0.32,
+      "mean_p_when_no": 0.056,
+      "separation": 0.264
+    }
+  }
+}

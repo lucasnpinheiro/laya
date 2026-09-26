@@ -1,0 +1,104 @@
+{
+  "_about": "Perguntas de decisao para desenvolvimento de software (commit, issue, review, mudanca que quebra, seguranca). Criterios sempre em ingles. Evidencia: tests/DEV-DECISIONS.md, metricas em tests/reports/dev_decisions_metrics.json. Amostra pequena (6-8 casos por pergunta, PT/EN pareados): os numeros sao sonda, nao benchmark - recalibre no seu dado antes de automatizar.",
+  "_measured_on": "2026-09-24",
+  "_how_to_use": "Copie o bloco `question` para laya_predict. `_mode` diz em que idioma o TEXTO deve ir (pt = como veio; en = a LLM traduz antes). Abaixo do portao, nao adivinhe: devolva o item para a LLM ler.",
+  "approved": {
+    "commit_type": {
+      "_verdict": "APROVADO. en/en 1.000 (8/8). pt/en 0.750, mas com portao de confianca >= 0.40 aceita 4 de 8 com precisao 1.000. Uso: sugerir o tipo Conventional Commit (feat/fix/refactor/docs/test/chore) a partir da descricao da mudanca.",
+      "_mode": "en",
+      "_accuracy_floor": 1.0,
+      "_confidence_gate": 0.4,
+      "_pt_fallback": "texto em PT aceitavel so com confianca >= 0.40; abaixo, escalar",
+      "_on_low_confidence": "LLM escolhe o tipo lendo o diff",
+      "question": {
+        "commit_type": {
+          "type": "choice",
+          "instructions": "What kind of change is described?",
+          "criteria": {
+            "feat": "adds a new capability or behaviour visible to users",
+            "fix": "corrects a bug or wrong behaviour",
+            "refactor": "restructures code without changing behaviour",
+            "docs": "changes only documentation, readme or comments",
+            "test": "adds or changes only automated tests",
+            "chore": "build, dependencies, configuration or tooling"
+          }
+        }
+      }
+    },
+    "issue_kind": {
+      "_verdict": "APROVADO SO EM INGLES. en/en 1.000 (8/8), mas confianca baixa (0.35 media) - portao >= 0.30 aceita 6 de 8 com precisao 1.000. pt/en 0.375: traduza o titulo+corpo da issue antes.",
+      "_mode": "en",
+      "_accuracy_floor": 1.0,
+      "_confidence_gate": 0.3,
+      "_on_low_confidence": "LLM classifica a issue",
+      "question": {
+        "issue_kind": {
+          "type": "choice",
+          "instructions": "What kind of issue is this?",
+          "criteria": {
+            "bug": "something that used to work or should work is broken",
+            "feature": "a request for new behaviour that does not exist yet",
+            "question": "the reporter is asking how something works, nothing is broken",
+            "tech_debt": "internal cleanup, upgrade or refactoring with no user-visible change"
+          }
+        }
+      }
+    },
+    "review_verdict": {
+      "_verdict": "APROVADO. en/en 1.000 (6/6). pt/en 0.833; com portao >= 0.30 aceita 3 de 6 com precisao 1.000. Uso: consolidar dezenas de comentarios de review em bloqueia / sugere / aprova.",
+      "_mode": "en",
+      "_accuracy_floor": 1.0,
+      "_confidence_gate": 0.3,
+      "_on_low_confidence": "tratar como request_changes ate a LLM ler - errar para o lado seguro",
+      "question": {
+        "review_verdict": {
+          "type": "choice",
+          "instructions": "What verdict does this code review comment give?",
+          "criteria": {
+            "approve": "the reviewer is satisfied and the change can merge",
+            "request_changes": "the reviewer blocks the merge until something is fixed",
+            "comment": "a suggestion or question that does not block the merge"
+          }
+        }
+      }
+    },
+    "security_sensitive": {
+      "_verdict": "APROVADO COMO SINALIZADOR, nunca como liberacao. O noul sai baixo (sim = 0.14-0.76), entao o corte 0.5 erra; mas sim e nao nao se sobrepoem em nenhum modo - corte 0.10 separa 6/6 em pt/en e en/en. Corte ajustado nos proprios 6 casos: e hipotese, recalibre. Uso: marcar mudanca para o painel security-engineer; p < 0.10 NAO dispensa revisao de seguranca.",
+      "_mode": "pt",
+      "_noul_cut": 0.1,
+      "_on_low_confidence": "abaixo do corte o item segue o fluxo normal, sem pular a revisao",
+      "question": {
+        "security_sensitive": {
+          "type": "noul",
+          "instructions": "Does this change touch authentication, permissions, secrets or personal data?"
+        }
+      }
+    },
+    "breaking_change": {
+      "_verdict": "APROVADO COMO SINALIZADOR, SO EM INGLES. en/en: sim 0.17-0.26, nao 0.04-0.08 - corte 0.10 separa 6/6. pt/en nao separa (um sim a 0.01). Mesma ressalva: corte ajustado em 6 casos. Uso: levantar a mao para versionamento/changelog; nunca afirmar que algo NAO quebra.",
+      "_mode": "en",
+      "_noul_cut": 0.1,
+      "_on_low_confidence": "sem sinal nao significa compativel - LLM confere contrato/schema",
+      "question": {
+        "breaking_change": {
+          "type": "noul",
+          "instructions": "Does this change break existing callers, clients or stored data?"
+        }
+      }
+    }
+  },
+  "rejected": {
+    "test_failure_cause": {
+      "_verdict": "REPROVADO. pt/en 0.250, en/en 0.625; quase tudo vira product_bug, e confianca nunca passa de 0.30 em en/en. Diagnostico de falha de teste continua trabalho de LLM lendo o stack trace.",
+      "question_tested": "What most likely caused this test failure?"
+    },
+    "log_severity": {
+      "_verdict": "REPROVADO. 0.625 nos dois modos; troca info<->warning e rebaixa critical para warning/error. Rebaixar critical e o pior erro possivel para plantao.",
+      "question_tested": "How severe is this log entry for the on-call engineer?"
+    },
+    "touches_schema": {
+      "_verdict": "REPROVADO. pt/en separacao negativa (-0.13: da 1.0 para 'corrigir texto do e-mail'); en/en sobrepoe (sim 0.11, nao 0.18). Decidir se precisa de .sql e trabalho do mysql/LLM.",
+      "question_tested": "Does this change require altering database tables, columns or indexes?"
+    }
+  }
+}

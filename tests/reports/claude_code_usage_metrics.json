@@ -1,0 +1,2181 @@
+{
+  "request_kind": {
+    "pt": {
+      "accuracy": 0.667,
+      "n": 24,
+      "routed": [
+        "english",
+        "multilingual"
+      ],
+      "conf_when_right": 0.678,
+      "conf_when_wrong": 0.543,
+      "gate": 0.956,
+      "coverage": 0.125,
+      "confusions": [
+        "docs_tooling->plan_spec",
+        "docs_tooling->run_tests",
+        "new_feature->fix_bug",
+        "new_feature->fix_bug",
+        "plan_spec->fix_bug",
+        "question->fix_bug",
+        "question->fix_bug",
+        "question->fix_bug"
+      ],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.9568,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.3112,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9403,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.6007,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.4317,
+          "label": "new_feature",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.0487,
+          "label": "new_feature",
+          "got": "fix_bug",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.4892,
+          "label": "new_feature",
+          "got": "new_feature",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9022,
+          "label": "new_feature",
+          "got": "new_feature",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9228,
+          "label": "plan_spec",
+          "got": "plan_spec",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9505,
+          "label": "plan_spec",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.8495,
+          "label": "plan_spec",
+          "got": "plan_spec",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.6289,
+          "label": "plan_spec",
+          "got": "plan_spec",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.5904,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.5874,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9995,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9871,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.1019,
+          "label": "docs_tooling",
+          "got": "docs_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.0768,
+          "label": "docs_tooling",
+          "got": "run_tests",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.7152,
+          "label": "docs_tooling",
+          "got": "docs_tooling",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.2883,
+          "label": "docs_tooling",
+          "got": "plan_spec",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.8776,
+          "label": "question",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.2638,
+          "label": "question",
+          "got": "question",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.8525,
+          "label": "question",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.8212,
+          "label": "question",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        }
+      ]
+    },
+    "pt_ml": {
+      "accuracy": 0.625,
+      "n": 24,
+      "routed": [
+        "multilingual"
+      ],
+      "conf_when_right": 0.751,
+      "conf_when_wrong": 0.613,
+      "gate": 0.987,
+      "coverage": 0.167,
+      "confusions": [
+        "docs_tooling->new_feature",
+        "docs_tooling->plan_spec",
+        "new_feature->fix_bug",
+        "new_feature->fix_bug",
+        "plan_spec->fix_bug",
+        "question->fix_bug",
+        "question->fix_bug",
+        "question->fix_bug",
+        "question->fix_bug"
+      ],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.9568,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.3112,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9897,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9002,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.4317,
+          "label": "new_feature",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.1995,
+          "label": "new_feature",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.4892,
+          "label": "new_feature",
+          "got": "new_feature",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9022,
+          "label": "new_feature",
+          "got": "new_feature",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9228,
+          "label": "plan_spec",
+          "got": "plan_spec",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9505,
+          "label": "plan_spec",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.8495,
+          "label": "plan_spec",
+          "got": "plan_spec",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.6289,
+          "label": "plan_spec",
+          "got": "plan_spec",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9988,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.5874,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9995,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9871,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.0257,
+          "label": "docs_tooling",
+          "got": "docs_tooling",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.1218,
+          "label": "docs_tooling",
+          "got": "new_feature",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.7152,
+          "label": "docs_tooling",
+          "got": "docs_tooling",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.2883,
+          "label": "docs_tooling",
+          "got": "plan_spec",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.8776,
+          "label": "question",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.976,
+          "label": "question",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.8525,
+          "label": "question",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.8212,
+          "label": "question",
+          "got": "fix_bug",
+          "routed": "multilingual"
+        }
+      ]
+    },
+    "en": {
+      "accuracy": 0.792,
+      "n": 24,
+      "routed": [
+        "english"
+      ],
+      "conf_when_right": 0.61,
+      "conf_when_wrong": 0.438,
+      "gate": 0.887,
+      "coverage": 0.417,
+      "confusions": [
+        "docs_tooling->plan_spec",
+        "docs_tooling->run_tests",
+        "docs_tooling->run_tests",
+        "plan_spec->new_feature",
+        "question->docs_tooling"
+      ],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.9313,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.1958,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9323,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.2048,
+          "label": "fix_bug",
+          "got": "fix_bug",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9245,
+          "label": "new_feature",
+          "got": "new_feature",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.235,
+          "label": "new_feature",
+          "got": "new_feature",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.8872,
+          "label": "new_feature",
+          "got": "new_feature",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.1911,
+          "label": "new_feature",
+          "got": "new_feature",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.6002,
+          "label": "plan_spec",
+          "got": "new_feature",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.2982,
+          "label": "plan_spec",
+          "got": "plan_spec",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9771,
+          "label": "plan_spec",
+          "got": "plan_spec",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9439,
+          "label": "plan_spec",
+          "got": "plan_spec",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9784,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9837,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9943,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9835,
+          "label": "run_tests",
+          "got": "run_tests",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.1007,
+          "label": "docs_tooling",
+          "got": "docs_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.1794,
+          "label": "docs_tooling",
+          "got": "run_tests",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.7209,
+          "label": "docs_tooling",
+          "got": "plan_spec",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.5074,
+          "label": "docs_tooling",
+          "got": "run_tests",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.1434,
+          "label": "question",
+          "got": "question",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.1453,
+          "label": "question",
+          "got": "question",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.1818,
+          "label": "question",
+          "got": "docs_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.5319,
+          "label": "question",
+          "got": "question",
+          "routed": "english"
+        }
+      ]
+    }
+  },
+  "work_area": {
+    "pt": {
+      "accuracy": 0.542,
+      "n": 24,
+      "routed": [
+        "english",
+        "multilingual"
+      ],
+      "conf_when_right": 0.78,
+      "conf_when_wrong": 0.357,
+      "gate": 0.808,
+      "coverage": 0.333,
+      "confusions": [
+        "agent_tooling->database",
+        "agent_tooling->integration",
+        "fiscal_finance->agent_tooling",
+        "fiscal_finance->database",
+        "fiscal_finance->database",
+        "integration->agent_tooling",
+        "integration->fiscal_finance",
+        "integration->stock_orders",
+        "integration->stock_orders",
+        "screen_ui->integration",
+        "screen_ui->stock_orders"
+      ],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.7387,
+          "label": "database",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9609,
+          "label": "database",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.7829,
+          "label": "database",
+          "got": "database",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.8504,
+          "label": "database",
+          "got": "database",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.1504,
+          "label": "screen_ui",
+          "got": "integration",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.702,
+          "label": "screen_ui",
+          "got": "screen_ui",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.3751,
+          "label": "screen_ui",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.8088,
+          "label": "screen_ui",
+          "got": "screen_ui",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.1344,
+          "label": "fiscal_finance",
+          "got": "agent_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.7985,
+          "label": "fiscal_finance",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 1.0,
+          "label": "fiscal_finance",
+          "got": "fiscal_finance",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.61,
+          "label": "fiscal_finance",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9036,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.984,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9998,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.3512,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.8104,
+          "label": "agent_tooling",
+          "got": "agent_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.2044,
+          "label": "agent_tooling",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.2422,
+          "label": "agent_tooling",
+          "got": "agent_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.3529,
+          "label": "agent_tooling",
+          "got": "integration",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.3003,
+          "label": "integration",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.0812,
+          "label": "integration",
+          "got": "fiscal_finance",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.4852,
+          "label": "integration",
+          "got": "agent_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.4397,
+          "label": "integration",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        }
+      ]
+    },
+    "pt_ml": {
+      "accuracy": 0.625,
+      "n": 24,
+      "routed": [
+        "multilingual"
+      ],
+      "conf_when_right": 0.783,
+      "conf_when_wrong": 0.453,
+      "gate": 0.859,
+      "coverage": 0.333,
+      "confusions": [
+        "agent_tooling->database",
+        "agent_tooling->integration",
+        "fiscal_finance->database",
+        "fiscal_finance->database",
+        "integration->fiscal_finance",
+        "integration->stock_orders",
+        "integration->stock_orders",
+        "screen_ui->integration",
+        "screen_ui->stock_orders"
+      ],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.7387,
+          "label": "database",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9609,
+          "label": "database",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.7756,
+          "label": "database",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9837,
+          "label": "database",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.1504,
+          "label": "screen_ui",
+          "got": "integration",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.702,
+          "label": "screen_ui",
+          "got": "screen_ui",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.3751,
+          "label": "screen_ui",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.8088,
+          "label": "screen_ui",
+          "got": "screen_ui",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9977,
+          "label": "fiscal_finance",
+          "got": "fiscal_finance",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.7985,
+          "label": "fiscal_finance",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 1.0,
+          "label": "fiscal_finance",
+          "got": "fiscal_finance",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.61,
+          "label": "fiscal_finance",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9036,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.984,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9998,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.3512,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.8597,
+          "label": "agent_tooling",
+          "got": "agent_tooling",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.2044,
+          "label": "agent_tooling",
+          "got": "database",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.3165,
+          "label": "agent_tooling",
+          "got": "agent_tooling",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.3529,
+          "label": "agent_tooling",
+          "got": "integration",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.3003,
+          "label": "integration",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.8447,
+          "label": "integration",
+          "got": "fiscal_finance",
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.3687,
+          "label": "integration",
+          "got": "integration",
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.4397,
+          "label": "integration",
+          "got": "stock_orders",
+          "routed": "multilingual"
+        }
+      ]
+    },
+    "en": {
+      "accuracy": 0.708,
+      "n": 24,
+      "routed": [
+        "english"
+      ],
+      "conf_when_right": 0.655,
+      "conf_when_wrong": 0.497,
+      "gate": 0.719,
+      "coverage": 0.375,
+      "confusions": [
+        "fiscal_finance->agent_tooling",
+        "fiscal_finance->database",
+        "fiscal_finance->database",
+        "integration->agent_tooling",
+        "integration->fiscal_finance",
+        "integration->stock_orders",
+        "integration->stock_orders"
+      ],
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.599,
+          "label": "database",
+          "got": "database",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.878,
+          "label": "database",
+          "got": "database",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9163,
+          "label": "database",
+          "got": "database",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.8573,
+          "label": "database",
+          "got": "database",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.4889,
+          "label": "screen_ui",
+          "got": "screen_ui",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.7314,
+          "label": "screen_ui",
+          "got": "screen_ui",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.5465,
+          "label": "screen_ui",
+          "got": "screen_ui",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9938,
+          "label": "screen_ui",
+          "got": "screen_ui",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.2897,
+          "label": "fiscal_finance",
+          "got": "agent_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.3721,
+          "label": "fiscal_finance",
+          "got": "database",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9674,
+          "label": "fiscal_finance",
+          "got": "fiscal_finance",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.5122,
+          "label": "fiscal_finance",
+          "got": "database",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9346,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.6365,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9723,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.1259,
+          "label": "stock_orders",
+          "got": "stock_orders",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.7196,
+          "label": "agent_tooling",
+          "got": "agent_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.2137,
+          "label": "agent_tooling",
+          "got": "agent_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.3404,
+          "label": "agent_tooling",
+          "got": "agent_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.2093,
+          "label": "agent_tooling",
+          "got": "agent_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.5617,
+          "label": "integration",
+          "got": "stock_orders",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.6957,
+          "label": "integration",
+          "got": "fiscal_finance",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.3762,
+          "label": "integration",
+          "got": "agent_tooling",
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.6683,
+          "label": "integration",
+          "got": "stock_orders",
+          "routed": "english"
+        }
+      ]
+    }
+  },
+  "contains_credentials": {
+    "pt": {
+      "accuracy": 0.562,
+      "n": 16,
+      "routed": [
+        "english",
+        "multilingual"
+      ],
+      "mean_p_when_yes": 0.886,
+      "mean_p_when_no": 0.796,
+      "separation": 0.09,
+      "best_cut": 0.686,
+      "best_cut_accuracy": 0.625,
+      "clean_split": false,
+      "flag_cut_all_yes": 0.686,
+      "false_flags_at_that_cut": 6,
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.915,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.8265,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 1.0,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.8956,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.6861,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9289,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.905,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.93,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.9418,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.8856,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9796,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9992,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9016,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.5972,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.2952,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.7683,
+          "label": false,
+          "routed": "english"
+        }
+      ]
+    },
+    "pt_ml": {
+      "accuracy": 0.5,
+      "n": 16,
+      "routed": [
+        "multilingual"
+      ],
+      "mean_p_when_yes": 0.998,
+      "mean_p_when_no": 0.957,
+      "separation": 0.041,
+      "best_cut": 1.0,
+      "best_cut_accuracy": 0.812,
+      "clean_split": false,
+      "flag_cut_all_yes": 0.991,
+      "false_flags_at_that_cut": 3,
+      "rows": [
+        {
+          "ok": true,
+          "value": 1.0,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 1.0,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 1.0,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9907,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9932,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 1.0,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 1.0,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 1.0,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9418,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.8856,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9796,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9992,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9016,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.998,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 1.0,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9539,
+          "label": false,
+          "routed": "multilingual"
+        }
+      ]
+    },
+    "en": {
+      "accuracy": 0.938,
+      "n": 16,
+      "routed": [
+        "english"
+      ],
+      "mean_p_when_yes": 0.872,
+      "mean_p_when_no": 0.184,
+      "separation": 0.688,
+      "best_cut": 0.786,
+      "best_cut_accuracy": 1.0,
+      "clean_split": true,
+      "flag_cut_all_yes": 0.786,
+      "false_flags_at_that_cut": 0,
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.8794,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.9645,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.8423,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.8956,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.7859,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.8928,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.8684,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.8448,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.1928,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.0339,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.0779,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.0615,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.0858,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.6481,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.1367,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.2326,
+          "label": false,
+          "routed": "english"
+        }
+      ]
+    }
+  },
+  "destructive_intent": {
+    "pt": {
+      "accuracy": 0.562,
+      "n": 16,
+      "routed": [
+        "english",
+        "multilingual"
+      ],
+      "mean_p_when_yes": 0.586,
+      "mean_p_when_no": 0.473,
+      "separation": 0.113,
+      "best_cut": 0.829,
+      "best_cut_accuracy": 0.688,
+      "clean_split": false,
+      "flag_cut_all_yes": 0.009,
+      "false_flags_at_that_cut": 8,
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.9683,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.6677,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.8943,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9025,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.829,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.0319,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.3851,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.0085,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.7636,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.941,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.5558,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.142,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.1312,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.0317,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.7997,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.417,
+          "label": false,
+          "routed": "multilingual"
+        }
+      ]
+    },
+    "pt_ml": {
+      "accuracy": 0.562,
+      "n": 16,
+      "routed": [
+        "multilingual"
+      ],
+      "mean_p_when_yes": 0.607,
+      "mean_p_when_no": 0.474,
+      "separation": 0.133,
+      "best_cut": 0.894,
+      "best_cut_accuracy": 0.688,
+      "clean_split": false,
+      "flag_cut_all_yes": 0.009,
+      "false_flags_at_that_cut": 8,
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.9683,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.6677,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.8943,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9025,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.9945,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.0319,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.3851,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.0085,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.7636,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.941,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.5558,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.142,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.1429,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.0317,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.7997,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.417,
+          "label": false,
+          "routed": "multilingual"
+        }
+      ]
+    },
+    "en": {
+      "accuracy": 0.5,
+      "n": 16,
+      "routed": [
+        "english"
+      ],
+      "mean_p_when_yes": 0.624,
+      "mean_p_when_no": 0.492,
+      "separation": 0.132,
+      "best_cut": 0.344,
+      "best_cut_accuracy": 0.688,
+      "clean_split": false,
+      "flag_cut_all_yes": 0.344,
+      "false_flags_at_that_cut": 5,
+      "rows": [
+        {
+          "ok": true,
+          "value": 0.8325,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.4455,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.7768,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.6879,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.811,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.5995,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.4964,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.3438,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.2031,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.9913,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.1448,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.592,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.0543,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.6093,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.6135,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.7316,
+          "label": false,
+          "routed": "english"
+        }
+      ]
+    }
+  },
+  "is_followup": {
+    "pt": {
+      "accuracy": 0.562,
+      "n": 16,
+      "routed": [
+        "english",
+        "multilingual"
+      ],
+      "mean_p_when_yes": 0.393,
+      "mean_p_when_no": 0.39,
+      "separation": 0.003,
+      "best_cut": 0.572,
+      "best_cut_accuracy": 0.625,
+      "clean_split": false,
+      "flag_cut_all_yes": 0.085,
+      "false_flags_at_that_cut": 7,
+      "rows": [
+        {
+          "ok": false,
+          "value": 0.0854,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.6228,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.205,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.2618,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.0919,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.5935,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.7079,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.5723,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.117,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.5095,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.8137,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.2532,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.12,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.9137,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.3661,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.0288,
+          "label": false,
+          "routed": "multilingual"
+        }
+      ]
+    },
+    "pt_ml": {
+      "accuracy": 0.312,
+      "n": 16,
+      "routed": [
+        "multilingual"
+      ],
+      "mean_p_when_yes": 0.218,
+      "mean_p_when_no": 0.523,
+      "separation": -0.305,
+      "best_cut": 0.043,
+      "best_cut_accuracy": 0.562,
+      "clean_split": false,
+      "flag_cut_all_yes": 0.043,
+      "false_flags_at_that_cut": 7,
+      "rows": [
+        {
+          "ok": false,
+          "value": 0.2563,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.0465,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.1124,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.0752,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.4144,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.0529,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.043,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.7473,
+          "label": true,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9201,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.074,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 1.0,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.6201,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.2625,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": false,
+          "value": 0.9137,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.3661,
+          "label": false,
+          "routed": "multilingual"
+        },
+        {
+          "ok": true,
+          "value": 0.0288,
+          "label": false,
+          "routed": "multilingual"
+        }
+      ]
+    },
+    "en": {
+      "accuracy": 0.562,
+      "n": 16,
+      "routed": [
+        "english"
+      ],
+      "mean_p_when_yes": 0.311,
+      "mean_p_when_no": 0.201,
+      "separation": 0.11,
+      "best_cut": 0.193,
+      "best_cut_accuracy": 0.688,
+      "clean_split": false,
+      "flag_cut_all_yes": 0.116,
+      "false_flags_at_that_cut": 6,
+      "rows": [
+        {
+          "ok": false,
+          "value": 0.1926,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.3009,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.4195,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.1162,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.2697,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.5113,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.3817,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": false,
+          "value": 0.2922,
+          "label": true,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.0871,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.3073,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.096,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.2105,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.3365,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.3063,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.1328,
+          "label": false,
+          "routed": "english"
+        },
+        {
+          "ok": true,
+          "value": 0.1276,
+          "label": false,
+          "routed": "english"
+        }
+      ]
+    }
+  }
+}
