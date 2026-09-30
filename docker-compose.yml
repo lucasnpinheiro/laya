@@ -7,7 +7,15 @@ services:
     environment:
       - OMP_NUM_THREADS=6
       - HF_HUB_OFFLINE=0
+      # log de toda request/response (docker compose logs -f laya-api)
+      - LOG_LEVEL=INFO
+      - LOG_BODY_MAX=10000
       # - HF_TOKEN=seu_token_aqui
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
     volumes:
       - laya-hf-cache:/home/laya/.cache/huggingface
     restart: unless-stopped
