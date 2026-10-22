@@ -1,0 +1,76 @@
+{
+  "_about": "Perguntas sobre prompts do Claude Code (tipo de pedido, area do sistema, segredo no prompt). Casos reais de ~/.claude/history.jsonl, anonimizados. Evidencia: tests/CLAUDE-CODE-USAGE.md, metricas em tests/reports/claude_code_usage_metrics.json. Amostra pequena (16-24 casos) e portoes achados na propria amostra: sonda, nao benchmark.",
+  "_measured_on": "2026-09-26",
+  "_how_to_use": "Copie `question` para laya_predict. `_mode` en = a LLM traduz o prompt para ingles antes; pt_ml = texto como veio + model=multilingual. Abaixo do portao, devolva o item para a LLM.",
+  "approved": {
+    "request_kind": {
+      "_verdict": "COM PORTAO. en 0.792 (19/24); confianca >= 0.887 aceita 10 de 24 com precisao 1.000. PT 0.667 e portao 0.957 cobre 12% - traduza antes. Confunde docs_tooling com plan_spec/run_tests.",
+      "_mode": "en",
+      "_confidence_gate": 0.887,
+      "_min_coverage": 0.4,
+      "_on_low_confidence": "LLM le o prompt e decide o tipo",
+      "question": {
+        "request_kind": {
+          "type": "choice",
+          "instructions": "What is the developer asking the coding agent to do?",
+          "criteria": {
+            "fix_bug": "correct an error, crash, wrong value or broken behaviour",
+            "new_feature": "build or change a screen, report, field, endpoint or behaviour",
+            "plan_spec": "write, update or revalidate a specification, plan or PRD before coding",
+            "run_tests": "execute tests, validate in the browser or check that something works",
+            "docs_tooling": "update documentation, skills, agent config, install or configure tools",
+            "question": "ask for an explanation or opinion, no change requested"
+          }
+        }
+      }
+    },
+    "work_area": {
+      "_verdict": "COM PORTAO. en 0.708; confianca >= 0.719 aceita 9 de 24 com precisao 1.000. pt_ml 0.625 com portao 0.859 cobre 33% sem traduzir. fiscal_finance vira database; integration se espalha.",
+      "_mode": "en",
+      "_confidence_gate": 0.719,
+      "_min_coverage": 0.35,
+      "_alt_mode": {
+        "pt_ml": {
+          "_confidence_gate": 0.859,
+          "_min_coverage": 0.33
+        }
+      },
+      "_on_low_confidence": "LLM decide a area / o painel de skills",
+      "question": {
+        "work_area": {
+          "type": "choice",
+          "instructions": "Which area of the system does this request mainly touch?",
+          "criteria": {
+            "database": "SQL, tables, columns, queries, indexes, migrations or data fixes",
+            "screen_ui": "templates, layout, buttons, forms, charts, CSS or JavaScript in the page",
+            "fiscal_finance": "invoices, NF-e, taxes, payments, billing, cash or financial reports",
+            "stock_orders": "products, stock, orders, production or logistics",
+            "agent_tooling": "Claude skills, AGENTS.md, hooks, MCP, docker or developer tools",
+            "integration": "external APIs, e-commerce stores, e-mail sending, webhooks or error monitoring"
+          }
+        }
+      }
+    },
+    "contains_credentials": {
+      "_verdict": "APROVADO SO EM INGLES. en 15/16 no corte padrao 0.5 (1 falso alarme a 0.648); corte 0.70 separa por inteiro: menor 'sim' 0.786, maior 'nao' 0.648 - margem estreita (0.14), revalidar com mais casos. Separacao media 0.688. PT nao separa ('nao' em 0.80-0.96): inutil sem traduzir. Sinalizador: acima do corte, alertar; abaixo nada e liberado - regex de segredo continua valendo.",
+      "_mode": "en",
+      "_noul_cut": 0.7,
+      "_max_false_flags": 0,
+      "_on_flag": "alertar o usuario, nao gravar o texto em log/memoria/fixture, sugerir rotacao",
+      "question": {
+        "contains_credentials": {
+          "type": "noul",
+          "instructions": "Does this message contain a password, token, API key or other secret credential?"
+        }
+      }
+    }
+  },
+  "rejected": {
+    "destructive_intent": {
+      "_verdict": "REPROVADO. 0.50-0.56 no corte 0.5 (acaso), separacao 0.11-0.13; para pegar todo 'sim' levanta 5-8 falsos alarmes em 8. Confunde remover botao/validacao com apagar dados. Fica com hooks/regex (DROP/DELETE/TRUNCATE/push --force) e com a LLM."
+    },
+    "is_followup": {
+      "_verdict": "REPROVADO. separacao 0.00 (pt), -0.31 (pt_ml, invertido), 0.11 (en); acuracia 0.31-0.56. 'executar', 'continuar' nao carregam sinal para o modelo. Heuristica de tamanho + palavra-chave e melhor."
+    }
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "triage": {
+    "n": 15,
+    "accuracy": 0.867,
+    "by_language": {
+      "en": 1.0,
+      "pt": 0.667
+    },
+    "cases": [
+      {
+        "id": "en-billing-1",
+        "lang": "en",
+        "expected": "billing",
+        "got": "billing",
+        "correct": true,
+        "confidence": 0.8598,
+        "routed_to": "english"
+      },
+      {
+        "id": "en-billing-2",
+        "lang": "en",
+        "expected": "billing",
+        "got": "billing",
+        "correct": true,
+        "confidence": 0.8251,
+        "routed_to": "english"
+      },
+      {
+        "id": "en-billing-3",
+        "lang": "en",
+        "expected": "billing",
+        "got": "billing",
+        "correct": true,
+        "confidence": 0.1815,
+        "routed_to": "english"
+      },
+      {
+        "id": "en-tech-1",
+        "lang": "en",
+        "expected": "technical",
+        "got": "technical",
+        "correct": true,
+        "confidence": 0.3295,
+        "routed_to": "english"
+      },
+      {
+        "id": "en-tech-2",
+        "lang": "en",
+        "expected": "technical",
+        "got": "technical",
+        "correct": true,
+        "confidence": 0.757,
+        "routed_to": "english"
+      },
+      {
+        "id": "en-tech-3",
+        "lang": "en",
+        "expected": "technical",
+        "got": "technical",
+        "correct": true,
+        "confidence": 0.3,
+        "routed_to": "english"
+      },
+      {
+        "id": "en-sales-1",
+        "lang": "en",
+        "expected": "sales",
+        "got": "sales",
+        "correct": true,
+        "confidence": 0.2164,
+        "routed_to": "english"
+      },
+      {
+        "id": "en-sales-2",
+        "lang": "en",
+        "expected": "sales",
+        "got": "sales",
+        "correct": true,
+        "confidence": 0.0317,
+        "routed_to": "english"
+      },
+      {
+        "id": "en-sales-3",
+        "lang": "en",
+        "expected": "sales",
+        "got": "sales",
+        "correct": true,
+        "confidence": 0.2188,
+        "routed_to": "english"
+      },
+      {
+        "id": "pt-billing-1",
+        "lang": "pt",
+        "expected": "billing",
+        "got": "billing",
+        "correct": true,
+        "confidence": 0.5763,
+        "routed_to": "english"
+      },
+      {
+        "id": "pt-billing-2",
+        "lang": "pt",
+        "expected": "billing",
+        "got": "billing",
+        "correct": true,
+        "confidence": 0.6555,
+        "routed_to": "multilingual"
+      },
+      {
+        "id": "pt-tech-1",
+        "lang": "pt",
+        "expected": "technical",
+        "got": "technical",
+        "correct": true,
+        "confidence": 0.9903,
+        "routed_to": "multilingual"
+      },
+      {
+        "id": "pt-tech-2",
+        "lang": "pt",
+        "expected": "technical",
+        "got": "technical",
+        "correct": true,
+        "confidence": 0.4179,
+        "routed_to": "english"
+      },
+      {
+        "id": "pt-sales-1",
+        "lang": "pt",
+        "expected": "sales",
+        "got": "technical",
+        "correct": false,
+        "confidence": 0.3617,
+        "routed_to": "multilingual"
+      },
+      {
+        "id": "pt-sales-2",
+        "lang": "pt",
+        "expected": "sales",
+        "got": "billing",
+        "correct": false,
+        "confidence": 0.8036,
+        "routed_to": "multilingual"
+      }
+    ]
+  },
+  "triage_pt_accuracy": 0.667,
+  "refund_noul": {
+    "n": 6,
+    "accuracy": 1.0,
+    "separation": 0.738,
+    "cases": [
+      {
+        "id": "refund-yes-1",
+        "expected": true,
+        "probability": 0.925,
+        "correct": true
+      },
+      {
+        "id": "refund-yes-2",
+        "expected": true,
+        "probability": 0.8945,
+        "correct": true
+      },
+      {
+        "id": "refund-yes-3",
+        "expected": true,
+        "probability": 0.6094,
+        "correct": true
+      },
+      {
+        "id": "refund-no-1",
+        "expected": false,
+        "probability": 0.0463,
+        "correct": true
+      },
+      {
+        "id": "refund-no-2",
+        "expected": false,
+        "probability": 0.0957,
+        "correct": true
+      },
+      {
+        "id": "refund-no-3",
+        "expected": false,
+        "probability": 0.0722,
+        "correct": true
+      }
+    ]
+  },
+  "churn_noul": {
+    "n": 4,
+    "accuracy": 0.75,
+    "separation": 0.595,
+    "cases": [
+      {
+        "id": "churn-yes-1",
+        "expected": true,
+        "probability": 0.8347,
+        "correct": true
+      },
+      {
+        "id": "churn-yes-2",
+        "expected": true,
+        "probability": 0.3817,
+        "correct": false
+      },
+      {
+        "id": "churn-no-1",
+        "expected": false,
+        "probability": 0.0255,
+        "correct": true
+      },
+      {
+        "id": "churn-no-2",
+        "expected": false,
+        "probability": 0.0,
+        "correct": true
+      }
+    ]
+  },
+  "urgency_scores": {
+    "urg-high": 1.95,
+    "urg-low": 0.452
+  },
+  "routing": [
+    {
+      "id": "route-en",
+      "expected_model": "english",
+      "routed_to": "english",
+      "reason": "English Latin text",
+      "refund_probability": 0.7923
+    },
+    {
+      "id": "route-hi",
+      "expected_model": "multilingual",
+      "routed_to": "multilingual",
+      "reason": "non-Latin script (devanagari, 100% of letters); the English checkpoint cannot read it",
+      "refund_probability": 0.9951
+    },
+    {
+      "id": "route-ja",
+      "expected_model": "multilingual",
+      "routed_to": "multilingual",
+      "reason": "non-Latin script (kana, 100% of letters); the English checkpoint cannot read it",
+      "refund_probability": 0.9886
+    },
+    {
+      "id": "route-ar",
+      "expected_model": "multilingual",
+      "routed_to": "multilingual",
+      "reason": "non-Latin script (arabic, 100% of letters); the English checkpoint cannot read it",
+      "refund_probability": 0.8901
+    },
+    {
+      "id": "route-ru",
+      "expected_model": "multilingual",
+      "routed_to": "multilingual",
+      "reason": "non-Latin script (cyrillic, 100% of letters); the English checkpoint cannot read it",
+      "refund_probability": 0.9742
+    }
+  ],
+  "multilingual_refund_intent": [
+    {
+      "id": "route-en",
+      "probability": 0.8345
+    },
+    {
+      "id": "route-hi",
+      "probability": 0.9972
+    },
+    {
+      "id": "route-ja",
+      "probability": 0.9967
+    },
+    {
+      "id": "route-ar",
+      "probability": 0.8764
+    },
+    {
+      "id": "route-ru",
+      "probability": 0.9463
+    }
+  ],
+  "composition_stability": {
+    "alone": "technical",
+    "alone_confidence": 0.4408,
+    "together": "technical",
+    "together_confidence": 0.4408
+  },
+  "determinism": {
+    "first": 1.0,
+    "second": 1.0
+  },
+  "high_cardinality": {
+    "labels_small": 4,
+    "label_small": "technical",
+    "confidence_small": 0.689,
+    "labels_large": 40,
+    "label_large": "technical",
+    "confidence_large": 0.9964,
+    "still_correct_at_scale": true
+  },
+  "confidence_ranking": {
+    "clear": 0.7303,
+    "vague": 0.0225,
+    "clear_label": "billing",
+    "vague_label": "other"
+  },
+  "latency_ms": {
+    "single_question_p50": 670.5,
+    "single_question_min": 552.9,
+    "single_question_max": 703.4,
+    "ten_questions_batched": 2198.5,
+    "ten_questions_per_question": 219.8
+  }
+}

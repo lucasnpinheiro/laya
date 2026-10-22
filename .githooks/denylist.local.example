@@ -1,0 +1,6 @@
+# Modelo da denylist local. Copie para .githooks/denylist.local (esse arquivo NÃO é versionado)
+# e acrescente os termos que nunca devem entrar no repositório (nomes de clientes, projetos internos).
+# Uma expressão fixa por linha, sem distinção de maiúsculas. Linhas com # e vazias são ignoradas.
+# Exemplos genéricos:
+# cliente-x
+# projeto-interno-y

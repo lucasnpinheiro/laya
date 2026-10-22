@@ -1,0 +1,17 @@
+.idea
+__pycache__/
+.env
+.test-cache/
+tests/reports/.tmp/
+*.pem
+*.key
+*.p12
+*.pfx
+*.sql
+app_local.php
+.claude/
+*.bundle
+.env.*
+.githooks/denylist.local
+tests/reports/junit.xml
+*.junit.xml

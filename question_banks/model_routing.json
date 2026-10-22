@@ -1,0 +1,38 @@
+{
+  "_about": "Perguntas do roteador de modelos do ~/.agents (effort por spawn). Criterios em ingles, brief em ingles. Evidencia: ~/.agents/docs/model-routing-calibration.md (70 briefs sinteticos CakePHP4-ERP, checkpoint english, chamada combinada task_tier + effort_level). Amostra pequena: sonda, nao benchmark; re-sonde antes de afrouxar o portao.",
+  "_measured_on": "2026-10-09",
+  "_how_to_use": "Copie o bloco `question` para laya_predict com state {role, brief}. Leia probabilities['0'] = p(low). So BAIXE um candidato medium para low quando p(low) >= _p_low_gate e o papel estiver em _applies_to. Nunca use a pergunta para subir effort.",
+  "approved": {
+    "effort_level": {
+      "_verdict": "APROVADO SO PARA DOWNGRADE. Sonnet medium 10/10 e Opus medium 10/10 sem falso downgrade no portao 0.60; Sonnet low 8/10 e Opus low 10/10 caem certo. Haiku medium: 6/10 falsos low (p(low) ate 0.90) -> rapido fora.",
+      "_mode": "en",
+      "_use": "downgrade_only",
+      "_downgrade": {"from": "medium", "to": "low"},
+      "_p_low_gate": 0.60,
+      "_applies_to": ["padrao", "opus-medium"],
+      "_never_for": ["rapido", "per-task-type floor rows (PRD/spec, BDD/TDD, impact analysis)"],
+      "_on_low_confidence": "abaixo do portao, mantenha medium (nada sobe)",
+      "question": {
+        "effort_level": {
+          "type": "score",
+          "instructions": "How much reasoning effort does this task need, for a lower-cost execution mode?",
+          "criteria": [
+            "low: mechanical, no branching or ambiguity",
+            "medium: bounded multi-step reasoning, existing pattern/spec",
+            "high: ambiguous, many interacting constraints, broad-impact judgment"
+          ]
+        }
+      }
+    }
+  },
+  "rejected": {
+    "effort_raise_to_high": {
+      "_verdict": "REPROVADO. Opus high 0/10: todos os 10 briefs de alta complexidade sairam medium (conf 0.59-0.83). A pergunta nao separa medium de high; subir effort por ela rebaixaria trabalho critico.",
+      "question_tested": "effort_level (same question), reading `high` as the top label"
+    },
+    "effort_xhigh": {
+      "_verdict": "NAO MEDIDO: xhigh never measured (a pergunta so tem low/medium/high). Effort xhigh vem da tabela fixa de papeis em ~/.agents/docs/model-routing.md, nunca do Laya.",
+      "question_tested": "none"
+    }
+  }
+}

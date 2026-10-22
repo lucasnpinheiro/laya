@@ -1,0 +1,95 @@
+#!/bin/sh
+# pre-commit do laya: bloqueia segredos, caminhos pessoais, e-mail pessoal,
+# arquivos sensíveis, termos da denylist local e identidade de autor errada.
+# Varre só as linhas ADICIONADAS do diff staged. Ativar: scripts/setup-hooks.sh.
+set -u
+
+root=$(git rev-parse --show-toplevel) || exit 1
+tmpdir=$(mktemp -d "${TMPDIR:-/tmp}/laya-precommit.XXXXXX") || exit 1
+trap 'rm -rf "$tmpdir"' EXIT INT TERM
+added="$tmpdir/added"
+fail=0
+
+block() {
+  printf 'pre-commit: BLOQUEADO: %s\n' "$1" >&2
+  fail=1
+}
+
+# Varre as linhas adicionadas com as flags do grep ($1) e o padrão ($2).
+# Mostra só os arquivos afetados, nunca o conteúdo (pode ser o próprio segredo).
+check() {
+  hits=$(grep $1 -e "$2" "$added" 2>/dev/null | cut -d: -f1 | sort -u)
+  if [ -n "$hits" ]; then
+    block "$3"
+    printf '%s\n' "$hits" | sed 's/^/    arquivo: /' >&2
+  fi
+}
+
+# 1. Identidade do autor e do committer.
+allowed=$(git config --get laya.allowedEmail 2>/dev/null)
+[ -n "$allowed" ] || allowed='2411995+lucasnpinheiro@users.noreply.github.com'
+cfg_email=$(git config --get user.email 2>/dev/null)
+author=${GIT_AUTHOR_EMAIL:-$cfg_email}
+committer=${GIT_COMMITTER_EMAIL:-$cfg_email}
+[ "$author" = "$allowed" ] || block "e-mail do autor '$author' diferente de '$allowed' (git config laya.allowedEmail)"
+[ "$committer" = "$allowed" ] || block "e-mail do committer '$committer' diferente de '$allowed'"
+
+# 2. Arquivos sensíveis staged (não removidos).
+git diff --cached --name-only --diff-filter=ACMR > "$tmpdir/names"
+while IFS= read -r f; do
+  lf=$(printf '%s' "$f" | tr '[:upper:]' '[:lower:]')
+  case "$lf" in
+    *.pem|*.key|*.p12|*.pfx|*.sql|*.bundle|*.env)
+      block "extensão proibida em arquivo staged: $f" ;;
+  esac
+done < "$tmpdir/names"
+
+# 3. Linhas adicionadas. Os próprios hooks ficam fora da varredura de conteúdo.
+git diff --cached -U0 --no-color --no-ext-diff | awk '
+  /^diff --git / { inhdr = 1; next }
+  inhdr && /^\+\+\+ / { f = substr($0, 7); inhdr = 0; next }
+  /^@@/ { inhdr = 0; next }
+  /^\+/ && !inhdr {
+    if (f ~ /^\.githooks\/(pre-commit|commit-msg)$/ || f == "tests/test_git_hooks.py") next
+    print f ":" substr($0, 2)
+  }' > "$added"
+
+check '-E' 'hf_[A-Za-z0-9]{20,}' 'segredo: token Hugging Face (hf_)'
+check '-F' 'ghp_' 'segredo: token GitHub (ghp_)'
+check '-F' 'github_pat_' 'segredo: token GitHub (github_pat_)'
+check '-F' 'sk-ant-' 'segredo: chave Anthropic (sk-ant-)'
+check '-E' 'sk-[A-Za-z0-9]{20,}' 'segredo: chave sk-'
+check '-E' 'AKIA[0-9A-Z]{16}' 'segredo: chave AWS (AKIA)'
+check '-E' '-----BEGIN .*PRIVATE KEY-----' 'segredo: chave privada PEM'
+# Senha com valor real: 6+ caracteres que não sejam <placeholder>, crase ou aspas.
+check '-i -E' '(password|senha)[[:space:]]*[:=][[:space:]]*[^[:space:]<`"'"'"']{6,}' 'senha em claro (use placeholder <...>)'
+check '-E' '/Users/[^/<]+/' 'caminho pessoal macOS (/Users/...)'
+# Usuários de /home liberados (container): git config --get-all laya.allowedHomeUsers (padrão: laya).
+homeusers=$(git config --get-all laya.allowedHomeUsers 2>/dev/null | paste -sd'|' -)
+[ -n "$homeusers" ] || homeusers=laya
+hits=$(sed -E "s#/home/($homeusers)/#/HOMEOK/#g" "$added" | grep -E '/home/[^/<]+/' | cut -d: -f1 | sort -u)
+if [ -n "$hits" ]; then
+  block 'caminho pessoal Linux (/home/...)'
+  printf '%s\n' "$hits" | sed 's/^/    arquivo: /' >&2
+fi
+check '-F' '/private/tmp/claude-' 'caminho temporário de sessão Claude'
+check '-F' 'claude.ai/code/session' 'link de sessão Claude'
+check '-i -E' '@gmail\.com' 'e-mail pessoal (@gmail.com)'
+
+# 4. Denylist local (não versionada). Ausente = ignorada.
+deny="$root/.githooks/denylist.local"
+if [ -f "$deny" ]; then
+  tr -d '\r' < "$deny" | grep -v -E '^[[:space:]]*(#|$)' > "$tmpdir/deny" || true
+  if [ -s "$tmpdir/deny" ]; then
+    hits=$(grep -i -F -f "$tmpdir/deny" "$added" 2>/dev/null | cut -d: -f1 | sort -u)
+    if [ -n "$hits" ]; then
+      block 'termo da denylist local (.githooks/denylist.local)'
+      printf '%s\n' "$hits" | sed 's/^/    arquivo: /' >&2
+    fi
+  fi
+fi
+
+if [ "$fail" -ne 0 ]; then
+  printf 'pre-commit: commit recusado. Revise as linhas acima ou use git commit --no-verify só se for falso positivo confirmado.\n' >&2
+fi
+exit "$fail"

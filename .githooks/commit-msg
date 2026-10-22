@@ -1,0 +1,19 @@
+#!/bin/sh
+# commit-msg do laya: bloqueia mensagens com link de sessão, caminho pessoal ou e-mail pessoal.
+# $1 é o arquivo com a mensagem. Ativar: scripts/setup-hooks.sh.
+set -u
+
+msg_file="$1"
+fail=0
+
+for padrao in 'claude.ai/code/session' '/Users/' '@gmail.com'; do
+  if grep -q -F -e "$padrao" "$msg_file"; then
+    printf 'commit-msg: BLOQUEADO: mensagem contém "%s"\n' "$padrao" >&2
+    fail=1
+  fi
+done
+
+if [ "$fail" -ne 0 ]; then
+  printf 'commit-msg: reescreva a mensagem sem esses trechos (git commit --amend ou nova mensagem).\n' >&2
+fi
+exit "$fail"

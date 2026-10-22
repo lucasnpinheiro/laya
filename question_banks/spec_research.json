@@ -1,0 +1,45 @@
+{
+  "_about": "Perguntas validadas para triagem de requisitos no pipeline spec-research. Evidencia e limites: tests/SPEC-RESEARCH.md. O texto do requisito vai em portugues; os criterios ficam em ingles - foi o modo mais preciso medido (0.923 vs 0.615 com criterios em portugues).",
+  "_measured_on": "2026-09-22",
+
+  "approved": {
+    "panel_routing": {
+      "_verdict": "APROVADO com portao de confianca. 0.923 de acuracia (13 requisitos, PT + criterios EN). Aceitar automaticamente so confianca >= 0.30: 8 de 13 aceitos com 100% de precisao, 5 escalados para a LLM.",
+      "_confidence_gate": 0.30,
+      "_on_low_confidence": "escalar para a LLM ler o requisito - nao adivinhar",
+      "question": {
+        "panel": {
+          "type": "choice",
+          "instructions": "Which specialty should review this requirement?",
+          "criteria": {
+            "security": "authentication, permissions, auditing, personal data, masking, vulnerabilities",
+            "database": "tables, columns, indexes, migrations, schema, primary keys",
+            "performance": "response time, load, slow queries, record volume, caching",
+            "frontend": "screens, forms, modals, visual listings, layout, interface components",
+            "erp_domain": "business rules for tax, stock, invoicing, commissions, orders, fiscal documents",
+            "code_quality": "refactoring, coupling, dependency injection, code organization without behaviour change"
+          }
+        }
+      }
+    }
+  },
+
+  "rejected": {
+    "ambiguity_detection": {
+      "_verdict": "REPROVADO. Acuracia maxima 0.5 em tres modos de idioma; separacao entre vago e concreto de -0.11 a +0.06, ou seja, ruido. Em en/en pegou 0 de 5 requisitos vagos. O unico corte com recall total marca 9 de 10 requisitos - equivale a nao filtrar. O gate 'zero silent ambiguity' continua sendo trabalho de LLM.",
+      "question_tested": "Is this requirement vague or subjective, with no concrete value that would let you verify it?"
+    },
+    "unresolved_severity": {
+      "_verdict": "REPROVADO. 0.333 em 3 classes - acaso. Amostra minima (n=3), entao o numero e sonda, nao medida; mas nao ha sinal para usar.",
+      "question_tested": "What is the impact of this open item?"
+    },
+    "ui_surface": {
+      "_verdict": "REPROVADO como gate. Recall 1.0 so no modo pt/pt, e ali marca quase tudo (acuracia 0.615); nos modos mais precisos o recall cai para 0.5. Pular UI_DESIGN_APPROVED por engano e caro demais para esse sinal.",
+      "question_tested": "Does this requirement involve a screen, form or other user-visible surface?"
+    },
+    "is_requirement": {
+      "_verdict": "MARGINAL. 0.833 em ingles, 0.667 em portugues, n=6. Nao usar para descartar linha de PRD - o risco de jogar fora um requisito nao compensa.",
+      "question_tested": "Does this text state something the system must do, rather than background or history?"
+    }
+  }
+}
