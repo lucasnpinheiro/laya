@@ -10,7 +10,7 @@ você prefira rodar um batch isolado.
 
 | Arquivo | Função |
 |---|---|
-| `Dockerfile` | Python 3 slim (mais recente) + PyTorch CPU + `laya` (sem pin, última versão) + FastAPI/uvicorn, base Debian atualizada (`apt upgrade`), usuário não-root `laya` (uid 10001) |
+| `Dockerfile` | Python 3 slim (mais recente) + PyTorch CPU + `laya==0.3.5` (pin: regressão de acurácia em 0.4.x, ver abaixo) + FastAPI/uvicorn, base Debian atualizada (`apt upgrade`), usuário não-root `laya` (uid 10001) |
 | `app.py` | API FastAPI com `/health` e `/predict` |
 | `docker-compose.yml` | Serviço `laya-api` na porta 8000 + volume de cache do Hugging Face |
 | `mcp/laya_mcp.py` | Servidor MCP para Claude Code, com auto-start do container |
@@ -37,7 +37,12 @@ A imagem é sempre reconstruída **sem cache** (`build.no_cache: true`) e com a 
 
 - base `python:3-slim` (Python 3 mais recente + Debian slim atual);
 - `apt-get upgrade` a cada build (correção de CVEs da base do SO);
-- `pip install --upgrade` de `torch` (CPU), `laya`, `fastapi`, `uvicorn` — sem pin.
+- `pip install --upgrade` de `torch` (CPU), `fastapi`, `uvicorn` — sem pin (última release).
+- `laya==0.3.5` — **pinado**. Motivo: a série 0.4.x (testado 0.4.22) derrubou a acurácia da triagem em PT
+  (0.667 -> 0.500) e o recall de ambiguidade (pt/pt 0.6 -> 0.0). Isolado por A/B com mesmo Python 3.11, mesmo torch
+  e mesmos pesos; a imagem nova em Python 3.15 dá o mesmo resultado, então não é o Python. Para remover o pin:
+  trocar `laya==0.3.5` por `laya` no `Dockerfile`, reconstruir e rodar `tests/run.sh --model`; só manter a
+  versão nova se os 3 testes de qualidade passarem (ver PR #1 para a tabela A/B/C).
 
 A imagem resultante se chama `laya-api:latest`. Não é preciso `--build`.
 
@@ -153,8 +158,8 @@ Resource Saver DESLIGADO; "Start Docker Desktop when you sign in" LIGADO. O comp
   (detector só reconhece 7 idiomas latinos); acurácia 93-96% em tópico/spam, 35-65% em emoção, prompt-injection e
   estrelas; latência 35-66 ms/pergunta. Confirma as regras já na skill (gate de confiança, escalar abaixo do corte).
 - `aayushch/laya`: **outro produto** (central de notificações Tauri/Svelte com LLMs), sem relação com o modelo; ignorado.
-- PyPI: o `Dockerfile` agora instala `laya` sem pin (última versão). Os bancos medidos valem para `0.3.5`;
-  após cada upgrade de `laya`, reexecutar `tests/` antes de confiar nas medições.
+- PyPI: o `Dockerfile` pina `laya==0.3.5` (regressão em 0.4.x, ver seção de build). Os bancos medidos valem para `0.3.5`;
+  após qualquer troca de versão de `laya`, reexecutar `tests/` antes de confiar nas medições.
 - Scout (`docker scout cves laya-api:latest`), após o rebuild: 0 CRITICAL, 1 HIGH. Corrigido CVE-2025-47273
   (setuptools 70.3.0 vendorizado em `pip/_vendor/pkg_resources`): o `Dockerfile` remove o pip da imagem final.
   Aceito: CVE-2026-85091 (zlib 1.3 do Debian trixie, sem fix upstream na distro); risco baixo, sem uso de zlib exposto a entrada não confiável pelo serviço.
@@ -377,7 +382,7 @@ Roda uma predição e sai, sem servidor HTTP.
 
 ### `Dockerfile`
 
-Alinhado ao `Dockerfile` da raiz (Python 3 slim, base Debian atualizada, sem pin de versão):
+Alinhado ao `Dockerfile` da raiz (Python 3 slim, base Debian atualizada, `laya` pinado em 0.3.5):
 
 ```dockerfile
 FROM python:3-slim
@@ -404,10 +409,10 @@ RUN groupadd --gid 10001 laya \
 
 WORKDIR /app
 
-# Instala o Laya + PyTorch CPU (sem pin: última release de cada pacote)
+# Instala o Laya (pinado em 0.3.5, ver Dockerfile da raiz) + PyTorch CPU (última release)
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
     && pip install --no-cache-dir --upgrade torch --index-url https://download.pytorch.org/whl/cpu \
-    && pip install --no-cache-dir --upgrade laya
+    && pip install --no-cache-dir --upgrade "laya==0.3.5"
 
 # Imagem final sem pip (runtime não usa; evita o setuptools vendorizado no pip)
 RUN python -m pip uninstall -y pip
