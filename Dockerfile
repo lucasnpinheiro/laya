@@ -1,4 +1,7 @@
-FROM python:3.11-slim-bookworm
+# Sempre a versão mais recente: Python 3 (maior minor disponível) sobre Debian slim (tag atual).
+# Se torch CPU ou laya não tiverem wheel para essa versão de Python, fixar a maior minor que
+# funciona e documentar o motivo AQUI (não pinar em silêncio).
+FROM python:3-slim
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -8,9 +11,11 @@ ENV PYTHONUNBUFFERED=1 \
     OMP_NUM_THREADS=6 \
     HF_HOME=/home/laya/.cache/huggingface
 
-# curl é necessário para o healthcheck do docker-compose
+# Atualiza a base do SO a cada build (CVEs) e instala curl (healthcheck do docker-compose)
 RUN apt-get update \
+    && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends curl \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid 10001 laya \
@@ -20,9 +25,10 @@ RUN groupadd --gid 10001 laya \
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu \
-    && pip install --no-cache-dir laya==0.3.5 fastapi uvicorn[standard]
+# Sem pin de versão: laya, torch, fastapi e uvicorn sempre na última release.
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
+    && pip install --no-cache-dir --upgrade torch --index-url https://download.pytorch.org/whl/cpu \
+    && pip install --no-cache-dir --upgrade laya fastapi "uvicorn[standard]"
 
 COPY --chown=laya:laya app.py lowmem.py /app/
 

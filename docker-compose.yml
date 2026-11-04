@@ -5,6 +5,7 @@ services:
     build:
       context: .
       pull: true
+      no_cache: true
     container_name: laya-api
     ports:
       - "127.0.0.1:8000:8000"

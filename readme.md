@@ -10,7 +10,7 @@ você prefira rodar um batch isolado.
 
 | Arquivo | Função |
 |---|---|
-| `Dockerfile` | Python 3.11 slim + PyTorch CPU + `laya==0.3.5` (pin = versão rodando no container) + FastAPI/uvicorn, usuário não-root `laya` (uid 10001) |
+| `Dockerfile` | Python 3 slim (mais recente) + PyTorch CPU + `laya` (sem pin, última versão) + FastAPI/uvicorn, base Debian atualizada (`apt upgrade`), usuário não-root `laya` (uid 10001) |
 | `app.py` | API FastAPI com `/health` e `/predict` |
 | `docker-compose.yml` | Serviço `laya-api` na porta 8000 + volume de cache do Hugging Face |
 | `mcp/laya_mcp.py` | Servidor MCP para Claude Code, com auto-start do container |
@@ -31,9 +31,22 @@ evitando novo download a cada restart.
 docker compose up -d
 ```
 
-`pull_policy: build` faz o `docker compose up -d` reconstruir a imagem a cada execução,
-a partir do código atual; `build.pull: true` puxa a base image `python:3.11-slim-bookworm`
-mais recente. A imagem resultante se chama `laya-api:latest`. Não é preciso `--build`.
+`pull_policy: build` faz o `docker compose up -d` reconstruir a imagem a cada execução.
+A imagem é sempre reconstruída **sem cache** (`build.no_cache: true`) e com a base puxada
+(`build.pull: true`):
+
+- base `python:3-slim` (Python 3 mais recente + Debian slim atual);
+- `apt-get upgrade` a cada build (correção de CVEs da base do SO);
+- `pip install --upgrade` de `torch` (CPU), `laya`, `fastapi`, `uvicorn` — sem pin.
+
+A imagem resultante se chama `laya-api:latest`. Não é preciso `--build`.
+
+**Atenção:**
+
+- `docker compose up -d` agora demora mais: baixa o `torch` CPU a cada up (sem cache).
+- Versões novas podem quebrar a API (ex.: mudança no `laya`). Se acontecer, fixe a versão
+  anterior no `Dockerfile` (ex.: `laya==0.3.5`) e reconstrua com `docker compose up -d`.
+- Se a base Python não tiver wheel do `torch`/`laya`, o Dockerfile documenta a minor fixada.
 
 O primeiro boot baixa o modelo — pode demorar. Por isso o healthcheck tem
 `start_period: 3m`.
@@ -140,8 +153,8 @@ Resource Saver DESLIGADO; "Start Docker Desktop when you sign in" LIGADO. O comp
   (detector só reconhece 7 idiomas latinos); acurácia 93-96% em tópico/spam, 35-65% em emoção, prompt-injection e
   estrelas; latência 35-66 ms/pergunta. Confirma as regras já na skill (gate de confiança, escalar abaixo do corte).
 - `aayushch/laya`: **outro produto** (central de notificações Tauri/Svelte com LLMs), sem relação com o modelo; ignorado.
-- PyPI: `laya` 0.4.13 existe (pin atual `0.3.5`). **Não atualizado**: não verificado contra `app.py`/bancos medidos;
-  subir exige rebuild + reexecutar `tests/` (as medições dos bancos valem para 0.3.5).
+- PyPI: o `Dockerfile` agora instala `laya` sem pin (última versão). Os bancos medidos valem para `0.3.5`;
+  após cada upgrade de `laya`, reexecutar `tests/` antes de confiar nas medições.
 
 ### Predição completa (inglês)
 

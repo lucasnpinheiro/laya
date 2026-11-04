@@ -51,6 +51,13 @@ def install() -> None:
     agent.load_file = mmap_load_file
 
 
+def _noop_init(*a, **k):
+    """Init no-op que devolve o tensor, seja posicional ou kwarg (`tensor=`/`t=`; laya novo usa kwarg)."""
+    if a:
+        return a[0]
+    return k.get("tensor", k.get("t"))
+
+
 def build_model_lowmem(orig, dtype_name: str = "float16"):
     """Envolve build_model: sem init aleatório (load_state_dict strict sobrescreve tudo) e já em
     `dtype_name`. Evita o pico fp32 (421 M params = 1,7 GB); em bf16 o modelo ocupa ~0,85 GB."""
@@ -63,7 +70,7 @@ def build_model_lowmem(orig, dtype_name: str = "float16"):
         prev = torch.get_default_dtype()
         torch.set_default_dtype(getattr(torch, dtype_name))
         for n in names:
-            setattr(init, n, lambda t, *_a, **_k: t)
+            setattr(init, n, _noop_init)
         try:
             model = orig(*a, **kw)
             lsd = model.load_state_dict
