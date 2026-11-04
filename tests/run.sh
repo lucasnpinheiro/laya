@@ -9,4 +9,4 @@
 # Extra args go to pytest. LAYA_TEST_DISK_CACHE=1 reuses predictions across runs (never for metrics).
 set -euo pipefail
 cd "$(dirname "$0")/.."
-exec uv run --with "mcp>=2" --with pytest --with pytest-timeout --no-project pytest "$@"
+exec uv run --with "mcp>=2" --with pytest --with pytest-timeout --with fastapi --with httpx --no-project pytest "$@"

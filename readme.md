@@ -93,9 +93,13 @@ curl http://localhost:8000/health
 {
   "state": "texto | objeto JSON (e-mail, ticket, etc.)",
   "questions": { "<nome>": { "type": "choice|score|noul", "instructions": "...", "criteria": ... } },
-  "model": "english | multilingual | typed-decisions"   // opcional
+  "model": "english | multilingual | typed-decisions",  // opcional
+  "max_len": 1024                                       // opcional, inteiro 1..8192 (senão 422)
 }
 ```
+
+`max_len` é o tamanho máximo de tokens do texto repassado ao `router.predict` (english usa contexto de 512;
+multilingual aceita até 8192). Sem o campo vale `LAYA_MAX_LEN` (se definido) ou o default da laya.
 
 Tipos de pergunta:
 
@@ -153,12 +157,27 @@ Resource Saver DESLIGADO; "Start Docker Desktop when you sign in" LIGADO. O comp
 - `LAYA_LOWMEM` (padrão `1`): encoder em fp16 via mmap (`lowmem.py`), sem init aleatório nem 2a cópia dos pesos;
   heads em fp32. `0` volta ao load antigo em fp32 e exige ~2,4 GB livres.
 - `LAYA_KEEPALIVE` (padrão `60`, segundos): relê as páginas mmap para mantê-las quentes no page cache.
+- `LAYA_MAX_LOADED` (padrão do app `1`; **no compose `2`**, faixa 1..4): quantos checkpoints ficam carregados (LRU).
+  Medido em 2026-11-04 no compose (mem_limit 3g, LAYA_LOWMEM=1), 10 trocas english/multilingual por configuração
+  (mediana por predict): `1` = 602 ms, RAM ~1,07-1,13 GiB; `2` = 320 ms, RAM ~0,89 GiB (idle após as trocas).
+  Pico bem abaixo de 2,4 GB, então o compose usa `2`. Valor inválido = erro no startup.
+- `LAYA_PRELOAD` (padrão `0`; `1` = sim): `Router(preload=True)` carrega todos os checkpoints no startup
+  (5-10x mais rápido em CPU, mais RAM). Aceita só `0` ou `1`.
+- `LAYA_MAX_LEN` (padrão vazio = default da laya; faixa 1..8192): tamanho de contexto padrão do `/predict`,
+  sobrescrito pelo campo `max_len` do corpo.
+- `/health` expõe `lowmem_active`: `true` quando o patch de baixa memória foi aplicado. Se não aplicar, o app
+  loga WARNING (`lowmem NÃO aplicado`) e segue com a carga padrão (pico ~1,8 GB). O healthcheck continua
+  exigindo só `"warmed":true`.
 - `LAYA_WARMUP`: no `docker-compose.yml` fica `english`; healthcheck exige `warmed: true`.
 - `LAYA_DEFAULT_MODEL` (padrão `multilingual`, no compose também): checkpoint para texto de idioma indeterminado
   (`Router(default=...)`). Valores: `english` | `multilingual`.
 - `LAYA_REVISION` (no compose fica `main`): revisão do Hub de onde o checkpoint é carregado. Sem ela a laya usa
   o `main` do Hub por padrão (mesmo resultado). Com `HF_HUB_OFFLINE=0` (compose), cada start confere o `main`
   e baixa se mudou. `reviewed` ou um sha fixam uma revisão; não usar aqui, já que queremos a mais recente.
+- Probabilidades não calibradas para o seu domínio: os scores `noul`/`choice` são os da laya, não calibrados
+  para os seus dados. A doc oficial recomenda refit de temperatura com dados próprios (ver
+  https://pypi.org/project/laya/ e o model card em https://huggingface.co/convaiinnovations/laya). Esta API não
+  faz refit: para usar thresholds em produção, calibre fora daqui e aplique o cut medido.
 - Causa do OOM: VM do Docker Desktop (7,65 GB) esgotada pelos stacks ecom*, com o checkpoint carregando em fp32
   com cópia dupla (pico 1,8-2,4 GB); com lowmem o pico anônimo cai para ~0,5 GB.
 

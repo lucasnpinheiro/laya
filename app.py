@@ -30,10 +30,14 @@ def _fmt_body(raw: bytes) -> str:
 
 
 # ---------- Carga enxuta dos pesos (LAYA_LOWMEM=0 desliga) ----------
-def _install_lowmem() -> None:
-    """Encoder fp16 via mmap, sem init aleatório: pico ~0,6 GB anônimo em vez de ~1,8 GB (ver lowmem.py)."""
+lowmem_active = False
+
+
+def _install_lowmem() -> bool:
+    """Encoder fp16 via mmap, sem init aleatório: pico ~0,6 GB anônimo em vez de ~1,8 GB (ver lowmem.py).
+    Retorna True só se o patch foi aplicado; falha vira WARNING (segue com a carga padrão)."""
     if os.environ.get("LAYA_LOWMEM", "1") == "0":
-        return
+        return False
     try:
         import laya.agent as laya_agent
         import lowmem
@@ -41,11 +45,43 @@ def _install_lowmem() -> None:
         lowmem.install()
         laya_agent.build_model = lowmem.build_model_lowmem(laya_agent.build_model)
         logger.info("lowmem ativo (encoder fp16 mmap)")
-    except Exception:
-        logger.exception("lowmem indisponível (segue com a carga padrão)")
+        return True
+    except Exception as exc:
+        logger.warning(
+            "lowmem NÃO aplicado (%s: %s): carga padrão, pico de RAM ~1,8 GB; /health lowmem_active=false",
+            type(exc).__name__, exc, exc_info=True,
+        )
+        return False
 
 
-_install_lowmem()
+lowmem_active = _install_lowmem()
+
+
+def _env_int(name: str, default: int, lo: int, hi: int) -> int:
+    raw = os.environ.get(name, str(default)).strip()
+    try:
+        value = int(raw)
+    except ValueError:
+        raise ValueError(f"{name} inválido: {raw!r} (inteiro entre {lo} e {hi})") from None
+    if not lo <= value <= hi:
+        raise ValueError(f"{name} fora da faixa: {value} (use {lo}..{hi})")
+    return value
+
+
+def _env_bool01(name: str, default: int) -> bool:
+    raw = os.environ.get(name, str(default)).strip()
+    if raw not in ("0", "1"):
+        raise ValueError(f"{name} inválido: {raw!r} (use 0 ou 1)")
+    return raw == "1"
+
+
+# Quantos checkpoints ficam carregados (LRU). 1 = troca de idioma recarrega (~7,4 s CPU); 2 se couber no mem_limit.
+LAYA_MAX_LOADED = _env_int("LAYA_MAX_LOADED", 1, 1, 4)
+# 1 = carrega todos os checkpoints no startup (5-10x mais rápido em CPU, mais RAM). 0 = lazy.
+LAYA_PRELOAD = _env_bool01("LAYA_PRELOAD", 0)
+# Tamanho de contexto padrão do predict (english 512; multilingual até 8192). Vazio = default da laya.
+LAYA_MAX_LEN_DEFAULT = _env_int("LAYA_MAX_LEN", 0, 0, 8192) or None  # 0 = não definido
+MAX_LEN_RANGE = (1, 8192)
 
 
 # ---------- Modelos de request/response ----------
@@ -53,12 +89,17 @@ class PredictRequest(BaseModel):
     state: Union[str, Dict[str, Any]] = Field(..., description="Texto, e-mail, ticket ou JSON")
     questions: Dict[str, Dict[str, Any]] = Field(..., description="Perguntas tipadas (choice, score, noul)")
     model: Optional[str] = Field(None, description="Forçar checkpoint: english | multilingual | typed-decisions")
+    max_len: Optional[int] = Field(
+        None, ge=MAX_LEN_RANGE[0], le=MAX_LEN_RANGE[1],
+        description="Tamanho máximo de tokens do texto (1..8192; english usa até 512, multilingual até 8192)",
+    )
 
 
 class HealthResponse(BaseModel):
     status: str
     model_loaded: bool
     warmed: bool = False
+    lowmem_active: bool = False
 
 
 # ---------- Ciclo de vida (carrega o modelo uma vez) ----------
@@ -120,7 +161,8 @@ async def load_router():
     global router, router_error
     print("Carregando Laya Router...", flush=True)
     try:
-        loaded_router = await asyncio.to_thread(Router, preload=False, max_loaded=1, default=LAYA_DEFAULT_MODEL)
+        loaded_router = await asyncio.to_thread(
+            Router, preload=LAYA_PRELOAD, max_loaded=LAYA_MAX_LOADED, default=LAYA_DEFAULT_MODEL)
         router = loaded_router
         print("Router pronto.", flush=True)
         await warm_up(loaded_router)
@@ -188,7 +230,7 @@ async def health():
         raise HTTPException(status_code=503, detail=router_error)
     if router is None:
         raise HTTPException(status_code=503, detail="Router ainda inicializando")
-    return {"status": "ok", "model_loaded": True, "warmed": warmed}
+    return {"status": "ok", "model_loaded": True, "warmed": warmed, "lowmem_active": lowmem_active}
 
 
 @app.post("/predict")
@@ -200,6 +242,9 @@ def predict(req: PredictRequest):  # def (threadpool): não bloqueia /health dur
         kwargs = {}
         if req.model:
             kwargs["model"] = req.model
+        max_len = req.max_len if req.max_len is not None else LAYA_MAX_LEN_DEFAULT
+        if max_len is not None:
+            kwargs["max_len"] = max_len
 
         with _predict_lock:
             result = router.predict(req.state, req.questions, **kwargs)
