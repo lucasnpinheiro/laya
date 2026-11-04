@@ -18,6 +18,8 @@ services:
       - LAYA_LOWMEM=1
       - LAYA_WARMUP=english
       - LAYA_DEFAULT_MODEL=multilingual
+      - LAYA_MAX_LOADED=${LAYA_MAX_LOADED:-2}
+      - LAYA_PRELOAD=${LAYA_PRELOAD:-0}
       - LAYA_REVISION=main
     logging:
       driver: json-file
