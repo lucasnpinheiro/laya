@@ -155,6 +155,9 @@ Resource Saver DESLIGADO; "Start Docker Desktop when you sign in" LIGADO. O comp
 - `aayushch/laya`: **outro produto** (central de notificações Tauri/Svelte com LLMs), sem relação com o modelo; ignorado.
 - PyPI: o `Dockerfile` agora instala `laya` sem pin (última versão). Os bancos medidos valem para `0.3.5`;
   após cada upgrade de `laya`, reexecutar `tests/` antes de confiar nas medições.
+- Scout (`docker scout cves laya-api:latest`), após o rebuild: 0 CRITICAL, 1 HIGH. Corrigido CVE-2025-47273
+  (setuptools 70.3.0 vendorizado em `pip/_vendor/pkg_resources`): o `Dockerfile` remove o pip da imagem final.
+  Aceito: CVE-2026-85091 (zlib 1.3 do Debian trixie, sem fix upstream na distro); risco baixo, sem uso de zlib exposto a entrada não confiável pelo serviço.
 
 ### Predição completa (inglês)
 
@@ -374,8 +377,10 @@ Roda uma predição e sai, sem servidor HTTP.
 
 ### `Dockerfile`
 
+Alinhado ao `Dockerfile` da raiz (Python 3 slim, base Debian atualizada, sem pin de versão):
+
 ```dockerfile
-FROM python:3.11-slim-bookworm
+FROM python:3-slim
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -385,6 +390,12 @@ ENV PYTHONUNBUFFERED=1 \
     OMP_NUM_THREADS=4 \
     HF_HOME=/home/laya/.cache/huggingface
 
+# Atualiza a base do SO a cada build (CVEs)
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 # Usuário não-root
 RUN groupadd --gid 10001 laya \
     && useradd --uid 10001 --gid laya --create-home laya \
@@ -393,10 +404,13 @@ RUN groupadd --gid 10001 laya \
 
 WORKDIR /app
 
-# Instala o Laya + PyTorch CPU (funciona bem no M2 via Rosetta/arm64)
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu \
-    && pip install --no-cache-dir laya
+# Instala o Laya + PyTorch CPU (sem pin: última release de cada pacote)
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
+    && pip install --no-cache-dir --upgrade torch --index-url https://download.pytorch.org/whl/cpu \
+    && pip install --no-cache-dir --upgrade laya
+
+# Imagem final sem pip (runtime não usa; evita o setuptools vendorizado no pip)
+RUN python -m pip uninstall -y pip
 
 USER laya
 

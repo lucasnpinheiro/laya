@@ -30,6 +30,10 @@ RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
     && pip install --no-cache-dir --upgrade torch --index-url https://download.pytorch.org/whl/cpu \
     && pip install --no-cache-dir --upgrade laya fastapi "uvicorn[standard]"
 
+# Remove o pip da imagem final: o runtime não usa pip. O pip vendoriza setuptools 70.3.0
+# (pip/_vendor/pkg_resources, CVE-2025-47273 no scout) e nenhuma release atual do pip corrige isso.
+RUN python -m pip uninstall -y pip
+
 COPY --chown=laya:laya app.py lowmem.py /app/
 
 USER laya
