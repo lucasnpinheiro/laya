@@ -69,6 +69,19 @@ Use `docker compose up -d` para (re)subir o `laya-api`, não `docker compose sta
 `start` só religa um container que já existe e falha se ele foi removido. O serviço tem
 `restart: unless-stopped`, então volta sozinho após crash e reinício do Docker, desde que não tenha sido parado manualmente.
 
+### Autoheal (reinício de container unhealthy)
+
+O serviço `autoheal` (`willfarrell/autoheal:1.2.0`, tag e digest fixos; nunca `latest`) reinicia o
+`laya-api` quando o healthcheck fica `unhealthy` (ex.: `/health` sem `"warmed":true`). O Docker não faz
+isso sozinho; `restart: unless-stopped` só cobre saídas do processo, não healthcheck falho.
+
+- Só monitora containers com o label `autoheal=true` (já presente no `laya-api`).
+- Intervalo 30 s, `AUTOHEAL_START_PERIOD=240` (respeita o `start_period` de 3m do boot do modelo).
+- **Risco de segurança:** o serviço monta `/var/run/docker.sock`. Quem controla esse container tem acesso
+  root ao host via API do Docker. A flag `:ro` só torna o arquivo do socket somente-leitura; não restringe
+  a API. Por isso o serviço tem `mem_limit: 64m` e só esse volume.
+- Desligar: `docker compose stop autoheal` (o `laya-api` continua rodando, sem auto-recuperação).
+
 ### Acompanhar
 
 ```bash

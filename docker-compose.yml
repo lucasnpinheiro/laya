@@ -1,4 +1,25 @@
 services:
+  # Reinicia o laya-api quando o healthcheck fica "unhealthy" (o Docker não faz isso sozinho).
+  # ATENÇÃO: o socket montado dá acesso root ao host (a flag :ro só vale para o arquivo, não restringe a API).
+  # Desligar: `docker compose stop autoheal`.
+  autoheal:
+    image: willfarrell/autoheal:1.2.0@sha256:31f580ef0279eaced5b38d631b08c474d70d8403c1c2fdd6ddcf2e879d5f3f7c
+    container_name: autoheal
+    restart: unless-stopped
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=autoheal
+      - AUTOHEAL_INTERVAL=30
+      - AUTOHEAL_START_PERIOD=240
+      - AUTOHEAL_DEFAULT_STOP_TIMEOUT=20
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    mem_limit: 64m
+
   laya-api:
     image: laya-api:latest
     pull_policy: build
@@ -7,6 +28,8 @@ services:
       pull: true
       no_cache: true
     container_name: laya-api
+    labels:
+      - autoheal=true
     ports:
       - "127.0.0.1:8000:8000"
     environment:
