@@ -53,7 +53,7 @@ O primeiro boot baixa o modelo — pode demorar. Por isso o healthcheck tem
 
 Use `docker compose up -d` para (re)subir o `laya-api`, não `docker compose start`:
 `start` só religa um container que já existe e falha se ele foi removido. O serviço tem
-`restart: unless-stopped`, então volta sozinho após crash e reinício do Docker.
+`restart: unless-stopped`, então volta sozinho após crash e reinício do Docker, desde que não tenha sido parado manualmente.
 
 ### Acompanhar
 
