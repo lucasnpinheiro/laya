@@ -23,7 +23,7 @@ Ambiente: macOS (Darwin 27), Docker Desktop, CPU (`OMP_NUM_THREADS=6`), imagem
 ./tests/run.sh tests/test_mcp_contract.py -v
 ```
 
-O runner usa `uv run --with mcp --with pytest`; não há virtualenv para manter. Os testes
+O runner usa `uv run --with mcp --with pytest --with pytest-timeout --with fastapi --with httpx`; não há virtualenv para manter. `torch` não entra no fast tier: os testes de `lowmem` e `warmup` que dependem dele pulam (`importorskip`). Os testes
 rápidos exigem o container **já rodando** (`docker compose up -d`); os lentos o derrubam de
 propósito e o religam ao final.
 
