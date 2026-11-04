@@ -1,6 +1,11 @@
 services:
   laya-api:
-    build: .
+    image: laya-api:latest
+    pull_policy: build
+    build:
+      context: .
+      pull: true
+      no_cache: true
     container_name: laya-api
     ports:
       - "127.0.0.1:8000:8000"
@@ -12,6 +17,8 @@ services:
       - LOG_BODY_MAX=10000
       - LAYA_LOWMEM=1
       - LAYA_WARMUP=english
+      - LAYA_DEFAULT_MODEL=multilingual
+      - LAYA_REVISION=main
     logging:
       driver: json-file
       options:

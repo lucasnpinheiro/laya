@@ -67,6 +67,13 @@ router_error: Optional[str] = None
 router_task: Optional[asyncio.Task] = None
 
 
+# Checkpoint para texto de idioma indeterminado (curto, só palavras de conteúdo). "multilingual" é o default
+# upstream da laya 0.4.x (decisão do usuário: última versão multilinguagem). Com ele a triagem PT fica em 0.500
+# (ver PR #1). "english" dá mais acurácia em PT, mas só serve se o tráfego for majoritariamente inglês.
+LAYA_DEFAULT_MODEL = os.environ.get("LAYA_DEFAULT_MODEL", "multilingual").strip().lower()
+if LAYA_DEFAULT_MODEL not in ("english", "multilingual"):
+    raise ValueError(f"LAYA_DEFAULT_MODEL inválido: {LAYA_DEFAULT_MODEL!r} (use english ou multilingual)")
+
 WARMUP_CHECKPOINT = os.environ.get("LAYA_WARMUP", "")  # ex.: multilingual; vazio = desligado (carga do checkpoint estourou 4 GB no Docker)
 _predict_lock = threading.Lock()  # modelo torch: uma inferência por vez, sem travar o event loop
 warmed = False
@@ -113,7 +120,7 @@ async def load_router():
     global router, router_error
     print("Carregando Laya Router...", flush=True)
     try:
-        loaded_router = await asyncio.to_thread(Router, preload=False, max_loaded=1)
+        loaded_router = await asyncio.to_thread(Router, preload=False, max_loaded=1, default=LAYA_DEFAULT_MODEL)
         router = loaded_router
         print("Router pronto.", flush=True)
         await warm_up(loaded_router)

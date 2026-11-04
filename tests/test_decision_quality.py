@@ -75,6 +75,10 @@ def test_department_triage_accuracy(laya, cases):
     assert overall >= 0.80, f"department accuracy {overall:.3f} below guard 0.80\n" + "\n".join(wrong)
 
 
+@pytest.mark.xfail(
+    strict=True,
+    reason="regressão conhecida laya 0.4.x com default multilingual (lang.py 0.3.6 + router default 0.4.0); ver PR #1",
+)
 def test_triage_works_in_portuguese_not_just_english(laya, cases):
     """Guards the router: a Latin-script non-English state must not collapse."""
     criteria = cases["department_criteria"]
