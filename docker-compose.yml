@@ -1,6 +1,10 @@
 services:
   laya-api:
-    build: .
+    image: laya-api:latest
+    pull_policy: build
+    build:
+      context: .
+      pull: true
     container_name: laya-api
     ports:
       - "127.0.0.1:8000:8000"

@@ -28,11 +28,15 @@ evitando novo download a cada restart.
 ### Subir
 
 ```bash
-docker compose up --build -d
+docker compose up -d
 ```
 
+`pull_policy: build` faz o `docker compose up -d` reconstruir a imagem a cada execução,
+a partir do código atual; `build.pull: true` puxa a base image `python:3.11-slim-bookworm`
+mais recente. A imagem resultante se chama `laya-api:latest`. Não é preciso `--build`.
+
 O primeiro boot baixa o modelo — pode demorar. Por isso o healthcheck tem
-`start_period: 60s`.
+`start_period: 3m`.
 
 Use `docker compose up -d` para (re)subir o `laya-api`, não `docker compose start`:
 `start` só religa um container que já existe e falha se ele foi removido. O serviço tem
