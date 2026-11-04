@@ -34,6 +34,10 @@ docker compose up --build -d
 O primeiro boot baixa o modelo — pode demorar. Por isso o healthcheck tem
 `start_period: 60s`.
 
+Use `docker compose up -d` para (re)subir o `laya-api`, não `docker compose start`:
+`start` só religa um container que já existe e falha se ele foi removido. O serviço tem
+`restart: unless-stopped`, então volta sozinho após crash e reinício do Docker.
+
 ### Acompanhar
 
 ```bash
