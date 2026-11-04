@@ -10,7 +10,7 @@ você prefira rodar um batch isolado.
 
 | Arquivo | Função |
 |---|---|
-| `Dockerfile` | Python 3 slim (mais recente) + PyTorch CPU + `laya==0.3.5` (pin: regressão de acurácia em 0.4.x, ver abaixo) + FastAPI/uvicorn, base Debian atualizada (`apt upgrade`), usuário não-root `laya` (uid 10001) |
+| `Dockerfile` | Python 3 slim (mais recente) + PyTorch CPU + `laya` (última release, sem pin; regressões conhecidas, ver abaixo) + FastAPI/uvicorn, base Debian atualizada (`apt upgrade`), usuário não-root `laya` (uid 10001) |
 | `app.py` | API FastAPI com `/health` e `/predict` |
 | `docker-compose.yml` | Serviço `laya-api` na porta 8000 + volume de cache do Hugging Face |
 | `mcp/laya_mcp.py` | Servidor MCP para Claude Code, com auto-start do container |
@@ -38,11 +38,20 @@ A imagem é sempre reconstruída **sem cache** (`build.no_cache: true`) e com a 
 - base `python:3-slim` (Python 3 mais recente + Debian slim atual);
 - `apt-get upgrade` a cada build (correção de CVEs da base do SO);
 - `pip install --upgrade` de `torch` (CPU), `fastapi`, `uvicorn` — sem pin (última release).
-- `laya==0.3.5` — **pinado**. Motivo: a série 0.4.x (testado 0.4.22) derrubou a acurácia da triagem em PT
-  (0.667 -> 0.500) e o recall de ambiguidade (pt/pt 0.6 -> 0.0). Isolado por A/B com mesmo Python 3.11, mesmo torch
-  e mesmos pesos; a imagem nova em Python 3.15 dá o mesmo resultado, então não é o Python. Para remover o pin:
-  trocar `laya==0.3.5` por `laya` no `Dockerfile`, reconstruir e rodar `tests/run.sh --model`; só manter a
-  versão nova se os 3 testes de qualidade passarem (ver PR #1 para a tabela A/B/C).
+- `laya` — **sem pin**: última release, com o checkpoint `multilingual` sempre da revisão mais recente do Hub
+  (ver `LAYA_REVISION` abaixo). Default do app: `LAYA_DEFAULT_MODEL=multilingual` (default upstream da 0.4.x).
+  Regressões conhecidas da série nova, medidas por bisect (PR #1); os 3 testes de acurácia estão em
+  `xfail(strict=True)`, então, se o upstream corrigir, eles dão XPASS e a suíte falha: remover os xfail.
+  - Triagem PT: 0.667 (0.3.5) -> 0.500 (0.4.x com default `multilingual`): troca de `default` do `Router` em 0.4.0.
+    Mitigação, se a acurácia PT importar mais que o resto: `LAYA_DEFAULT_MODEL=english` (aceita-se o custo em
+    tráfego não inglês; a própria laya recomenda `english` só para tráfego majoritariamente inglês).
+  - Ambiguidade PT: pt/pt recall 0.6 (0.3.5) -> 0.2 desde 0.3.6 (`lang.py` roteia PT de ambiguidade ao
+    `multilingual`). Não mitigada pelo default.
+  - Bisect (triagem PT / recall pt/pt): 0.3.5 0.667 / 0.6 (bom); 0.3.6, 0.3.9, 0.3.12, 0.3.18, 0.3.29: 0.667 / 0.2;
+    0.4.0, 0.4.1, 0.4.4, 0.4.10, 0.4.22 com default `multilingual`: 0.500 / 0.0; 0.4.22 com `english`: 0.667 / 0.2.
+  - `LAYA_DEFAULT_MODEL` aceita `english` ou `multilingual` (inválido = erro no startup).
+  - Para fixar a 0.3.5 (sem as duas regressões, ao custo de versão antiga): trocar `laya` por `laya==0.3.5`
+    no `Dockerfile`, reconstruir com `docker compose up -d --build` e rodar `tests/run.sh --model`.
 
 A imagem resultante se chama `laya-api:latest`. Não é preciso `--build`.
 
@@ -145,6 +154,11 @@ Resource Saver DESLIGADO; "Start Docker Desktop when you sign in" LIGADO. O comp
   heads em fp32. `0` volta ao load antigo em fp32 e exige ~2,4 GB livres.
 - `LAYA_KEEPALIVE` (padrão `60`, segundos): relê as páginas mmap para mantê-las quentes no page cache.
 - `LAYA_WARMUP`: no `docker-compose.yml` fica `english`; healthcheck exige `warmed: true`.
+- `LAYA_DEFAULT_MODEL` (padrão `multilingual`, no compose também): checkpoint para texto de idioma indeterminado
+  (`Router(default=...)`). Valores: `english` | `multilingual`.
+- `LAYA_REVISION` (no compose fica `main`): revisão do Hub de onde o checkpoint é carregado. Sem ela a laya usa
+  o `main` do Hub por padrão (mesmo resultado). Com `HF_HUB_OFFLINE=0` (compose), cada start confere o `main`
+  e baixa se mudou. `reviewed` ou um sha fixam uma revisão; não usar aqui, já que queremos a mais recente.
 - Causa do OOM: VM do Docker Desktop (7,65 GB) esgotada pelos stacks ecom*, com o checkpoint carregando em fp32
   com cópia dupla (pico 1,8-2,4 GB); com lowmem o pico anônimo cai para ~0,5 GB.
 
@@ -158,7 +172,7 @@ Resource Saver DESLIGADO; "Start Docker Desktop when you sign in" LIGADO. O comp
   (detector só reconhece 7 idiomas latinos); acurácia 93-96% em tópico/spam, 35-65% em emoção, prompt-injection e
   estrelas; latência 35-66 ms/pergunta. Confirma as regras já na skill (gate de confiança, escalar abaixo do corte).
 - `aayushch/laya`: **outro produto** (central de notificações Tauri/Svelte com LLMs), sem relação com o modelo; ignorado.
-- PyPI: o `Dockerfile` pina `laya==0.3.5` (regressão em 0.4.x, ver seção de build). Os bancos medidos valem para `0.3.5`;
+- PyPI: o `Dockerfile` instala `laya` sem pin (última release; regressões conhecidas na seção de build). Os bancos medidos valem para `0.3.5`;
   após qualquer troca de versão de `laya`, reexecutar `tests/` antes de confiar nas medições.
 - Scout (`docker scout cves laya-api:latest`), após o rebuild: 0 CRITICAL, 1 HIGH. Corrigido CVE-2025-47273
   (setuptools 70.3.0 vendorizado em `pip/_vendor/pkg_resources`): o `Dockerfile` remove o pip da imagem final.
@@ -382,7 +396,7 @@ Roda uma predição e sai, sem servidor HTTP.
 
 ### `Dockerfile`
 
-Alinhado ao `Dockerfile` da raiz (Python 3 slim, base Debian atualizada, `laya` pinado em 0.3.5):
+Alinhado ao `Dockerfile` da raiz (Python 3 slim, base Debian atualizada, `laya` sem pin):
 
 ```dockerfile
 FROM python:3-slim
@@ -409,10 +423,10 @@ RUN groupadd --gid 10001 laya \
 
 WORKDIR /app
 
-# Instala o Laya (pinado em 0.3.5, ver Dockerfile da raiz) + PyTorch CPU (última release)
+# Instala o Laya (última release, ver Dockerfile da raiz) + PyTorch CPU (última release)
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
     && pip install --no-cache-dir --upgrade torch --index-url https://download.pytorch.org/whl/cpu \
-    && pip install --no-cache-dir --upgrade "laya==0.3.5"
+    && pip install --no-cache-dir --upgrade laya
 
 # Imagem final sem pip (runtime não usa; evita o setuptools vendorizado no pip)
 RUN python -m pip uninstall -y pip

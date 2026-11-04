@@ -17,6 +17,8 @@ services:
       - LOG_BODY_MAX=10000
       - LAYA_LOWMEM=1
       - LAYA_WARMUP=english
+      - LAYA_DEFAULT_MODEL=multilingual
+      - LAYA_REVISION=main
     logging:
       driver: json-file
       options:

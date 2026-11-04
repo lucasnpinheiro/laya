@@ -25,13 +25,11 @@ RUN groupadd --gid 10001 laya \
 
 WORKDIR /app
 
-# torch, fastapi e uvicorn sempre na última release. laya fixado em 0.3.5: a série 0.4.x teve regressão
-# de acurácia (triagem PT 0.667 -> 0.500; recall de ambiguidade 0.6 -> 0.0 em pt/pt), isolada por A/B
-# com mesmo Python, torch e pesos (ver PR #1). Remover o pin quando o upstream corrigir e os 3 testes
-# do tier model (tests/run.sh --model) voltarem a passar com a versão nova.
+# Sempre a última release de laya, torch, fastapi e uvicorn (decisão do usuário). Regressão conhecida
+# de laya >= 0.3.6 em ambiguidade PT: ver PR #1; a triagem PT é mitigada por LAYA_DEFAULT_MODEL=english (app.py).
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
     && pip install --no-cache-dir --upgrade torch --index-url https://download.pytorch.org/whl/cpu \
-    && pip install --no-cache-dir --upgrade "laya==0.3.5" fastapi "uvicorn[standard]"
+    && pip install --no-cache-dir --upgrade laya fastapi "uvicorn[standard]"
 
 # Remove o pip da imagem final: o runtime não usa pip. O pip vendoriza setuptools 70.3.0
 # (pip/_vendor/pkg_resources, CVE-2025-47273 no scout) e nenhuma release atual do pip corrige isso.
