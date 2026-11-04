@@ -77,6 +77,9 @@ isso sozinho; `restart: unless-stopped` só cobre saídas do processo, não heal
 
 - Só monitora containers com o label `autoheal=true` (já presente no `laya-api`).
 - Intervalo 30 s, `AUTOHEAL_START_PERIOD=240` (respeita o `start_period` de 3m do boot do modelo).
+- `CURL_TIMEOUT=60`: o POST de restart só responde após o stop (`AUTOHEAL_DEFAULT_STOP_TIMEOUT=20` s) e o
+  start. Com o padrão de 30 s do autoheal a margem era ~10 s; 60 s evita falha por timeout do curl.
+  Medido: restart de container de teste com `t=20` leva ~20,3 s e retorna HTTP 204.
 - **Risco de segurança:** o serviço monta `/var/run/docker.sock`. Quem controla esse container tem acesso
   root ao host via API do Docker. A flag `:ro` só torna o arquivo do socket somente-leitura; não restringe
   a API. Por isso o serviço tem `mem_limit: 64m` e só esse volume.

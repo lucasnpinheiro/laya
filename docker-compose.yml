@@ -11,6 +11,8 @@ services:
       - AUTOHEAL_INTERVAL=30
       - AUTOHEAL_START_PERIOD=240
       - AUTOHEAL_DEFAULT_STOP_TIMEOUT=20
+      # curl padrão do autoheal é 30 s; o POST de restart só responde depois do stop (20 s) + start.
+      - CURL_TIMEOUT=60
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     logging:
